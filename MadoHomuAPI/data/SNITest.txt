@@ -1,0 +1,20 @@
+104.21.39.202
+
+curl -iv --resolve madohomu.love:443:172.67.171.91 https://madohomu.love
+curl -iv --resolve madhomu.love:443:172.67.171.91 https://madhomu.love
+curl -iv --resolve adohomu.love:443:172.67.171.91 https://adohomu.love
+curl -iv --resolve madohom.love:443:172.67.171.91 https://madohom.love
+curl -iv --resolve madohomu.com:443:172.67.171.91 https://madohomu.com
+
+curl -iv --resolve akuma.im:443:172.67.171.91 https://akuma.im
+
+curl -ivk http://madohomu.love
+
+
+curl -iv --resolve madohomu.love:80:172.67.171.91 http://madohomu.love
+
+40.115.194.122
+192.151.224.134
+20.212.7.189
+
+curl -ivk --resolve madohomu.love:443:104.21.39.202 https://madohomu.love

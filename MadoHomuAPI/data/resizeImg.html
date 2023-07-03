@@ -1,0 +1,90 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+    <title>Image resize before upload jquery</title>
+</head>
+
+<body onload="loadImageFile();">
+    <form name="uploadForm">
+        <table>
+            <tbody>
+                <tr>
+                    <td>Select Image - <input id="upload-Image" type="file" accept="image/*"
+                            onchange="loadImageFile();" /></td>
+                </tr>
+                <tr>
+                    <td>Origal Image - <img id="original-Img" height="400px" /></td>
+                </tr>
+                <tr>
+                    <td>Compress Image - <img id="upload-Preview" /></td>
+                </tr>
+                <tr>
+                    <td><br />Code by - <a href="https://shinerweb.com" ratget="_blank"> Shinerweb</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+
+    <script type="text/javascript">
+
+        function loadImageFile() {
+            var uploadImage = document.getElementById("upload-Image");
+            if (uploadImage.files.length === 0) {
+                console.log('No file chosen')
+                return;
+            }
+            var uploadFile = document.getElementById("upload-Image").files[0];
+            if (!uploadFile.type.match(/image.*/)) {
+                alert("Please select a valid image.");
+                return;
+            }
+
+            var fileReader = new FileReader();
+            fileReader.onload = () => {
+                var image = new Image();
+                image.src = fileReader.result;
+
+                //console.log(image)
+
+                document.getElementById("original-Img").src = image.src;
+
+                var MAX_WIDTH = 200;
+                var MAX_HEIGHT = 200;
+                var width = image.width;
+                var height = image.height;
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+
+                var canvas = document.createElement("canvas");
+                canvas.width = width;
+                canvas.height = height;
+
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(image, 0, 0, width, height); 
+
+                console.log(canvas)
+
+                document.getElementById("upload-Preview").src = canvas.toDataURL("image/jpeg");
+
+                canvas.toBlob((blob) => {
+                    console.log(blob)
+                }, "image/jpeg")
+            };
+            fileReader.readAsDataURL(uploadFile);
+        }
+    </script>
+
+</body>
+
+</html>
