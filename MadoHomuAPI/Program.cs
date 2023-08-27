@@ -5,6 +5,7 @@ using System.Threading;
 using Microsoft.Extensions.Logging;
 using System.Data;
 using System.Diagnostics;
+using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -35,6 +36,10 @@ var sqlWriterRunning = true;
 Thread sqlWriter = new(() =>
 {
     File.AppendAllText(@".\data\log.txt", $"\n[{DateTime.Now}] API started\n");
+    var retryCount = 0;
+    var maxRetryCount = 10;
+    var criticalWarn = 0;
+
     while (sqlWriterRunning)
     {
         if (pendingComments.Count > 0)
@@ -64,29 +69,52 @@ Thread sqlWriter = new(() =>
             }
 
             //DBcommand.CommandText = $"INSERT INTO comments (id, time, sender, comment) VALUES ({id}, {pendingComments[0].unixTime}, '{pendingComments[0].sender}', '{pendingComments[0].comment}')";
-            DBcommand.CommandText = $"INSERT INTO comments (id, time, sender, comment) VALUES ({id}, {pendingComments[0].unixTime}, @sender, @comment)";
+            DBcommand.CommandText = $"INSERT INTO comments (id, time, sender, comment, image) VALUES ({id}, {pendingComments[0].unixTime}, @sender, @comment, @images)";
             DBcommand.Parameters.AddWithValue("@sender", pendingComments[0].sender);
             DBcommand.Parameters.AddWithValue("@comment", pendingComments[0].comment);
+            DBcommand.Parameters.AddWithValue("@images", pendingComments[0].images ?? (object)DBNull.Value);
             try
             {
                 var result = DBcommand.ExecuteNonQuery();
             }
             catch (Exception e)
             {
+                //app.Logger.LogInformation(e.Message);
                 stopwatch.Stop();
                 elapsed_time = stopwatch.ElapsedMilliseconds;
 
-                var errlog = $"[{DateTime.Now}] Failed to write to database after {elapsed_time}ms, retrying. Pending to write: {pendingComments.Count}\n{e.Message}\n";
-                //app.Logger.LogInformation(errlog);
-                //app.Logger.LogInformation(e.Message);
-                File.AppendAllTextAsync(@".\data\log.txt", errlog);
                 DBconnection.Close();
+
+                if (retryCount < maxRetryCount)
+                {
+                    retryCount++;
+                    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Failed to write to database after {elapsed_time}ms, retrying ({retryCount}/{maxRetryCount}). Pending to write: {pendingComments.Count}\nError: {e.Message}\n");
+                }
+                else
+                {
+                    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Failed to write to database after {elapsed_time}ms, discarding this comment. Pending to write: {pendingComments.Count}\nError: {e.Message}\nSender: {pendingComments[0].sender}\nComment: {pendingComments[0].comment}\nImage: {pendingComments[0].images}\n");
+                    
+                    pendingComments.RemoveAt(0);
+                    retryCount = 0;
+                    criticalWarn++;
+
+                    if (criticalWarn >= 3)
+                    {
+                        File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Too many comments have been discarded, force exiting ...\n");
+                        Environment.Exit(-10000);
+                    }
+                }
+
+                Thread.Sleep(1000);
+
                 continue;
             }
 
             DBconnection.Close();
 
             pendingComments.RemoveAt(0);
+            retryCount = 0;
+            criticalWarn = 0;
 
             stopwatch.Stop();
             elapsed_time = stopwatch.ElapsedMilliseconds;
@@ -172,6 +200,46 @@ app.MapGet("/comments", (int? from, int? count) =>
 
 app.MapPost("/post", (PostedComment commentData) =>
 {
+    if (commentData.sender == null || commentData.comment == null)
+    {
+        File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Ignoring a request with null sender/comment\n");
+        return -1;
+    }
+
+    string? images = "";
+
+    if (commentData.images == null)
+    {
+        images = null;
+    }
+    else
+    {
+        if (commentData.images.Count == 0)
+        {
+            images = null;
+        }
+        else
+        {
+            foreach (var image in commentData.images)
+            {
+                //app.Logger.LogInformation(commentData.images[0]);
+                var filename = DateTime.UtcNow.Ticks.ToString();
+                try
+                {
+                    File.WriteAllBytes(@$"data\images\posts\{filename}.jpg", Convert.FromBase64String(image));
+                    images += filename + ',';
+                }
+                catch (Exception e)
+                {
+                    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}\n");
+                }
+            }
+            images = images.TrimEnd(',');
+        }
+    }
+    
+    //app.Logger.LogInformation(images);
+
     //totalPosts++;
     DateTimeOffset dto = new(DateTime.UtcNow);
     long unixTime = dto.ToUnixTimeSeconds();
@@ -181,6 +249,7 @@ app.MapPost("/post", (PostedComment commentData) =>
         unixTime = unixTime,
         sender = commentData.sender,
         comment = commentData.comment,
+        images = images,
     });
 
     //returned++;
@@ -209,6 +278,8 @@ app.MapPost("/upload", (HttpRequest request) =>
         request.Form.Files[0].CopyTo(stream);
     }
 
+    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] User {name} has uploaded an avatar\n");
+
     return name;
 });
 
@@ -219,6 +290,7 @@ public class PostedComment
 {
     public string? sender { get; set; }
     public string? comment { get; set; }
+    public List<string>? images { get; set; }
 }
 
 public class CommentToWrite
@@ -226,4 +298,5 @@ public class CommentToWrite
     public long unixTime { get; set; }
     public string? sender { get; set; }
     public string? comment { get; set; }
+    public string? images { get; set; }
 }
