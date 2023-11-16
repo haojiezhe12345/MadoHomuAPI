@@ -5,7 +5,6 @@ using System.Threading;
 using Microsoft.Extensions.Logging;
 using System.Data;
 using System.Diagnostics;
-using static System.Net.Mime.MediaTypeNames;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -268,7 +267,14 @@ app.MapPost("/upload", (HttpRequest request) =>
     var name = request.Form.Files[0].Name;
     var FileName = request.Form.Files[0].FileName;
 
-    if (name == "" || name.Substring(0, 4) == ".jpg" || name.Contains('/') || name.Contains('\\'))
+    var invalidFileChars = "\\/:*?\"<>|";
+    var validFileChars = "＼／：＊？＂＜＞｜";
+    for ( int i = 0; i < invalidFileChars.Length; i++ )
+    {
+        name = name.Replace(invalidFileChars[i], validFileChars[i]);
+    }
+
+    if (name == "" || name == ".jpg" || name == "匿名用户.jpg" || name.Contains('/') || name.Contains('\\'))
     {
         return "invalid username";
     }
@@ -278,7 +284,7 @@ app.MapPost("/upload", (HttpRequest request) =>
         request.Form.Files[0].CopyTo(stream);
     }
 
-    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] User {name} has uploaded an avatar\n");
+    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Avatar {name} has been uploaded\n");
 
     return name;
 });
