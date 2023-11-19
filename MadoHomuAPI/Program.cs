@@ -147,7 +147,7 @@ Thread pendingChecker = new Thread(() =>
 pendingChecker.Start();
 */
 
-app.MapGet("/comments", (int? from, int? count) =>
+app.MapGet("/comments", (int? from, int? count, int? time) =>
 {
     List<Dictionary<string, dynamic>> comments = new();
 
@@ -159,7 +159,12 @@ app.MapGet("/comments", (int? from, int? count) =>
     {
         DBcommand.CommandText = $"SELECT * FROM comments WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
     }
-    else {
+    else if (time != null)
+    {
+        DBcommand.CommandText = $"SELECT * FROM comments WHERE id BETWEEN (SELECT id FROM comments WHERE time >= {time} LIMIT 1) AND (SELECT id FROM comments WHERE time >= {time} LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
+    }
+    else
+    {
         DBcommand.CommandText = $"SELECT * FROM comments ORDER BY id DESC LIMIT {count ?? 10}";
     }
 
