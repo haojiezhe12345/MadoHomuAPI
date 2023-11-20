@@ -202,6 +202,42 @@ app.MapGet("/comments", (int? from, int? count, int? time) =>
     return comments;
 });
 
+app.MapGet("/comments/count", (long? time, int? utc) =>
+{
+    DateTimeOffset dto;
+    if (time != null)
+    {
+        dto = DateTimeOffset.FromUnixTimeSeconds((long)time);
+    } 
+    else
+    {
+        dto = DateTimeOffset.UtcNow;
+    }
+    dto = dto.AddHours((double)(utc ?? 8));
+    long timeMin = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
+    long timeMax = new DateTimeOffset(dto.Year, dto.Month, dto.Day + 1, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
+
+    long count = 0;
+
+    var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
+    DBconnection.Open();
+    var DBcommand = DBconnection.CreateCommand();
+
+    DBcommand.CommandText = $"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}";
+    using (var reader = DBcommand.ExecuteReader())
+    {
+        while (reader.Read())
+        {
+            count = (long)reader.GetValue(0);
+        }
+    }
+
+    DBconnection.Close();
+
+    //return new List<string> { dto.ToString(), timeMin.ToString(), dto.ToUnixTimeSeconds().ToString(), timeMax.ToString() };
+    return count;
+});
+
 app.MapPost("/post", (PostedComment commentData) =>
 {
     if (commentData.sender == null || commentData.comment == null)
