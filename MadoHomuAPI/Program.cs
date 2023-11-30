@@ -215,7 +215,7 @@ app.MapGet("/comments/count", (long? time, int? utc) =>
     }
     dto = dto.AddHours((double)(utc ?? 8));
     long timeMin = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
-    long timeMax = new DateTimeOffset(dto.Year, dto.Month, dto.Day + 1, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
+    long timeMax = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 23, 59, 59, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
 
     long count = 0;
 
