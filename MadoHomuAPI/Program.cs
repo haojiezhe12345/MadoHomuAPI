@@ -147,7 +147,7 @@ Thread pendingChecker = new Thread(() =>
 pendingChecker.Start();
 */
 
-app.MapGet("/comments", (int? from, int? count, int? time) =>
+app.MapGet("/comments", (int? from, int? count, int? time, string? user) =>
 {
     List<Dictionary<string, dynamic>> comments = new();
 
@@ -155,7 +155,12 @@ app.MapGet("/comments", (int? from, int? count, int? time) =>
     DBconnection.Open();
     var DBcommand = DBconnection.CreateCommand();
 
-    if (from != null)
+    if (user != null)
+    {
+        DBcommand.CommandText = $"SELECT * FROM comments WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+        DBcommand.Parameters.AddWithValue("@sender", user);
+    }
+    else if (from != null)
     {
         DBcommand.CommandText = $"SELECT * FROM comments WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
     }
@@ -193,7 +198,7 @@ app.MapGet("/comments", (int? from, int? count, int? time) =>
             {"id", -999999},
             {"time", 0},
             {"sender", ""},
-            {"comment", "你请求的留言不存在\n\n可能原因:\n\n你输入了错误的留言ID (最小-24849, 最大不超过现有留言数)\n\n你翻到了留言区底部\n\n网站的数据库出现了错误"},
+            {"comment", "你请求的留言不存在\n\n可能原因:\n\n1. 你输入了错误的留言ID (最小-24849, 最大不超过现有留言数)\n\n2. 你翻到了留言区底部\n\n3. 网站的数据库出现了错误"},
             {"image", ""},
             {"hidden", 0},
         });
