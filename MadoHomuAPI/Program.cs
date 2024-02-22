@@ -147,9 +147,16 @@ Thread pendingChecker = new Thread(() =>
 pendingChecker.Start();
 */
 
-app.MapGet("/comments", (int? from, int? count, int? time, string? user) =>
+app.MapGet("/comments", (int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax) =>
 {
     List<Dictionary<string, dynamic>> comments = new();
+
+    var table = "comments";
+    if (db != null)
+    {
+        if (db == "kami") table = "kami";
+        else return comments;
+    }
 
     var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
     DBconnection.Open();
@@ -157,20 +164,24 @@ app.MapGet("/comments", (int? from, int? count, int? time, string? user) =>
 
     if (user != null)
     {
-        DBcommand.CommandText = $"SELECT * FROM comments WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+        DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
         DBcommand.Parameters.AddWithValue("@sender", user);
     }
     else if (from != null)
     {
-        DBcommand.CommandText = $"SELECT * FROM comments WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
+        DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
     }
     else if (time != null)
     {
-        DBcommand.CommandText = $"SELECT * FROM comments WHERE id BETWEEN (SELECT id FROM comments WHERE time >= {time} LIMIT 1) AND (SELECT id FROM comments WHERE time >= {time} LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
+        DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) AND (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
+    }
+    else if (timeMin != null && timeMax != null)
+    {
+        DBcommand.CommandText = $"SELECT * FROM {table} WHERE time BETWEEN {timeMin} AND {timeMax} ORDER BY id DESC";
     }
     else
     {
-        DBcommand.CommandText = $"SELECT * FROM comments ORDER BY id DESC LIMIT {count ?? 10}";
+        DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
     }
 
     using (var reader = DBcommand.ExecuteReader())
@@ -179,30 +190,18 @@ app.MapGet("/comments", (int? from, int? count, int? time, string? user) =>
         {
             comments.Add(new Dictionary<string, dynamic>
             {
-                {"id", reader.GetValue(0)},
-                {"time", reader.GetValue(1)},
-                {"sender", reader.GetValue(2)},
-                {"comment", reader.GetValue(3)},
-                {"image", reader.GetValue(4)},
-                {"hidden", reader.GetValue(5)},
+                {"id", reader["id"]},
+                {"time", reader["time"]},
+                {"sender", reader["sender"]},
+                {"uid", reader["uid"]},
+                {"comment", reader["comment"]},
+                {"image", reader["image"]},
+                {"hidden", reader["hidden"]},
             });
         }
     }
 
     DBconnection.Close();
-
-    if (comments.Count == 0)
-    {
-        comments.Add(new Dictionary<string, dynamic>
-        {
-            {"id", -999999},
-            {"time", 0},
-            {"sender", ""},
-            {"comment", "你请求的留言不存在\n\n可能原因:\n\n1. 你输入了错误的留言ID (最小-24849, 最大不超过现有留言数)\n\n2. 你翻到了留言区底部\n\n3. 网站的数据库出现了错误"},
-            {"image", ""},
-            {"hidden", 0},
-        });
-    }
 
     return comments;
 });
