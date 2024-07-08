@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
+using static MadoHomuAPIv2.Comments;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -68,15 +69,7 @@ namespace MadoHomuAPIv2.Controllers
         [HttpGet("count")]
         public long Get(long? time, int? utc)
         {
-            DateTimeOffset dto;
-            if (time != null)
-            {
-                dto = DateTimeOffset.FromUnixTimeSeconds((long)time);
-            }
-            else
-            {
-                dto = DateTimeOffset.UtcNow;
-            }
+            DateTimeOffset dto = time == null ? DateTimeOffset.UtcNow : DateTimeOffset.FromUnixTimeSeconds((long)time);
             dto = dto.AddHours((double)(utc ?? 8));
             long timeMin = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
             long timeMax = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 23, 59, 59, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
@@ -104,8 +97,48 @@ namespace MadoHomuAPIv2.Controllers
 
         [HttpPost]
         [HttpPost("/post")]
-        public void Post([FromBody] string value)
+        public int Post(PostedComment CommentData)
         {
+            if (CommentData.sender == null || CommentData.comment == null)
+            {
+                System.IO.File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] Ignoring a request with null sender/comment\n");
+                return -1;
+            }
+
+            string? images = null;
+
+            if (CommentData.images != null && CommentData.images.Count != 0)
+            {
+                images = "";
+                foreach (var image in CommentData.images)
+                {
+                    //app.Logger.LogInformation(commentData.images[0]);
+                    var filename = DateTime.UtcNow.Ticks.ToString();
+                    try
+                    {
+                        System.IO.File.WriteAllBytes(@$"data\images\posts\{filename}.jpg", Convert.FromBase64String(image));
+                        images += filename + ',';
+                    }
+                    catch (Exception e)
+                    {
+                        System.IO.File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}\n");
+                    }
+                }
+                images = images.TrimEnd(',');
+            }
+
+            //app.Logger.LogInformation(images);
+
+            DateTimeOffset dto = new(DateTime.UtcNow);
+            long TimeStamp = dto.ToUnixTimeSeconds();
+
+            return WriteComment(new CommentToWrite
+            {
+                unixTime = TimeStamp,
+                sender = CommentData.sender,
+                comment = CommentData.comment,
+                images = images,
+            });
         }
 
         // PUT api/<ValuesController>/5
