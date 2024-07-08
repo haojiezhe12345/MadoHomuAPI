@@ -1,0 +1,20 @@
+curl 'https://kami.im/reg.php' \
+  -H 'authority: kami.im' \
+  -H 'accept: */*' \
+  -H 'accept-language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7' \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/x-www-form-urlencoded; charset=UTF-8' \
+  -H 'origin: https://kami.im' \
+  -H 'pragma: no-cache' \
+  -H 'referer: https://kami.im/portal.html' \
+  -H 'sec-ch-ua: "Not A(Brand";v="99", "Microsoft Edge";v="121", "Chromium";v="121"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Windows"' \
+  -H 'sec-fetch-dest: empty' \
+  -H 'sec-fetch-mode: cors' \
+  -H 'sec-fetch-site: same-origin' \
+  -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 Edg/121.0.0.0' \
+  -H 'x-requested-with: XMLHttpRequest' \
+  --data-raw 'username=madohomu.love&email=qq3112611479%40outlook.com&password=f71d35a6f3f0f4de1a239b962f6242cd' \
+  --compressed \
+  --insecure

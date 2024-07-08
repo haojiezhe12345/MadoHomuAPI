@@ -1,20 +1,20 @@
 ﻿{
-  "$schema": "https://json.schemastore.org/launchsettings.json",
+  "$schema": "http://json.schemastore.org/launchsettings.json",
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:41477",
-      "sslPort": 44312
+      "applicationUrl": "http://localhost:36509",
+      "sslPort": 0
     }
   },
   "profiles": {
-    "MadoHomuAPI": {
+    "http": {
       "commandName": "Project",
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5017",
+      "applicationUrl": "http://localhost:5213",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

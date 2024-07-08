@@ -1,0 +1,152 @@
+
+[11/27/2023 9:55:19 AM] API started
+[11/27/2023 9:55:24 AM] Written comment #1 in 44ms
+
+[11/27/2023 9:56:26 AM] API started
+
+[11/27/2023 9:57:11 AM] API started
+
+[11/30/2023 11:45:14 PM] API started
+
+[11/30/2023 11:47:17 PM] API started
+
+[11/30/2023 11:49:36 PM] API started
+
+[11/30/2023 11:50:33 PM] API started
+
+[12/16/2023 8:00:53 PM] API started
+
+[12/16/2023 8:10:03 PM] API started
+
+[12/17/2023 3:17:13 AM] API started
+
+[12/17/2023 3:36:00 AM] API started
+
+[12/17/2023 3:39:57 AM] API started
+
+[12/18/2023 8:08:38 PM] API started
+
+[12/18/2023 8:12:07 PM] API started
+
+[1/2/2024 3:40:12 PM] API started
+
+[1/2/2024 3:41:08 PM] API started
+
+[1/2/2024 3:42:45 PM] API started
+
+[1/2/2024 3:43:01 PM] API started
+
+[1/2/2024 3:43:46 PM] API started
+
+[1/2/2024 3:44:38 PM] API started
+
+[2/19/2024 5:48:14 AM] API started
+
+[2/19/2024 5:49:40 AM] API started
+
+[2/19/2024 5:52:03 AM] API started
+
+[2/19/2024 5:53:31 AM] API started
+
+[2/19/2024 5:58:29 AM] API started
+
+[2/21/2024 6:25:55 AM] API started
+
+[2/21/2024 6:27:27 AM] API started
+
+[2/21/2024 7:27:13 AM] API started
+
+[2/21/2024 7:28:06 AM] API started
+
+[2/21/2024 7:28:32 AM] API started
+
+[2/21/2024 7:29:28 AM] API started
+
+[2/21/2024 7:29:36 AM] API started
+
+[2/21/2024 10:14:10 AM] API started
+
+[2/21/2024 10:14:27 AM] API started
+
+[2/21/2024 10:17:41 AM] API started
+
+[2/21/2024 10:17:59 AM] API started
+
+[2/21/2024 10:18:05 AM] API started
+
+[2/21/2024 10:18:30 AM] API started
+
+[2/21/2024 10:18:36 AM] API started
+
+[2/21/2024 10:21:34 AM] API started
+
+[2/21/2024 10:22:19 AM] API started
+
+[2/21/2024 10:22:24 AM] API started
+
+[2/21/2024 10:22:56 AM] API started
+
+[2/21/2024 10:23:45 AM] API started
+
+[2/21/2024 10:24:04 AM] API started
+
+[2/21/2024 10:29:20 AM] API started
+
+[2/21/2024 10:35:59 AM] API started
+
+[2/21/2024 12:51:44 PM] API started
+
+[2/21/2024 12:59:02 PM] API started
+
+[2/22/2024 4:18:06 AM] API started
+
+[2/22/2024 4:46:33 AM] API started
+
+[6/17/2024 11:45:00 AM] API started
+
+[7/1/2024 4:09:41 PM] API started
+
+[7/1/2024 4:15:26 PM] API started
+
+[7/1/2024 4:18:00 PM] API started
+
+[7/1/2024 4:28:40 PM] API started
+[7/1/2024 4:28:51 PM] Failed to write to database after 388ms, retrying (1/10). Pending to write: 615
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:53 PM] Failed to write to database after 25ms, retrying (2/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:54 PM] Failed to write to database after 26ms, retrying (3/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:55 PM] Failed to write to database after 17ms, retrying (4/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:56 PM] Failed to write to database after 14ms, retrying (5/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:57 PM] Failed to write to database after 24ms, retrying (6/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:58 PM] Failed to write to database after 25ms, retrying (7/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:28:59 PM] Failed to write to database after 26ms, retrying (8/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:00 PM] Failed to write to database after 22ms, retrying (9/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:01 PM] Failed to write to database after 25ms, retrying (10/10). Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:02 PM] Failed to write to database after 23ms, discarding this comment. Pending to write: 977
+Error: SQLite Error 1: 'near ",": syntax error'.
+Sender: testuser6's
+Comment: x');DELETE FROM comments--
+Image: 
+[7/1/2024 4:29:03 PM] Failed to write to database after 28ms, retrying (1/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:04 PM] Failed to write to database after 29ms, retrying (2/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:05 PM] Failed to write to database after 17ms, retrying (3/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:06 PM] Failed to write to database after 20ms, retrying (4/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:07 PM] Failed to write to database after 14ms, retrying (5/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:08 PM] Failed to write to database after 21ms, retrying (6/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
+[7/1/2024 4:29:09 PM] Failed to write to database after 18ms, retrying (7/10). Pending to write: 976
+Error: SQLite Error 1: 'near ",": syntax error'.
