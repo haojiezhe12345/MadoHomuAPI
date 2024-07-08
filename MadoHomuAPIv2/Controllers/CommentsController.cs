@@ -9,11 +9,10 @@ namespace MadoHomuAPIv2.Controllers
     [ApiController]
     public class CommentsController : ControllerBase
     {
-        // GET: api/<ValuesController>
         [HttpGet]
-        public IEnumerable<Dictionary<string, dynamic>> Get(int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax)
+        public IEnumerable<Comment> Get(int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax)
         {
-            List<Dictionary<string, dynamic>> comments = new();
+            List<Comment> comments = [];
 
             var table = "comments";
             if (db != null)
@@ -50,18 +49,14 @@ namespace MadoHomuAPIv2.Controllers
 
             using (var reader = DBcommand.ExecuteReader())
             {
+                List<string> columns = [];
+                for (int i = 0; i < reader.FieldCount; i++) columns.Add(reader.GetName(i));
+
                 while (reader.Read())
                 {
-                    comments.Add(new Dictionary<string, dynamic>
-            {
-                {"id", reader["id"]},
-                {"time", reader["time"]},
-                {"sender", reader["sender"]},
-                {"uid", reader["uid"]},
-                {"comment", reader["comment"]},
-                {"image", reader["image"]},
-                {"hidden", reader["hidden"]},
-            });
+                    Comment comment = [];
+                    columns.ForEach(column => comment[column] = reader[column]);
+                    comments.Add(comment);
                 }
             }
 
@@ -70,7 +65,6 @@ namespace MadoHomuAPIv2.Controllers
             return comments;
         }
 
-        // GET api/<ValuesController>/5
         [HttpGet("count")]
         public long Get(long? time, int? utc)
         {
@@ -108,8 +102,8 @@ namespace MadoHomuAPIv2.Controllers
             return count;
         }
 
-        // POST api/<ValuesController>
         [HttpPost]
+        [HttpPost("/post")]
         public void Post([FromBody] string value)
         {
         }
