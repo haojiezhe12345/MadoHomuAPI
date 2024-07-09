@@ -11,7 +11,7 @@ namespace MadoHomuAPIv2.Controllers
     public class CommentsController : ControllerBase
     {
         [HttpGet]
-        public IEnumerable<Comment> Get(int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax)
+        public List<Comment> GetComments(int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax)
         {
             List<Comment> comments = [];
 
@@ -67,7 +67,7 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpGet("count")]
-        public long Get(long? time, int? utc)
+        public long GetCommentCount(long? time, int? utc)
         {
             DateTimeOffset dto = time == null ? DateTimeOffset.UtcNow : DateTimeOffset.FromUnixTimeSeconds((long)time);
             dto = dto.AddHours((double)(utc ?? 8));
@@ -95,7 +95,7 @@ namespace MadoHomuAPIv2.Controllers
             return count;
         }
 
-        [HttpPost]
+        [HttpPost("")]
         [HttpPost("/post")]
         public int Post(PostedComment CommentData)
         {
@@ -139,18 +139,6 @@ namespace MadoHomuAPIv2.Controllers
                 comment = CommentData.comment,
                 images = images,
             });
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
         }
     }
 }
