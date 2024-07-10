@@ -14,6 +14,7 @@ namespace MadoHomuAPIv2
             public string? image { get; set; }
             public int? hidden { get; set; }
             public string? avatar { get; set; }
+            public string? source { get; set; }
         }
 
         public class PostedComment

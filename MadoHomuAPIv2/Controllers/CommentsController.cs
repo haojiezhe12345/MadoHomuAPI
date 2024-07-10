@@ -57,6 +57,7 @@ namespace MadoHomuAPIv2.Controllers
                     comment.avatar = user.avatar;
                 }
                 comment.avatar ??= "default.png";
+                comment.source = table;
             });
 
             DBconnection.Close();
