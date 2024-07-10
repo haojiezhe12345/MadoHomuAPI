@@ -45,9 +45,17 @@ namespace MadoHomuAPIv2
                 row.ForEach(x =>
                 {
                     var property = properties.FirstOrDefault(p => p.Name == x.column);
-                    property?.SetValue(dto, x.value != null
-                        ? Convert.ChangeType(x.value, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType)
-                        : null);
+                    if (property != null && x.value != null)
+                    {
+                        try
+                        {
+                            property.SetValue(dto, Convert.ChangeType(x.value, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType));
+                        }
+                        catch (Exception e)
+                        {
+                            Logging.Log($"Failed to convert database cell '{x.value}' of type {x.value.GetType()} to {property.PropertyType} at column '{x.column}'. Reason:\n{e}");
+                        }
+                    }
                 });
                 result.Add(dto);
             });
