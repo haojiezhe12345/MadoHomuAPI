@@ -20,49 +20,51 @@ namespace MadoHomuAPIv2.Controllers
                 else return [];
             }
 
-            var DBconnection = Database.OpenNewConnection();
-            var DBcommand = DBconnection.CreateCommand();
+            List<CommentDTO> comments = [];
 
-            if (user != null)
+            using (var DBconnection = Database.OpenNewConnection())
             {
-                DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
-                DBcommand.Parameters.AddWithValue("@sender", user);
-            }
-            else if (from != null)
-            {
-                DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
-            }
-            else if (time != null)
-            {
-                DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) AND (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
-            }
-            else if (timeMin != null && timeMax != null)
-            {
-                DBcommand.CommandText = $"SELECT * FROM {table} WHERE time BETWEEN {timeMin} AND {timeMax} ORDER BY id DESC";
-            }
-            else
-            {
-                DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
-            }
+                var DBcommand = DBconnection.CreateCommand();
 
-            List<CommentDTO> comments = DBcommand.ReadAsDTOList<CommentDTO>();
-
-            comments.ForEach(comment =>
-            {
-                if (table == "comments" && comment.uid != null)
+                if (user != null)
                 {
-                    UserDTO? user = DBconnection.GetUserById((int)comment.uid);
-                    if (user != null)
-                    {
-                        comment.sender = user.name;
-                        comment.avatar = user.avatar;
-                    }
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+                    DBcommand.Parameters.AddWithValue("@sender", user);
                 }
-                comment.avatar ??= "default.png";
-                comment.source = table;
-            });
+                else if (from != null)
+                {
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
+                }
+                else if (time != null)
+                {
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) AND (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
+                }
+                else if (timeMin != null && timeMax != null)
+                {
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE time BETWEEN {timeMin} AND {timeMax} ORDER BY id DESC";
+                }
+                else
+                {
+                    DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
+                }
 
-            DBconnection.Close();
+                comments = DBcommand.ReadAsDTOList<CommentDTO>();
+
+                comments.ForEach(comment =>
+                {
+                    if (table == "comments" && comment.uid != null)
+                    {
+                        UserDTO? user = DBconnection.GetUserById((int)comment.uid);
+                        if (user != null)
+                        {
+                            comment.sender = user.name;
+                            comment.avatar = user.avatar;
+                        }
+                    }
+                    comment.avatar ??= "default.png";
+                    comment.source = table;
+                });
+            }
 
             return comments;
         }
@@ -77,19 +79,19 @@ namespace MadoHomuAPIv2.Controllers
 
             long count = 0;
 
-            var DBconnection = Database.OpenNewConnection();
-            var DBcommand = DBconnection.CreateCommand();
-
-            DBcommand.CommandText = $"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}";
-            using (var reader = DBcommand.ExecuteReader())
+            using (var DBconnection = Database.OpenNewConnection())
             {
-                while (reader.Read())
+                var DBcommand = DBconnection.CreateCommand();
+
+                DBcommand.CommandText = $"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}";
+                using (var reader = DBcommand.ExecuteReader())
                 {
-                    count = (long)reader.GetValue(0);
+                    while (reader.Read())
+                    {
+                        count = (long)reader.GetValue(0);
+                    }
                 }
             }
-
-            DBconnection.Close();
 
             //return new List<string> { dto.ToString(), timeMin.ToString(), dto.ToUnixTimeSeconds().ToString(), timeMax.ToString() };
             return count;

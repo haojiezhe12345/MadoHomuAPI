@@ -34,26 +34,23 @@ namespace MadoHomuAPIv2
 
         public static int WriteComment(CommentToWrite Comment)
         {
+            if (Comment.sender == "3112611479") return -1;
+
+            int result;
+
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var DBconnection = Database.OpenNewConnection();
-            var DBcommand = DBconnection.CreateCommand();
-
-            if (Comment.sender == "3112611479")
+            using (var DBconnection = Database.OpenNewConnection())
             {
-                return -1;
+                var DBcommand = DBconnection.CreateCommand();
+                DBcommand.CommandText = $"INSERT INTO comments (time, sender, comment, image) VALUES (@time, @sender, @comment, @images)";
+                DBcommand.Parameters.AddWithValue("@time", Comment.timestamp);
+                DBcommand.Parameters.AddWithValue("@sender", Comment.sender);
+                DBcommand.Parameters.AddWithValue("@comment", Comment.comment);
+                DBcommand.Parameters.AddWithValue("@images", Comment.images ?? (object)DBNull.Value);
+                result = DBcommand.ExecuteNonQuery();
             }
-
-            DBcommand.CommandText = $"INSERT INTO comments (time, sender, comment, image) VALUES (@time, @sender, @comment, @images)";
-            DBcommand.Parameters.AddWithValue("@time", Comment.timestamp);
-            DBcommand.Parameters.AddWithValue("@sender", Comment.sender);
-            DBcommand.Parameters.AddWithValue("@comment", Comment.comment);
-            DBcommand.Parameters.AddWithValue("@images", Comment.images ?? (object)DBNull.Value);
-
-            var result = DBcommand.ExecuteNonQuery();
-
-            DBconnection.Close();
 
             stopwatch.Stop();
             Logging.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
