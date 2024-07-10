@@ -42,7 +42,7 @@ namespace MadoHomuAPIv2.Controllers
                 Request.Form.Files[0].CopyTo(stream);
             }
 
-            System.IO.File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] Avatar {name} has been uploaded\n");
+            Logging.Log($"Avatar {name} has been uploaded");
 
             return name;
         }

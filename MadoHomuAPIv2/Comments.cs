@@ -56,7 +56,7 @@ namespace MadoHomuAPIv2
             DBconnection.Close();
 
             stopwatch.Stop();
-            File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] Written comment in {stopwatch.ElapsedMilliseconds}ms\n");
+            Logging.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }

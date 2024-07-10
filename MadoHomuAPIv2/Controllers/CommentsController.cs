@@ -99,7 +99,7 @@ namespace MadoHomuAPIv2.Controllers
         {
             if (CommentData.sender == null || CommentData.comment == null)
             {
-                System.IO.File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] Ignoring a request with null sender/comment\n");
+                Logging.Log($"Ignoring a request with null sender/comment");
                 return -1;
             }
 
@@ -119,7 +119,7 @@ namespace MadoHomuAPIv2.Controllers
                     }
                     catch (Exception e)
                     {
-                        System.IO.File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}\n");
+                        Logging.Log($"Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}");
                     }
                 }
                 images = images.TrimEnd(',');
