@@ -2,6 +2,14 @@
 
 namespace MadoHomuAPIv2
 {
+    public static class Database
+    {
+        public static SqliteConnection OpenNewConnection()
+        {
+            return new SqliteConnection(@"Data Source=data\main.db");
+        }
+    }
+
     public static class SqliteCommandExtensions
     {
         public static List<Dictionary<string, object?>> ReadAsDictList(this SqliteCommand command)

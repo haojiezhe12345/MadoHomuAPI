@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.Sqlite;
 using static MadoHomuAPIv2.Comments;
 using static MadoHomuAPIv2.User;
 
@@ -21,7 +20,7 @@ namespace MadoHomuAPIv2.Controllers
                 else return [];
             }
 
-            var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
+            var DBconnection = Database.OpenNewConnection();
             DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 
@@ -51,7 +50,7 @@ namespace MadoHomuAPIv2.Controllers
 
             comments.ForEach(comment =>
             {
-                if (comment.uid != null)
+                if (table == "comments" && comment.uid != null)
                 {
                     UserDTO user = DBconnection.GetUserById((int)comment.uid);
                     comment.sender = user.name;
@@ -75,7 +74,7 @@ namespace MadoHomuAPIv2.Controllers
 
             long count = 0;
 
-            var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
+            var DBconnection = Database.OpenNewConnection();
             DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 

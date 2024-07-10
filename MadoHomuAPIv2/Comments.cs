@@ -1,5 +1,4 @@
-﻿using Microsoft.Data.Sqlite;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace MadoHomuAPIv2
 {
@@ -37,7 +36,7 @@ namespace MadoHomuAPIv2
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
+            var DBconnection = Database.OpenNewConnection();
             DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 
