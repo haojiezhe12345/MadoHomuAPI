@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using static MadoHomuAPIv2.Comments;
+using static MadoHomuAPIv2.User;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,15 +12,13 @@ namespace MadoHomuAPIv2.Controllers
     public class CommentsController : ControllerBase
     {
         [HttpGet]
-        public List<Comment> GetComments(int? from, int? count, int? time, string? user, string? db, int? timeMin, int? timeMax)
+        public List<CommentDTO> GetComments(int? from, int? count, long? time, string? user, string? db, long? timeMin, long? timeMax)
         {
-            List<Comment> comments = [];
-
             var table = "comments";
             if (db != null)
             {
                 if (db == "kami") table = "kami";
-                else return comments;
+                else return [];
             }
 
             var DBconnection = new SqliteConnection(@"Data Source=data\main.db");
@@ -48,18 +47,18 @@ namespace MadoHomuAPIv2.Controllers
                 DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
             }
 
-            using (var reader = DBcommand.ExecuteReader())
-            {
-                List<string> columns = [];
-                for (int i = 0; i < reader.FieldCount; i++) columns.Add(reader.GetName(i));
+            List<CommentDTO> comments = DBcommand.ReadAsDTOList<CommentDTO>();
 
-                while (reader.Read())
+            comments.ForEach(comment =>
+            {
+                if (comment.uid != null)
                 {
-                    Comment comment = [];
-                    columns.ForEach(column => comment[column] = reader[column]);
-                    comments.Add(comment);
+                    UserDTO user = DBconnection.GetUserById((int)comment.uid);
+                    comment.sender = user.name;
+                    comment.avatar = user.avatar;
                 }
-            }
+                comment.avatar ??= "default.png";
+            });
 
             DBconnection.Close();
 
@@ -134,7 +133,7 @@ namespace MadoHomuAPIv2.Controllers
 
             return WriteComment(new CommentToWrite
             {
-                unixTime = TimeStamp,
+                timestamp = TimeStamp,
                 sender = CommentData.sender,
                 comment = CommentData.comment,
                 images = images,

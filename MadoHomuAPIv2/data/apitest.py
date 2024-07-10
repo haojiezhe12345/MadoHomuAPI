@@ -12,10 +12,11 @@ import json
 # x');SELECT * FROM comments--
 
 session = requests.session()
+baseurl = 'http://localhost:5213'
 
 
 def get(i):
-    x = requests.get('http://localhost:5213/comments?from=-20000&count=10')
+    x = requests.get(f'{baseurl}/comments?from=-20000&count=10')
     print(f'\n\n============ {i}\n\n{x.text}')
     # response = json.loads(x.text)
     # if response[0]['sender'] != "浩劫者12345":
@@ -24,7 +25,7 @@ def get(i):
 
 
 def post(i):
-    url = 'http://localhost:5213/post'
+    url = f'{baseurl}/post'
     x = session.post(url, json={
         'sender': f'testuser{i}\'s',
         'comment': "x');DELETE FROM comments--"
@@ -42,7 +43,7 @@ def PostStress(count):
     def send(x):
         nonlocal sent, fulfilled
         sent += 1
-        session.post('http://localhost:5213/post', json={
+        session.post(f'{baseurl}/post', json={
             'sender': f'testuser{x}\'s',
             'comment': "x');DELETE FROM comments--"
         })
@@ -55,7 +56,7 @@ def PostStress(count):
 
 
 def postFile(i):
-    url = 'http://localhost:5213/upload'
+    url = f'{baseurl}/upload'
     f = open(R"C:\Users\31126\Desktop\magireco.png", mode='rb')
     # data = f.read()
     # f.close()
@@ -67,7 +68,7 @@ def postFile(i):
 
 
 def postWithImg(i):
-    url = 'http://localhost:5213/post'
+    url = f'{baseurl}/post'
     with open(R"C:\Users\31126\Desktop\magireco.png", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read()).decode('ascii')
     x = requests.post(url, json={
@@ -88,4 +89,5 @@ if __name__ == "__main__":
     # for i in range(0, 20):
     #    print()
 
-    PostStress(1000)
+    baseurl = 'http://192.168.2.99:8001/api'
+    PostStress(5000)

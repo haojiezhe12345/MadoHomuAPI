@@ -3,9 +3,19 @@ using System.Diagnostics;
 
 namespace MadoHomuAPIv2
 {
-    public class Comments
+    public static class Comments
     {
-        public class Comment : Dictionary<string, object>;
+        public class CommentDTO
+        {
+            public int? id { get; set; }
+            public long? time { get; set; }
+            public string? sender { get; set; }
+            public int? uid { get; set; }
+            public string? comment { get; set; }
+            public string? image { get; set; }
+            public int? hidden { get; set; }
+            public string? avatar { get; set; }
+        }
 
         public class PostedComment
         {
@@ -16,7 +26,7 @@ namespace MadoHomuAPIv2
 
         public class CommentToWrite
         {
-            public long unixTime { get; set; }
+            public long? timestamp { get; set; }
             public string? sender { get; set; }
             public string? comment { get; set; }
             public string? images { get; set; }
@@ -37,7 +47,7 @@ namespace MadoHomuAPIv2
             }
 
             DBcommand.CommandText = $"INSERT INTO comments (time, sender, comment, image) VALUES (@time, @sender, @comment, @images)";
-            DBcommand.Parameters.AddWithValue("@time", Comment.unixTime);
+            DBcommand.Parameters.AddWithValue("@time", Comment.timestamp);
             DBcommand.Parameters.AddWithValue("@sender", Comment.sender);
             DBcommand.Parameters.AddWithValue("@comment", Comment.comment);
             DBcommand.Parameters.AddWithValue("@images", Comment.images ?? (object)DBNull.Value);
