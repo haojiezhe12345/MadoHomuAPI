@@ -6,7 +6,9 @@ namespace MadoHomuAPIv2
     {
         public static SqliteConnection OpenNewConnection()
         {
-            return new SqliteConnection(@"Data Source=data\main.db");
+            var connection = new SqliteConnection(@"Data Source=data\main.db");
+            connection.Open();
+            return connection;
         }
     }
 
@@ -24,6 +26,12 @@ namespace MadoHomuAPIv2
             });
 
             return result;
+        }
+
+        public static T? ReadAsDTO<T>(this SqliteCommand command) where T : new()
+        {
+            List<T> list = command.ReadAsDTOList<T>();
+            return list.Count > 0 ? list[0] : default;
         }
 
         public static List<T> ReadAsDTOList<T>(this SqliteCommand command) where T : new()

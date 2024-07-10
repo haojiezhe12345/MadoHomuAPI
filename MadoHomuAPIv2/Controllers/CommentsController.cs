@@ -21,7 +21,6 @@ namespace MadoHomuAPIv2.Controllers
             }
 
             var DBconnection = Database.OpenNewConnection();
-            DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 
             if (user != null)
@@ -52,9 +51,12 @@ namespace MadoHomuAPIv2.Controllers
             {
                 if (table == "comments" && comment.uid != null)
                 {
-                    UserDTO user = DBconnection.GetUserById((int)comment.uid);
-                    comment.sender = user.name;
-                    comment.avatar = user.avatar;
+                    UserDTO? user = DBconnection.GetUserById((int)comment.uid);
+                    if (user != null)
+                    {
+                        comment.sender = user.name;
+                        comment.avatar = user.avatar;
+                    }
                 }
                 comment.avatar ??= "default.png";
                 comment.source = table;
@@ -76,7 +78,6 @@ namespace MadoHomuAPIv2.Controllers
             long count = 0;
 
             var DBconnection = Database.OpenNewConnection();
-            DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 
             DBcommand.CommandText = $"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}";

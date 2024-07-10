@@ -38,7 +38,6 @@ namespace MadoHomuAPIv2
             stopwatch.Start();
 
             var DBconnection = Database.OpenNewConnection();
-            DBconnection.Open();
             var DBcommand = DBconnection.CreateCommand();
 
             if (Comment.sender == "3112611479")
