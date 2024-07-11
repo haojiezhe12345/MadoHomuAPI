@@ -2,20 +2,21 @@
 
 namespace MadoHomuAPIv2
 {
-    public class UserMiddleware(RequestDelegate next)
-    {
-        public async Task InvokeAsync(HttpContext context)
-        {
-            context.SetUser(context.DbConnection().GetUserByRequest(context.Request));
-            await next(context);
-        }
-    }
-
     public static class HttpContextUserExtensions
     {
-        private static readonly string DbConnectionKey = "User";
-        public static User.UserDTO? User(this HttpContext context) => context.Items[DbConnectionKey] as User.UserDTO;
-        public static void SetUser(this HttpContext context, object? value) => context.Items[DbConnectionKey] = value;
+        private static readonly string IsUserRetrievedKey = "IsUserRetrieved";
+        private static readonly string UserKey = "User";
+        public static User.UserDTO? User(this HttpContext context)
+        {
+            if (context.Items[IsUserRetrievedKey] != null) return context.Items[UserKey] as User.UserDTO;
+            else
+            {
+                var user = context.DbConnection().GetUserByRequest(context.Request);
+                context.Items[UserKey] = user;
+                context.Items[IsUserRetrievedKey] = true;
+                return user;
+            }
+        }
     }
 
     public static class User

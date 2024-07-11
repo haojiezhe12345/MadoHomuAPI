@@ -19,7 +19,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<DatabaseMiddleware>();
-app.UseMiddleware<UserMiddleware>();
 
 app.UseAuthorization();
 
