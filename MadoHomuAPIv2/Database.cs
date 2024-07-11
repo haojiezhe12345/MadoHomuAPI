@@ -80,6 +80,24 @@ namespace MadoHomuAPIv2
             reader.Close();
         }
 
+        public static int InsertDTO<T>(this SqliteConnection connection, string table, T dto)
+        {
+            var properties = typeof(T).GetProperties();
+            List<string> columns = [];
+            List<string> values = [];
+
+            var command = connection.CreateCommand();
+            foreach (var property in properties)
+            {
+                columns.Add(property.Name);
+                values.Add($"@{property.Name}");
+                command.Parameters.AddWithValue($"@{property.Name}", property.GetValue(dto) ?? DBNull.Value);
+            }
+            command.CommandText = $"INSERT INTO {table} ({string.Join(", ", columns)}) VALUES ({string.Join(", ", values)})";
+
+            return command.ExecuteNonQuery();
+        }
+
         private class Row : List<RowValue>;
 
         private class RowValue

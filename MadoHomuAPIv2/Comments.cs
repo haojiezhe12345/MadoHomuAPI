@@ -26,11 +26,11 @@ namespace MadoHomuAPIv2
 
         public class CommentToWrite
         {
-            public long? timestamp { get; set; }
+            public long? time { get; set; }
             public string? sender { get; set; }
             public int? uid { get; set; }
             public string? comment { get; set; }
-            public string? images { get; set; }
+            public string? image { get; set; }
         }
 
         public static int WriteComment(CommentToWrite Comment)
@@ -44,14 +44,7 @@ namespace MadoHomuAPIv2
 
             using (var DBconnection = Database.OpenNewConnection())
             {
-                var DBcommand = DBconnection.CreateCommand();
-                DBcommand.CommandText = $"INSERT INTO comments (time, sender, uid, comment, image) VALUES (@time, @sender, @uid, @comment, @images)";
-                DBcommand.Parameters.AddWithValue("@time", Comment.timestamp);
-                DBcommand.Parameters.AddWithValue("@sender", Comment.sender ?? (object)DBNull.Value);
-                DBcommand.Parameters.AddWithValue("@uid", Comment.uid ?? (object)DBNull.Value);
-                DBcommand.Parameters.AddWithValue("@comment", Comment.comment);
-                DBcommand.Parameters.AddWithValue("@images", Comment.images ?? (object)DBNull.Value);
-                result = DBcommand.ExecuteNonQuery();
+                result = DBconnection.InsertDTO("comments", Comment);
             }
 
             stopwatch.Stop();

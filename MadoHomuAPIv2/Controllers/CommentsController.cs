@@ -140,11 +140,11 @@ namespace MadoHomuAPIv2.Controllers
 
             return WriteComment(new CommentToWrite
             {
-                timestamp = TimeStamp,
+                time = TimeStamp,
                 sender = CommentData.sender,
                 uid = user?.id,
                 comment = CommentData.comment,
-                images = images,
+                image = images,
             });
         }
     }
