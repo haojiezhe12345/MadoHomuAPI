@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using static MadoHomuAPIv2.Comments;
 using static MadoHomuAPIv2.User;
 
@@ -22,10 +23,8 @@ namespace MadoHomuAPIv2.Controllers
 
             List<CommentDTO> comments = [];
 
-            using (var DBconnection = Database.OpenNewConnection())
+            using (var DBcommand = HttpContext.DbConnection().CreateCommand())
             {
-                using var DBcommand = DBconnection.CreateCommand();
-
                 if (user != null)
                 {
                     DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
@@ -49,22 +48,22 @@ namespace MadoHomuAPIv2.Controllers
                 }
 
                 comments = DBcommand.ReadAsDTOList<CommentDTO>();
-
-                comments.ForEach(comment =>
-                {
-                    if (table == "comments" && comment.uid != null)
-                    {
-                        UserDTO? user = DBconnection.GetUser("id", comment.uid);
-                        if (user != null)
-                        {
-                            comment.sender = user.name;
-                            comment.avatar = user.avatar;
-                        }
-                    }
-                    comment.avatar ??= "default.png";
-                    comment.source = table;
-                });
             }
+
+            comments.ForEach(comment =>
+            {
+                if (table == "comments" && comment.uid != null)
+                {
+                    UserDTO? user = HttpContext.DbConnection().GetUser("id", comment.uid);
+                    if (user != null)
+                    {
+                        comment.sender = user.name;
+                        comment.avatar = user.avatar;
+                    }
+                }
+                comment.avatar ??= "default.png";
+                comment.source = table;
+            });
 
             return comments;
         }
@@ -77,22 +76,14 @@ namespace MadoHomuAPIv2.Controllers
             long timeMin = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 0, 0, 0, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
             long timeMax = new DateTimeOffset(dto.Year, dto.Month, dto.Day, 23, 59, 59, new TimeSpan(utc ?? 8, 0, 0)).ToUnixTimeSeconds();
 
-            long count;
-
-            using (var db = Database.OpenNewConnection())
-                count = (long?)db.ReadOneValue($"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}") ?? 0;
-
-            //return new List<string> { dto.ToString(), timeMin.ToString(), dto.ToUnixTimeSeconds().ToString(), timeMax.ToString() };
-            return count;
+            return (long?)HttpContext.DbConnection().ReadOneValue($"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}") ?? 0;
         }
 
         [HttpPost("")]
         [HttpPost("/post")]
         public int Post(PostedComment CommentData)
         {
-            UserDTO? user = null;
-            using (var db = Database.OpenNewConnection())
-                user = db.GetUserByRequest(Request);
+            UserDTO? user = HttpContext.User();
 
             if (user == null && (CommentData.sender == null || CommentData.comment == null))
             {
@@ -127,14 +118,28 @@ namespace MadoHomuAPIv2.Controllers
             DateTimeOffset dto = new(DateTime.UtcNow);
             long TimeStamp = dto.ToUnixTimeSeconds();
 
-            return WriteComment(new CommentToWrite
+            var Comment = new CommentToWrite
             {
                 time = TimeStamp,
                 sender = CommentData.sender,
                 uid = user?.id,
                 comment = CommentData.comment,
                 image = images,
-            });
+            };
+
+            if (Comment.sender == "3112611479") return -1;
+
+            int result;
+
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+
+            result = HttpContext.DbConnection().InsertDTO("comments", Comment);
+
+            stopwatch.Stop();
+            Logging.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
+
+            return result;
         }
     }
 }

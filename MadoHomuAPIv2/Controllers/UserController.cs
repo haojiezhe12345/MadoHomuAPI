@@ -13,22 +13,18 @@ namespace MadoHomuAPIv2.Controllers
         public string Login(LoginDTO login)
         {
             string token = "";
+            UserDTO? user = null;
 
-            using (var db = Database.OpenNewConnection())
+            if (login.email != null)
+                user = HttpContext.DbConnection().GetUser("email", login.email);
+
+            if (user != null && user.id != null)
             {
-                UserDTO? user = null;
-                if (login.email != null)
+                if (user.token == null || user.token.Length < 8)
                 {
-                    user = db.GetUser("email", login.email);
+                    token = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
                 }
-                if (user != null && user.id != null)
-                {
-                    if (user.token == null || user.token.Length < 8)
-                    {
-                        token = db.GenerateTokenForUserById((int)user.id);
-                    }
-                    else token = user.token;
-                }
+                else token = user.token;
             }
 
             return token;
