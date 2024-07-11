@@ -72,7 +72,7 @@ namespace MadoHomuAPIv2
                         }
                         catch (Exception e)
                         {
-                            Logging.Log($"Failed to convert database cell '{x.value}' of type {x.value.GetType()} to {property.PropertyType} at column '{x.column}'. Reason:\n{e}");
+                            Utils.Log($"Failed to convert database cell '{x.value}' of type {x.value.GetType()} to {property.PropertyType} at column '{x.column}'. Reason:\n{e}");
                         }
                     }
                 });

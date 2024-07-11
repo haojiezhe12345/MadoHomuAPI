@@ -87,7 +87,7 @@ namespace MadoHomuAPIv2.Controllers
 
             if (user == null && (CommentData.sender == null || CommentData.comment == null))
             {
-                Logging.Log($"Ignoring a request with null sender/comment");
+                Utils.Log($"Ignoring a request with null sender/comment");
                 return -1;
             }
 
@@ -102,12 +102,12 @@ namespace MadoHomuAPIv2.Controllers
                     var filename = DateTime.UtcNow.Ticks.ToString();
                     try
                     {
-                        System.IO.File.WriteAllBytes(@$"data\images\posts\{filename}.jpg", Convert.FromBase64String(image));
+                        Utils.WriteFileFromBase64(@$"data\images\posts\{filename}.jpg", image);
                         images += filename + ',';
                     }
                     catch (Exception e)
                     {
-                        Logging.Log($"Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}");
+                        Utils.Log($"Failed to decode base64 image: {e.Message}\nThe base64 data is:\n{image}");
                     }
                 }
                 images = images.TrimEnd(',');
@@ -122,7 +122,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 var testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, {TimeStamp}, 'sender', -1, 'comment', 'image', 1)");
                 HttpContext.DbConnection().Execute("DELETE FROM comments WHERE id = -1");
-                Logging.Log($"Comment write test {(testResult == 1 ? "succeeded" : "FAILED")}");
+                Utils.Log($"Comment write test {(testResult == 1 ? "succeeded" : "FAILED")}");
                 return -1;
             }
 
@@ -141,7 +141,7 @@ namespace MadoHomuAPIv2.Controllers
             });
 
             stopwatch.Stop();
-            Logging.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
+            Utils.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }

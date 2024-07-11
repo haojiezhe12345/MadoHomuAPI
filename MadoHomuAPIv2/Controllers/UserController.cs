@@ -59,7 +59,7 @@ namespace MadoHomuAPIv2.Controllers
                 Request.Form.Files[0].CopyTo(stream);
             }
 
-            Logging.Log($"Avatar {name} has been uploaded");
+            Utils.Log($"Avatar {name} has been uploaded");
 
             return name;
         }
