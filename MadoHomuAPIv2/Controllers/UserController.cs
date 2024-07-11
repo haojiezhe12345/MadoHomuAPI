@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using static MadoHomuAPIv2.User;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,8 +10,28 @@ namespace MadoHomuAPIv2.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
-        public void Login([FromBody] string value)
+        public string Login(LoginDTO login)
         {
+            string token = "";
+
+            using (var db = Database.OpenNewConnection())
+            {
+                UserDTO? user = null;
+                if (login.email != null)
+                {
+                    user = db.GetUserByEmail(login.email);
+                }
+                if (user != null && user.id != null)
+                {
+                    if (user.token == null || user.token.Length < 8)
+                    {
+                        token = db.GenerateTokenForUserById((int)user.id);
+                    }
+                    else token = user.token;
+                }
+            }
+
+            return token;
         }
 
         [HttpPost("/upload")]

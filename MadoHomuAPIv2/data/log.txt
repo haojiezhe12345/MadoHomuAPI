@@ -1,4 +1,0 @@
-[7/9/2024 7:31:21 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
-The base64 data is:
-string
-[7/9/2024 7:31:21 AM] Written comment in 3ms

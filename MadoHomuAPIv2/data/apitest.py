@@ -16,43 +16,25 @@ baseurl = 'http://localhost:5213'
 
 
 def get(i):
-    x = requests.get(f'{baseurl}/comments?from=-20000&count=10')
-    print(f'\n\n============ {i}\n\n{x.text}')
-    # response = json.loads(x.text)
-    # if response[0]['sender'] != "浩劫者12345":
-    #    print('error', end='')
-    # print()
+    r = session.get(f'{baseurl}/comments?from={i}&count=50')
+    try:
+        json.loads(r.text)
+        return True
+    except:
+        print(r.text)
+        return False
 
 
 def post(i):
-    url = f'{baseurl}/post'
-    x = session.post(url, json={
+    r = session.post(f'{baseurl}/post', json={
         'sender': f'testuser{i}\'s',
         'comment': "x');DELETE FROM comments--"
     })
-    print(i, end=' ')
-    # if x.text != "1":
-    #    print('error', end='')
-    print(x.text)
-
-
-def PostStress(count):
-    sent = 0
-    fulfilled = 0
-
-    def send(x):
-        nonlocal sent, fulfilled
-        sent += 1
-        session.post(f'{baseurl}/post', json={
-            'sender': f'testuser{x}\'s',
-            'comment': "x');DELETE FROM comments--"
-        })
-        fulfilled += 1
-        print(f'Sent: {sent}/{count}, Fulfilled: {fulfilled}/{count}', end='\r')
-
-    for i in range(0, count):
-        thread = Thread(target=send, args=[i])
-        thread.start()
+    if r.text == '1':
+        return True
+    else:
+        print(r.text)
+        return False
 
 
 def postFile(i):
@@ -85,9 +67,29 @@ def postWithImg(i):
     print(x.text)
 
 
+def stress(fn, count):
+    created = 0
+    success = 0
+    fail = 0
+
+    def send(x):
+        nonlocal created, success, fail
+        created += 1
+        succeed = fn(x)
+        if succeed:
+            success += 1
+        else:
+            fail += 1
+        print(f'Created: {created}/{count}, Success: {success}/{count}, Failed: {fail}        ', end='\r')
+
+    for i in range(0, count):
+        thread = Thread(target=send, args=[i])
+        thread.start()
+
+
 if __name__ == "__main__":
     # for i in range(0, 20):
     #    print()
 
-    baseurl = 'http://192.168.2.99:8001/api'
-    PostStress(5000)
+    # baseurl = 'http://192.168.2.99:8001/api'
+    stress(post, 3000)
