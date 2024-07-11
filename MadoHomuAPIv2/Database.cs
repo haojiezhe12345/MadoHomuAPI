@@ -79,6 +79,21 @@ namespace MadoHomuAPIv2
             }
         }
 
+        public static object? ReadOneValue(this SqliteConnection connection, string sql)
+        {
+            using var command = connection.CreateCommand();
+            command.CommandText = sql;
+            return command.ReadOneValue();
+        }
+
+        public static object? ReadOneValue(this SqliteCommand command)
+        {
+            using var reader = command.ExecuteReader();
+            while (reader.Read())
+                return reader.GetValue(0);
+            return null;
+        }
+
         public static int InsertDTO<T>(this SqliteConnection connection, string table, T dto)
         {
             var properties = typeof(T).GetProperties();
