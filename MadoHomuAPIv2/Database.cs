@@ -131,6 +131,13 @@ namespace MadoHomuAPIv2
             return command.ExecuteNonQuery();
         }
 
+        public static int Execute(this SqliteConnection connection, string sql)
+        {
+            using var command = connection.CreateCommand();
+            command.CommandText = sql;
+            return command.ExecuteNonQuery();
+        }
+
         private class Row : List<RowValue>;
 
         private class RowValue

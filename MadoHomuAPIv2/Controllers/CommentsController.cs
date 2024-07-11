@@ -61,7 +61,7 @@ namespace MadoHomuAPIv2.Controllers
                         comment.avatar = user.avatar;
                     }
                 }
-                comment.avatar ??= "default.png";
+                //comment.avatar ??= "default.png";
                 comment.source = table;
             });
 
@@ -118,23 +118,27 @@ namespace MadoHomuAPIv2.Controllers
             DateTimeOffset dto = new(DateTime.UtcNow);
             long TimeStamp = dto.ToUnixTimeSeconds();
 
-            var Comment = new CommentToWrite
+            if (CommentData.sender == "3112611479")
             {
-                time = TimeStamp,
-                sender = CommentData.sender,
-                uid = user?.id,
-                comment = CommentData.comment,
-                image = images,
-            };
-
-            if (Comment.sender == "3112611479") return -1;
+                var testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, {TimeStamp}, 'sender', -1, 'comment', 'image', 1)");
+                HttpContext.DbConnection().Execute("DELETE FROM comments WHERE id = -1");
+                Logging.Log($"Comment write test {(testResult == 1 ? "succeeded" : "FAILED")}");
+                return -1;
+            }
 
             int result;
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            result = HttpContext.DbConnection().InsertDTO("comments", Comment);
+            result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
+            {
+                time = TimeStamp,
+                sender = CommentData.sender,
+                uid = user?.id,
+                comment = CommentData.comment,
+                image = images,
+            });
 
             stopwatch.Stop();
             Logging.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
