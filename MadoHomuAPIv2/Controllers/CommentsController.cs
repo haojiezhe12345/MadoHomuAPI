@@ -54,7 +54,7 @@ namespace MadoHomuAPIv2.Controllers
                 {
                     if (table == "comments" && comment.uid != null)
                     {
-                        UserDTO? user = DBconnection.GetUserById((int)comment.uid);
+                        UserDTO? user = DBconnection.GetUser("id", comment.uid);
                         if (user != null)
                         {
                             comment.sender = user.name;
@@ -101,7 +101,11 @@ namespace MadoHomuAPIv2.Controllers
         [HttpPost("/post")]
         public int Post(PostedComment CommentData)
         {
-            if (CommentData.sender == null || CommentData.comment == null)
+            UserDTO? user = null;
+            using (var db = Database.OpenNewConnection())
+                user = db.GetUserByRequest(Request);
+
+            if (user == null && (CommentData.sender == null || CommentData.comment == null))
             {
                 Logging.Log($"Ignoring a request with null sender/comment");
                 return -1;
@@ -138,6 +142,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 timestamp = TimeStamp,
                 sender = CommentData.sender,
+                uid = user?.id,
                 comment = CommentData.comment,
                 images = images,
             });

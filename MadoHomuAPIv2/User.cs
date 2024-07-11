@@ -20,18 +20,11 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
-        public static UserDTO? GetUserById(this SqliteConnection connection, int id)
+        public static UserDTO? GetUser(this SqliteConnection connection, string key, object value)
         {
             var command = connection.CreateCommand();
-            command.CommandText = $"SELECT * FROM users WHERE id = {id}";
-            return command.ReadAsDTO<UserDTO>();
-        }
-
-        public static UserDTO? GetUserByEmail(this SqliteConnection connection, string email)
-        {
-            var command = connection.CreateCommand();
-            command.CommandText = $"SELECT * FROM users WHERE email = @email";
-            command.Parameters.AddWithValue("@email", email);
+            command.CommandText = $"SELECT * FROM users WHERE {key} = @{key}";
+            command.Parameters.AddWithValue($"@{key}", value);
             return command.ReadAsDTO<UserDTO>();
         }
 
@@ -40,9 +33,19 @@ namespace MadoHomuAPIv2
             string token = Guid.NewGuid().ToString();
             var command = connection.CreateCommand();
             command.CommandText = $"UPDATE users SET token = '{token}' WHERE id = {id}";
-            if (command.ExecuteNonQuery() == 1) 
+            if (command.ExecuteNonQuery() == 1)
                 return token;
             else return "";
+        }
+
+        public static UserDTO? GetUserByRequest(this SqliteConnection connection, HttpRequest request)
+        {
+            string? token = null;
+            foreach (var header in request.Headers)
+                if (header.Key == "token") token = header.Value;
+            if (token != null)
+                return connection.GetUser("token", token);
+            else return null;
         }
     }
 }

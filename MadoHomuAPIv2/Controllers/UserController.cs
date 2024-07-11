@@ -19,7 +19,7 @@ namespace MadoHomuAPIv2.Controllers
                 UserDTO? user = null;
                 if (login.email != null)
                 {
-                    user = db.GetUserByEmail(login.email);
+                    user = db.GetUser("email", login.email);
                 }
                 if (user != null && user.id != null)
                 {
