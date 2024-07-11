@@ -65,7 +65,7 @@ namespace MadoHomuAPIv2
 
         private static void ReadEachRow(this SqliteCommand command, Action<Row> callback)
         {
-            var reader = command.ExecuteReader();
+            using var reader = command.ExecuteReader();
             List<string> columns = Enumerable.Range(0, reader.FieldCount).Select(reader.GetName).ToList();
             while (reader.Read())
             {
@@ -77,7 +77,6 @@ namespace MadoHomuAPIv2
                 }));
                 callback(row);
             }
-            reader.Close();
         }
 
         public static int InsertDTO<T>(this SqliteConnection connection, string table, T dto)
@@ -86,7 +85,7 @@ namespace MadoHomuAPIv2
             List<string> columns = [];
             List<string> values = [];
 
-            var command = connection.CreateCommand();
+            using var command = connection.CreateCommand();
             foreach (var property in properties)
             {
                 columns.Add(property.Name);

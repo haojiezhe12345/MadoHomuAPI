@@ -24,7 +24,7 @@ namespace MadoHomuAPIv2.Controllers
 
             using (var DBconnection = Database.OpenNewConnection())
             {
-                var DBcommand = DBconnection.CreateCommand();
+                using var DBcommand = DBconnection.CreateCommand();
 
                 if (user != null)
                 {
@@ -81,7 +81,7 @@ namespace MadoHomuAPIv2.Controllers
 
             using (var DBconnection = Database.OpenNewConnection())
             {
-                var DBcommand = DBconnection.CreateCommand();
+                using var DBcommand = DBconnection.CreateCommand();
 
                 DBcommand.CommandText = $"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}";
                 using (var reader = DBcommand.ExecuteReader())

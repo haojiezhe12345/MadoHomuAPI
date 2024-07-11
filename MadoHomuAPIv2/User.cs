@@ -22,7 +22,7 @@ namespace MadoHomuAPIv2
 
         public static UserDTO? GetUser(this SqliteConnection connection, string key, object value)
         {
-            var command = connection.CreateCommand();
+            using var command = connection.CreateCommand();
             command.CommandText = $"SELECT * FROM users WHERE {key} = @{key}";
             command.Parameters.AddWithValue($"@{key}", value);
             return command.ReadAsDTO<UserDTO>();
@@ -31,7 +31,7 @@ namespace MadoHomuAPIv2
         public static string GenerateTokenForUserById(this SqliteConnection connection, int id)
         {
             string token = Guid.NewGuid().ToString();
-            var command = connection.CreateCommand();
+            using var command = connection.CreateCommand();
             command.CommandText = $"UPDATE users SET token = '{token}' WHERE id = {id}";
             if (command.ExecuteNonQuery() == 1)
                 return token;
