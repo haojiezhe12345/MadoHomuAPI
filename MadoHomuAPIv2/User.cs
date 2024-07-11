@@ -2,6 +2,22 @@
 
 namespace MadoHomuAPIv2
 {
+    public class UserMiddleware(RequestDelegate next)
+    {
+        public async Task InvokeAsync(HttpContext context)
+        {
+            context.SetUser(context.DbConnection().GetUserByRequest(context.Request));
+            await next(context);
+        }
+    }
+
+    public static class HttpContextUserExtensions
+    {
+        private static readonly string DbConnectionKey = "User";
+        public static User.UserDTO? User(this HttpContext context) => context.Items[DbConnectionKey] as User.UserDTO;
+        public static void SetUser(this HttpContext context, object? value) => context.Items[DbConnectionKey] = value;
+    }
+
     public static class User
     {
         public class UserDTO
@@ -40,9 +56,7 @@ namespace MadoHomuAPIv2
 
         public static UserDTO? GetUserByRequest(this SqliteConnection connection, HttpRequest request)
         {
-            string? token = null;
-            foreach (var header in request.Headers)
-                if (header.Key == "token") token = header.Value;
+            string? token = request.Headers["token"];
             if (token != null)
                 return connection.GetUser("token", token);
             else return null;

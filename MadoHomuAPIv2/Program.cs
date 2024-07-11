@@ -1,3 +1,5 @@
+using MadoHomuAPIv2;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +17,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<DatabaseMiddleware>();
+app.UseMiddleware<UserMiddleware>();
 
 app.UseAuthorization();
 

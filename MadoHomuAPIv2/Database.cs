@@ -2,6 +2,28 @@
 
 namespace MadoHomuAPIv2
 {
+    public class DatabaseMiddleware(RequestDelegate next)
+    {
+        public async Task InvokeAsync(HttpContext context)
+        {
+            using var connection = Database.OpenNewConnection();
+            context.SetDbConnection(connection);
+            await next(context);
+        }
+    }
+
+    public static class HttpContextDatabaseExtensions
+    {
+        private static readonly string DbConnectionKey = "DbConnection";
+        public static SqliteConnection DbConnection(this HttpContext context)
+        {
+            if (context.Items[DbConnectionKey] is SqliteConnection connection)
+                return connection;
+            else throw new Exception("Database not connected");
+        }
+        public static void SetDbConnection(this HttpContext context, object value) => context.Items[DbConnectionKey] = value;
+    }
+
     public static class Database
     {
         public static SqliteConnection OpenNewConnection()
@@ -10,10 +32,7 @@ namespace MadoHomuAPIv2
             connection.Open();
             return connection;
         }
-    }
 
-    public static class SqliteCommandExtensions
-    {
         public static List<Dictionary<string, object?>> ReadAsDictList(this SqliteCommand command)
         {
             List<Dictionary<string, object?>> result = [];
