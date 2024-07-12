@@ -19,7 +19,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 user = HttpContext.DbConnection().GetUser("email", login.email);
                 response.code = 1000;
-                response.message = "Invalid Email";
+                response.message = "Email not registered";
             }
             else if (login.name != null)
             {
@@ -36,6 +36,53 @@ namespace MadoHomuAPIv2.Controllers
                     ? HttpContext.DbConnection().GenerateTokenForUserById((int)user.id)
                     : user.token;
                 Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
+            }
+
+            return response;
+        }
+
+        [HttpPost("register")]
+        public ResponseDTO Register(RegisterDTO reg)
+        {
+            ResponseDTO response = new();
+
+            if (reg.email == null)
+            {
+                if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
+                {
+                    response.code = 1000;
+                    response.message = "User already exists";
+                    return response;
+                }
+            }
+            else
+            {
+                if (reg.email.Length < 5)
+                {
+                    response.code = 1001;
+                    response.message = "Email is not valid";
+                    return response;
+                }
+                if (HttpContext.DbConnection().GetUser("email", reg.email) != null)
+                {
+                    response.code = 1002;
+                    response.message = "Email already registered";
+                    return response;
+                }
+            }
+
+            HttpContext.DbConnection().InsertDTO("users", reg);
+
+            var user = reg.email == null
+                ? HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL")
+                : HttpContext.DbConnection().GetUser("email", reg.email);
+
+            if (user != null && user.id != null)
+            {
+                response.code = 1;
+                response.message = "Success";
+                response.data = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
+                Utils.Log($"New user registered: {user.name} (id={user.id})");
             }
 
             return response;

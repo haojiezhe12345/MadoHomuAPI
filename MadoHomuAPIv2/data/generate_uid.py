@@ -50,11 +50,11 @@ with open('user_ids.json', 'w', encoding='utf-8') as f:
     json.dump(ids, f, ensure_ascii=False, indent=2)
 
 
+cur.execute(f'DELETE FROM sqlite_sequence')
 cur.execute(f'DELETE FROM users')
 cur.execute('UPDATE comments SET uid = null')
 for user in ids:
-    cur.execute('INSERT INTO users (id, name, avatar) VALUES (?, ?, ?)', (
-        user['id'],
+    cur.execute('INSERT INTO users (name, avatar) VALUES (?, ?)', (
         user['name'],
         user['name'] + '.jpg' if os.path.exists(os.path.join(avatarDir, user['name'] + '.jpg')) else None,
     ))

@@ -38,6 +38,13 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
+        public class RegisterDTO
+        {
+            public required string name { get; set; }
+            public string? email { get; set; }
+            public string? password { get; set; }
+        }
+
         public class ResponseDTO
         {
             public int? code { get; set; }

@@ -1,0 +1,373 @@
+[7/12/2024 6:10:27 AM] Written comment in 15ms
+[7/12/2024 6:10:39 AM] Written comment in 6ms
+[7/12/2024 6:12:50 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[7/12/2024 6:12:50 AM] Written comment in 17ms
+[7/12/2024 6:14:41 AM] Written comment in 11ms
+[7/12/2024 6:15:14 AM] Written comment in 14ms
+[7/12/2024 6:21:07 AM] Written comment in 6876ms
+[7/12/2024 6:21:52 AM] Written comment in 16ms
+[7/12/2024 6:22:22 AM] Written comment in 5ms
+[7/12/2024 6:23:01 AM] Written comment in 15ms
+[7/12/2024 6:33:20 AM] Written comment in 8ms
+[7/12/2024 6:33:20 AM] Written comment in 5ms
+[7/12/2024 7:14:45 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:56 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:56 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:56 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:56 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:56 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:57 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:57 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:14:57 AM] User logged in successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:19:04 AM] Written comment in 8ms
+[7/12/2024 7:19:08 AM] Written comment in 5ms
+[7/12/2024 7:19:12 AM] Comment write test succeeded
+[7/12/2024 7:28:03 AM] Comment write test succeeded
+[7/12/2024 7:28:46 AM] Comment write test FAILED. Reason:
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 5: 'database is locked'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.Execute(SqliteConnection connection, String sql) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 138
+   at MadoHomuAPIv2.Controllers.CommentsController.Post(PostedComment CommentData) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 126
+[7/12/2024 7:29:25 AM] Comment write test succeeded
+[7/12/2024 7:29:31 AM] Comment write test succeeded
+[7/12/2024 7:32:45 AM] Comment write test succeeded
+[7/12/2024 7:32:49 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[7/12/2024 7:32:49 AM] Written comment in 4ms
+[7/12/2024 7:56:01 AM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 1: 'no such table: users'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteCommand.PrepareAndEnumerateStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at MadoHomuAPIv2.Database.ReadEachRow(SqliteCommand command, Action`1 callback) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 87
+   at MadoHomuAPIv2.Database.ReadAsDTOList[T](SqliteCommand command) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 61
+   at MadoHomuAPIv2.Database.ReadAsDTO[T](SqliteCommand command) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 52
+   at MadoHomuAPIv2.User.GetUser(SqliteConnection connection, String key, Object value) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 45
+   at MadoHomuAPIv2.User.GetUserByRequest(SqliteConnection connection, HttpRequest request) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 62
+   at MadoHomuAPIv2.HttpContextUserExtensions.User(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 14
+   at MadoHomuAPIv2.Controllers.CommentsController.Post(PostedComment CommentData) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 86
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 7:56:39 AM] Comment write test succeeded
+[7/12/2024 7:56:44 AM] Written comment in 4ms
+[7/12/2024 7:57:28 AM] Failed to convert database cell '' of type System.String to System.Nullable`1[System.Int32] at column 'hidden'. Reason:
+System.FormatException: The input string '' was not in a correct format.
+   at System.Number.ThrowFormatException[TChar](ReadOnlySpan`1 value)
+   at System.String.System.IConvertible.ToInt32(IFormatProvider provider)
+   at System.Convert.ChangeType(Object value, Type conversionType, IFormatProvider provider)
+   at MadoHomuAPIv2.Database.<>c__DisplayClass3_1`1.<ReadAsDTOList>b__1(RowValue x) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 71
+[7/12/2024 7:58:03 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[7/12/2024 7:58:26 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[7/12/2024 7:58:33 AM] Failed to write comment. Reason:
+[7/12/2024 7:58:33 AM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 5: 'database is locked'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.CommentsController.Post(PostedComment CommentData) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 145
+   at lambda_method6(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 7:58:49 AM] User logged on successfully: 浩劫者12345 (id=1)
+[7/12/2024 7:58:55 AM] Written comment in 29639ms
+[7/12/2024 7:58:58 AM] Written comment in 5ms
+[7/12/2024 7:59:01 AM] Comment write test succeeded
+[7/12/2024 8:07:00 AM] Comment write test succeeded
+[7/12/2024 8:07:03 AM] Written comment from awa (id=) in 4ms
+[7/12/2024 8:07:27 AM] Written comment from 浩劫者12345 (id=1) in 10ms
+[7/12/2024 8:07:36 AM] Written comment from 浩劫者12345 (id=1) in 11ms
+[7/12/2024 8:07:36 AM] Written comment from 浩劫者12345 (id=1) in 20ms
+[7/12/2024 8:07:37 AM] Written comment from 浩劫者12345 (id=1) in 8ms
+[7/12/2024 8:07:38 AM] Written comment from 浩劫者12345 (id=1) in 18ms
+[7/12/2024 8:07:38 AM] Written comment from 浩劫者12345 (id=1) in 18ms
+[7/12/2024 8:07:39 AM] Written comment from 浩劫者12345 (id=1) in 10ms
+[7/12/2024 8:07:46 AM] Written comment from 浩劫者12345 (id=1) in 8ms
+[7/12/2024 8:07:47 AM] Written comment from 浩劫者12345 (id=1) in 48ms
+[7/12/2024 8:07:47 AM] Written comment from 浩劫者12345 (id=1) in 7ms
+[7/12/2024 8:07:48 AM] Written comment from 浩劫者12345 (id=1) in 15ms
+[7/12/2024 8:07:49 AM] Written comment from 浩劫者12345 (id=1) in 5ms
+[7/12/2024 8:07:57 AM] Written comment from 浩劫者12345 (id=1) in 5ms
+[7/12/2024 8:07:58 AM] Written comment from 浩劫者12345 (id=1) in 6ms
+[7/12/2024 8:08:02 AM] Written comment from awa (id=) in 6ms
+[7/12/2024 8:08:03 AM] Written comment from awa (id=) in 4ms
+[7/12/2024 8:08:05 AM] Written comment from 浩劫者12345 (id=1) in 15ms
+[7/12/2024 8:44:11 AM] Written comment from 浩劫者12345 (id=1) in 6ms
+[7/12/2024 8:44:14 AM] Written comment from awa (id=) in 5ms
+[7/12/2024 8:44:21 AM] Written comment from 浩劫者12345 (id=1) in 6ms
+[7/12/2024 9:07:56 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:08:33 AM] User logged on successfully: aaa (id=1216)
+[7/12/2024 9:08:38 AM] User logged on successfully: aaa (id=1216)
+[7/12/2024 9:08:38 AM] User logged on successfully: aaa (id=1216)
+[7/12/2024 9:09:47 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:35:51 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:35:58 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:35:59 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:36:03 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:36:16 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:36:16 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:37:45 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:38:25 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:38:32 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:38:34 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:38:38 AM] User logged on successfully: string (id=1216)
+[7/12/2024 9:38:44 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:38:45 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:38:45 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 9:38:46 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:34:57 AM] User logged on successfully: 浩劫者12345 (id=1)
+[7/12/2024 10:35:09 AM] User logged on successfully: string (id=1216)
+[7/12/2024 10:36:00 AM] User logged on successfully: string (id=1216)
+[7/12/2024 10:36:00 AM] User logged on successfully: string (id=1216)
+[7/12/2024 10:36:14 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:23 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:24 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:24 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:24 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:24 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:25 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:25 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:25 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:25 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:36:51 AM] User logged on successfully: aaa (id=1217)
+[7/12/2024 10:37:16 AM] User logged on successfully: string (id=1216)
+[7/12/2024 11:12:47 AM] Written comment from  (id=) in 14ms
+[7/12/2024 11:13:22 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:30 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:30 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:31 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:31 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:31 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:13:31 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:14:00 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:14:12 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:14:16 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:14:16 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:15:09 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:15:13 AM] Written comment from 浩劫者12345 (id=1) in 15ms
+[7/12/2024 11:15:15 AM] Written comment from 浩劫者12345 (id=1) in 5ms
+[7/12/2024 11:15:16 AM] Written comment from 浩劫者12345 (id=1) in 5ms
+[7/12/2024 11:15:20 AM] Written comment from 浩劫者12345 (id=1) in 5ms
+[7/12/2024 11:15:21 AM] Written comment from 浩劫者12345 (id=1) in 14ms
+[7/12/2024 11:15:26 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:15:37 AM] Written comment from awa (id=) in 5ms
+[7/12/2024 11:15:46 AM] Written comment from aaa (id=1217) in 5ms
+[7/12/2024 11:15:54 AM] Written comment from string (id=1216) in 5ms
+[7/12/2024 11:53:42 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:53:42 AM] Ignoring a request with null sender/comment
+[7/12/2024 11:58:39 AM] User logged on successfully: string (id=1218)
+[7/12/2024 11:59:49 AM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:02:58 PM] New user registered: 111 (id=1219)
+[7/12/2024 12:07:32 PM] New user registered: string (id=1220)
+[7/12/2024 12:07:54 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:08:24 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:08:26 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:08:26 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:08:27 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:08:27 PM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.UserController.Register(RegisterDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 56
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 22
+[7/12/2024 12:16:04 PM] New user registered: string1 (id=1221)
+[7/12/2024 12:16:46 PM] New user registered: string (id=1222)
+[7/12/2024 12:19:03 PM] New user registered: string (id=1223)
+[7/12/2024 1:50:31 PM] New user registered:  (id=1224)

@@ -25,10 +25,10 @@ def get(i):
         return False
 
 
-def post(i):
+def post(i, sender=None, comment=None):
     r = session.post(f'{baseurl}/post', json={
-        'sender': f'testuser{i}\'s',
-        'comment': "x');DELETE FROM comments--"
+        'sender': sender or f'testuser{i}\'s',
+        'comment': comment or "x');DELETE FROM comments--"
     })
     if r.text == '1':
         return True
@@ -92,4 +92,9 @@ if __name__ == "__main__":
     #    print()
 
     # baseurl = 'http://192.168.2.99:8001/api'
-    stress(post, 3000)
+    # stress(post, 3000)
+
+    session.headers['token'] = '69312bbf-ce6a-4e44-b0f1-268f0a5ce418'
+    post(1, 'awa', "??????????'''''")
+    # stress(post, 5000)
+    # stress(get, 10000)
