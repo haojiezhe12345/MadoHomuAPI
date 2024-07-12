@@ -120,9 +120,18 @@ namespace MadoHomuAPIv2.Controllers
 
             if (CommentData.sender == "3112611479")
             {
-                var testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, {TimeStamp}, 'sender', -1, 'comment', 'image', 1)");
-                HttpContext.DbConnection().Execute("DELETE FROM comments WHERE id = -1");
-                Utils.Log($"Comment write test {(testResult == 1 ? "succeeded" : "FAILED")}");
+                int testResult;
+                try
+                {
+                    testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, {TimeStamp}, 'sender', -1, 'comment', 'image', 1)");
+                    HttpContext.DbConnection().Execute("DELETE FROM comments WHERE id = -1");
+                }
+                catch
+                {
+                    Utils.Log($"Comment write test FAILED. Reason:");
+                    throw;
+                }
+                Utils.Log($"Comment write test {(testResult == 1 ? "succeeded" : "FAILED. Reason: Updated rows does not equal to 1")}");
                 return -1;
             }
 
@@ -131,17 +140,25 @@ namespace MadoHomuAPIv2.Controllers
             var stopwatch = new Stopwatch();
             stopwatch.Start();
 
-            result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
+            try
             {
-                time = TimeStamp,
-                sender = CommentData.sender,
-                uid = user?.id,
-                comment = CommentData.comment,
-                image = images,
-            });
+                result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
+                {
+                    time = TimeStamp,
+                    sender = CommentData.sender,
+                    uid = user?.id,
+                    comment = CommentData.comment,
+                    image = images,
+                });
+            }
+            catch
+            {
+                Utils.Log($"Failed to write comment. Reason:");
+                throw;
+            }
 
             stopwatch.Stop();
-            Utils.Log($"Written comment in {stopwatch.ElapsedMilliseconds}ms");
+            Utils.Log($"Written comment from {(user == null ? CommentData.sender : user.name)} (id={user?.id}) in {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }

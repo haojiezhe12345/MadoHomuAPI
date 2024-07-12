@@ -10,9 +10,9 @@ namespace MadoHomuAPIv2.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
-        public string Login(LoginDTO login)
+        public string? Login(LoginDTO login)
         {
-            string token = "";
+            string? token = null;
             UserDTO? user = null;
 
             if (login.email != null)
@@ -25,6 +25,10 @@ namespace MadoHomuAPIv2.Controllers
                     token = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
                 }
                 else token = user.token;
+            }
+
+            if (user != null && token != null) {
+                Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
             }
 
             return token;

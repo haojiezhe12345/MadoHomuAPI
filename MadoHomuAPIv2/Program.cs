@@ -18,6 +18,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseMiddleware<ErrorLoggingMiddleware>();
 app.UseMiddleware<DatabaseMiddleware>();
 
 app.UseAuthorization();
