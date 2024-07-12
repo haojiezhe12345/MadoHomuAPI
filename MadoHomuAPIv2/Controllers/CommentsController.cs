@@ -54,7 +54,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 if (table == "comments" && comment.uid != null)
                 {
-                    UserDTO? user = HttpContext.DbConnection().GetUser("id", comment.uid);
+                    var user = HttpContext.DbConnection().GetUser("id", comment.uid);
                     if (user != null)
                     {
                         comment.sender = user.name;
@@ -85,7 +85,7 @@ namespace MadoHomuAPIv2.Controllers
         {
             var user = HttpContext.User();
 
-            if (user == null && (CommentData.sender == null || CommentData.comment == null))
+            if ((user == null && CommentData.sender == null) || CommentData.comment == null)
             {
                 Utils.Log($"Ignoring a request with null sender/comment");
                 return -1;
