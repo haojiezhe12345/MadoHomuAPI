@@ -33,14 +33,22 @@ namespace MadoHomuAPIv2
 
         public class LoginDTO
         {
+            public string? name { get; set; }
             public string? email { get; set; }
             public string? password { get; set; }
         }
 
-        public static UserDTO? GetUser(this SqliteConnection connection, string key, object value)
+        public class ResponseDTO
+        {
+            public int? code { get; set; }
+            public string? message { get; set; }
+            public object? data { get; set; }
+        }
+
+        public static UserDTO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
         {
             using var command = connection.CreateCommand();
-            command.CommandText = $"SELECT * FROM users WHERE {key} = @{key}";
+            command.CommandText = $"SELECT * FROM users WHERE {key} = @{key} {ExtraParam}";
             command.Parameters.AddWithValue($"@{key}", value);
             return command.ReadAsDTO<UserDTO>();
         }

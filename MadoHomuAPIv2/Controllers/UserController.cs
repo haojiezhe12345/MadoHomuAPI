@@ -10,28 +10,35 @@ namespace MadoHomuAPIv2.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
-        public string? Login(LoginDTO login)
+        public ResponseDTO Login(LoginDTO login)
         {
-            string? token = null;
             UserDTO? user = null;
+            ResponseDTO response = new();
 
             if (login.email != null)
+            {
                 user = HttpContext.DbConnection().GetUser("email", login.email);
+                response.code = 1000;
+                response.message = "Invalid Email";
+            }
+            else if (login.name != null)
+            {
+                user = HttpContext.DbConnection().GetUser("name", login.name, "AND email is NULL");
+                response.code = 1001;
+                response.message = "User not found";
+            }
 
             if (user != null && user.id != null)
             {
-                if (user.token == null || user.token.Length < 8)
-                {
-                    token = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
-                }
-                else token = user.token;
-            }
-
-            if (user != null && token != null) {
+                response.code = 1;
+                response.message = "Success";
+                response.data = (user.token == null || user.token.Length < 8)
+                    ? HttpContext.DbConnection().GenerateTokenForUserById((int)user.id)
+                    : user.token;
                 Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
             }
 
-            return token;
+            return response;
         }
 
         [HttpPost("/upload")]
