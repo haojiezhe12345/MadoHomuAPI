@@ -88,6 +88,29 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
+        [HttpGet("find/{name}")]
+        public List<FindUserDTO> FindUser(string name)
+        {
+            List<FindUserDTO> result = [];
+
+            var command = HttpContext.DbConnection().CreateCommand();
+            command.CommandText = "SELECT * FROM users WHERE name = @name";
+            command.Parameters.AddWithValue("name", name);
+            var foundlist = command.ReadAsDTOList<UserDTO>();
+
+            foundlist.ForEach(user =>
+            {
+                result.Add(new FindUserDTO
+                {
+                    id = user.id,
+                    name = user.name,
+                    hasEmail = user.email != null,
+                });
+            });
+
+            return result;
+        }
+
         [HttpPost("/upload")]
         public string UploadAvatar()
         {

@@ -59,6 +59,13 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
+        public class FindUserDTO
+        {
+            public int? id { get; set; }
+            public string? name { get; set; }
+            public bool? hasEmail { get; set; }
+        }
+
         public class ResponseDTO
         {
             public int? code { get; set; }
