@@ -1,10 +1,12 @@
-﻿namespace MadoHomuAPIv2
+﻿using System.Diagnostics;
+
+namespace MadoHomuAPIv2
 {
     public class Utils
     {
         public static void Log(string txt)
         {
-            File.AppendAllTextAsync(@".\data\log.txt", $"[{DateTime.Now}] {txt}\n");
+            File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] {txt}\n");
         }
 
         public static void WriteFileFromBase64(string file, string base64)
@@ -26,6 +28,18 @@
                 Utils.Log(e.ToString());
                 throw;
             }
+        }
+    }
+
+    public class PerformanceMeasureMiddleware(RequestDelegate next)
+    {
+        public async Task InvokeAsync(HttpContext context)
+        {
+            var st = new Stopwatch();
+            st.Start();
+            await next(context);
+            st.Stop();
+            Utils.Log($"Request took {st.ElapsedTicks} ticks");
         }
     }
 }

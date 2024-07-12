@@ -19,7 +19,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseMiddleware<ErrorLoggingMiddleware>();
+//app.UseMiddleware<PerformanceMeasureMiddleware>();
 app.UseMiddleware<DatabaseMiddleware>();
+app.UseMiddleware<UserAuthMiddleware>();
 
 app.UseAuthorization();
 

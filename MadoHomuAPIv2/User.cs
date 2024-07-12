@@ -2,21 +2,35 @@
 
 namespace MadoHomuAPIv2
 {
+    public class UserAuthMiddleware(RequestDelegate next)
+    {
+        public async Task InvokeAsync(HttpContext context)
+        {
+            string? token = context.Request.Headers["token"];
+            bool IsTokenInvalid = false;
+
+            if (token != null)
+            {
+                var user = context.DbConnection().GetUser("token", token);
+                if (user == null)
+                    IsTokenInvalid = true;
+                else context.SetUser(user);
+            }
+
+            if (IsTokenInvalid)
+            {
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync("Invalid token");
+            }
+            else await next(context);
+        }
+    }
+
     public static class HttpContextUserExtensions
     {
-        private static readonly string IsUserRetrievedKey = "IsUserRetrieved";
-        private static readonly string UserKey = "User";
-        public static User.UserDTO? User(this HttpContext context)
-        {
-            if (context.Items[IsUserRetrievedKey] != null) return context.Items[UserKey] as User.UserDTO;
-            else
-            {
-                var user = context.DbConnection().GetUserByRequest(context.Request);
-                context.Items[UserKey] = user;
-                context.Items[IsUserRetrievedKey] = true;
-                return user;
-            }
-        }
+        private static readonly string DbConnectionKey = "User";
+        public static User.UserDTO? User(this HttpContext context) => context.Items[DbConnectionKey] as User.UserDTO;
+        public static void SetUser(this HttpContext context, object? value) => context.Items[DbConnectionKey] = value;
     }
 
     public static class User
@@ -68,14 +82,6 @@ namespace MadoHomuAPIv2
             if (command.ExecuteNonQuery() == 1)
                 return token;
             else return "";
-        }
-
-        public static UserDTO? GetUserByRequest(this SqliteConnection connection, HttpRequest request)
-        {
-            string? token = request.Headers["token"];
-            if (token != null)
-                return connection.GetUser("token", token);
-            else return null;
         }
     }
 }
