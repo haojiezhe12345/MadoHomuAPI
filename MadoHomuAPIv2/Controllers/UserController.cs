@@ -18,20 +18,17 @@ namespace MadoHomuAPIv2.Controllers
             if (login.email != null)
             {
                 user = HttpContext.DbConnection().GetUser("email", login.email);
-                response.code = 1000;
-                response.message = "Email not registered";
+                response.SetCode(ResponseCode.EmailNotRegistered);
             }
             else if (login.name != null)
             {
                 user = HttpContext.DbConnection().GetUser("name", login.name, "AND email is NULL");
-                response.code = 1001;
-                response.message = "User not found";
+                response.SetCode(ResponseCode.UserNotFound);
             }
 
             if (user != null && user.id != null)
             {
-                response.code = 1;
-                response.message = "Success";
+                response.SetCode(ResponseCode.Success);
                 response.data = (user.token == null || user.token.Length < 8)
                     ? HttpContext.DbConnection().GenerateTokenForUserById((int)user.id)
                     : user.token;
@@ -46,27 +43,20 @@ namespace MadoHomuAPIv2.Controllers
         {
             ResponseDTO response = new();
 
-            if (reg.email == null)
+            if (reg.email != null)
             {
-                if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
+                var check = HttpContext.DbConnection().CheckEmail(reg.email);
+                if (check != 1)
                 {
-                    response.code = 1000;
-                    response.message = "User already exists";
+                    response.SetCode((ResponseCode)check);
                     return response;
                 }
             }
             else
             {
-                if (reg.email.Length < 5)
+                if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
                 {
-                    response.code = 1001;
-                    response.message = "Email is not valid";
-                    return response;
-                }
-                if (HttpContext.DbConnection().GetUser("email", reg.email) != null)
-                {
-                    response.code = 1002;
-                    response.message = "Email already registered";
+                    response.SetCode(ResponseCode.UserAlreadyExists);
                     return response;
                 }
             }
@@ -79,11 +69,39 @@ namespace MadoHomuAPIv2.Controllers
 
             if (user != null && user.id != null)
             {
-                response.code = 1;
-                response.message = "Success";
+                response.SetCode(ResponseCode.Success);
                 response.data = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
                 Utils.Log($"New user registered: {user.name} (id={user.id})");
             }
+
+            return response;
+        }
+
+        [HttpPost("changeEmail")]
+        public ResponseDTO ChangeEmail(ChangeEmailDTO emailDTO)
+        {
+            ResponseDTO response = new();
+
+            var user = HttpContext.User();
+            if (user == null)
+            {
+                response.SetCode(ResponseCode.EmailChangeNotLoggedOn);
+                return response;
+            }
+
+            var check = HttpContext.DbConnection().CheckEmail(emailDTO.email);
+            if (check != 1)
+            {
+                response.SetCode((ResponseCode)check);
+                return response;
+            }
+
+            var command = HttpContext.DbConnection().CreateCommand();
+            command.CommandText = $"UPDATE users SET email = @email WHERE id = {user.id}";
+            command.Parameters.AddWithValue("email", emailDTO.email);
+
+            response.SetCode(ResponseCode.Success);
+            response.data = command.ExecuteNonQuery();
 
             return response;
         }

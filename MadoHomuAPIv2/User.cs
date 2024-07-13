@@ -66,11 +66,14 @@ namespace MadoHomuAPIv2
             public bool? hasEmail { get; set; }
         }
 
-        public class ResponseDTO
+        public class ChangeEmailDTO
         {
-            public int? code { get; set; }
-            public string? message { get; set; }
-            public object? data { get; set; }
+            public required string email { get; set; }
+        }
+
+        public class ImageUploadDTO
+        {
+            public required string image { get; set; }
         }
 
         public static UserDTO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
@@ -89,6 +92,15 @@ namespace MadoHomuAPIv2
             if (command.ExecuteNonQuery() == 1)
                 return token;
             else return "";
+        }
+
+        public static int CheckEmail(this SqliteConnection connection, string email)
+        {
+            if (email.Length < 5)
+                return (int)ResponseCode.EmailNotValid;
+            if (connection.GetUser("email", email) != null)
+                return (int)ResponseCode.EmailAlreadyRegistered;
+            return 1;
         }
     }
 }
