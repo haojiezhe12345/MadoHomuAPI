@@ -98,11 +98,9 @@ namespace MadoHomuAPIv2.Controllers
                 foreach (var image in CommentData.images)
                 {
                     //app.Logger.LogInformation(commentData.images[0]);
-                    var filename = DateTime.UtcNow.Ticks.ToString();
                     try
                     {
-                        Utils.WriteFileFromBase64(@$"data\images\posts\{filename}.jpg", image);
-                        images += filename + ',';
+                        images += Utils.WriteFileFromBase64WithRandomName(@"data\images\posts", ".jpg", image) + ',';
                     }
                     catch (Exception e)
                     {

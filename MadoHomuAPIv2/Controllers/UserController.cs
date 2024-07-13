@@ -102,6 +102,7 @@ namespace MadoHomuAPIv2.Controllers
 
             response.SetCode(ResponseCode.Success);
             response.data = command.ExecuteNonQuery();
+            Utils.Log($"User email changed: {user.name} (id={user.id})");
 
             return response;
         }
