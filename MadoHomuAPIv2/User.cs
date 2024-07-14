@@ -37,9 +37,9 @@ namespace MadoHomuAPIv2
     public static class HttpContextUserExtensions
     {
         private static readonly string DbConnectionKey = "User";
-        public static User.UserDTO User(this HttpContext context)
+        public static User.UserPO User(this HttpContext context)
         {
-            if (context.Items[DbConnectionKey] is User.UserDTO user)
+            if (context.Items[DbConnectionKey] is User.UserPO user)
                 return user;
             else throw new Exception("Trying to access null user in a login required controller");
         }
@@ -49,7 +49,7 @@ namespace MadoHomuAPIv2
 
     public static class User
     {
-        public class UserDTO
+        public class UserPO
         {
             public int? id { get; set; }
             public string? name { get; set; }
@@ -83,7 +83,7 @@ namespace MadoHomuAPIv2
             public required string image { get; set; }
         }
 
-        public class UserMeDTO
+        public class UserMeVO
         {
             public int? id { get; set; }
             public string? name { get; set; }
@@ -91,7 +91,7 @@ namespace MadoHomuAPIv2
             public string? email { get; set; }
         }
 
-        public class UserFindDTO
+        public class UserFindVO
         {
             public int? id { get; set; }
             public string? name { get; set; }
@@ -99,12 +99,12 @@ namespace MadoHomuAPIv2
             public bool? hasEmail { get; set; }
         }
 
-        public static UserDTO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
+        public static UserPO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
         {
             using var command = connection.CreateCommand();
             command.CommandText = $"SELECT * FROM users WHERE {key} = @{key} {ExtraParam}";
             command.Parameters.AddWithValue($"@{key}", value);
-            return command.ReadAsDTO<UserDTO>();
+            return command.ReadAsDTO<UserPO>();
         }
 
         public static string GenerateTokenForUserById(this SqliteConnection connection, int id)

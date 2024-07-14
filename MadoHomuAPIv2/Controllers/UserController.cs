@@ -10,10 +10,10 @@ namespace MadoHomuAPIv2.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
-        public ResponseDTO Login(LoginDTO login)
+        public ResponseVO Login(LoginDTO login)
         {
-            UserDTO? user = null;
-            ResponseDTO response = new();
+            UserPO? user = null;
+            ResponseVO response = new();
 
             if (login.email != null)
             {
@@ -39,9 +39,9 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpPost("register")]
-        public ResponseDTO Register(RegisterDTO reg)
+        public ResponseVO Register(RegisterDTO reg)
         {
-            ResponseDTO response = new();
+            ResponseVO response = new();
 
             if (reg.email != null)
             {
@@ -79,9 +79,9 @@ namespace MadoHomuAPIv2.Controllers
 
         [HttpPost("changeEmail")]
         [UserLoginRequired]
-        public ResponseDTO ChangeEmail(ChangeEmailDTO emailDTO)
+        public ResponseVO ChangeEmail(ChangeEmailDTO emailDTO)
         {
-            ResponseDTO response = new();
+            ResponseVO response = new();
 
             var user = HttpContext.User();
 
@@ -122,10 +122,10 @@ namespace MadoHomuAPIv2.Controllers
 
         [HttpGet("me")]
         [UserLoginRequired]
-        public UserMeDTO UserMe()
+        public UserMeVO UserMe()
         {
             var user = HttpContext.User();
-            return new UserMeDTO {
+            return new UserMeVO {
                 id = user.id,
                 name = user.name,
                 avatar = user.avatar,
@@ -134,18 +134,18 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpGet("find/{name}")]
-        public List<UserFindDTO> FindUser(string name)
+        public List<UserFindVO> FindUser(string name)
         {
-            List<UserFindDTO> result = [];
+            List<UserFindVO> result = [];
 
             var command = HttpContext.DbConnection().CreateCommand();
             command.CommandText = "SELECT * FROM users WHERE name = @name";
             command.Parameters.AddWithValue("name", name);
-            var foundlist = command.ReadAsDTOList<UserDTO>();
+            var foundlist = command.ReadAsDTOList<UserPO>();
 
             foundlist.ForEach(user =>
             {
-                result.Add(new UserFindDTO
+                result.Add(new UserFindVO
                 {
                     id = user.id,
                     name = user.name,

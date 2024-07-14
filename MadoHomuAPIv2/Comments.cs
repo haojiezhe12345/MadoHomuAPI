@@ -2,7 +2,7 @@
 {
     public static class Comments
     {
-        public class CommentDTO
+        public class CommentPO
         {
             public int? id { get; set; }
             public long? time { get; set; }
@@ -11,6 +11,10 @@
             public string? comment { get; set; }
             public string? image { get; set; }
             public int? hidden { get; set; }
+        }
+
+        public class CommentVO : CommentPO
+        {
             public string? avatar { get; set; }
             public string? source { get; set; }
         }

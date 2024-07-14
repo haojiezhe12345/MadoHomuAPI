@@ -1,6 +1,6 @@
 ﻿namespace MadoHomuAPIv2
 {
-    public class ResponseDTO
+    public class ResponseVO
     {
         public int? code { get; set; }
         public string? message { get; set; }
@@ -21,7 +21,7 @@
 
     public static class ResponseDTOExtensions
     {
-        public static void SetCode(this ResponseDTO response, ResponseCode code)
+        public static void SetCode(this ResponseVO response, ResponseCode code)
         {
             response.code = (int)code;
             response.message = code.ToString();

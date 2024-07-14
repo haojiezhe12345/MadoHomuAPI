@@ -11,7 +11,7 @@ namespace MadoHomuAPIv2.Controllers
     public class CommentsController : ControllerBase
     {
         [HttpGet]
-        public List<CommentDTO> GetComments(int? from, int? count, long? time, string? user, string? db, long? timeMin, long? timeMax)
+        public List<CommentVO> GetComments(int? from, int? count, long? time, string? user, string? db, long? timeMin, long? timeMax)
         {
             var table = "comments";
             if (db != null)
@@ -20,7 +20,7 @@ namespace MadoHomuAPIv2.Controllers
                 else return [];
             }
 
-            List<CommentDTO> comments = [];
+            List<CommentVO> comments = [];
 
             using (var DBcommand = HttpContext.DbConnection().CreateCommand())
             {
@@ -46,7 +46,7 @@ namespace MadoHomuAPIv2.Controllers
                     DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
                 }
 
-                comments = DBcommand.ReadAsDTOList<CommentDTO>();
+                comments = DBcommand.ReadAsDTOList<CommentVO>();
             }
 
             comments.ForEach(comment =>
