@@ -103,35 +103,10 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpGet("find/{name}")]
-        public List<FindUserDTO> FindUser(string name)
-        {
-            List<FindUserDTO> result = [];
-
-            var command = HttpContext.DbConnection().CreateCommand();
-            command.CommandText = "SELECT * FROM users WHERE name = @name";
-            command.Parameters.AddWithValue("name", name);
-            var foundlist = command.ReadAsDTOList<UserDTO>();
-
-            foundlist.ForEach(user =>
-            {
-                result.Add(new FindUserDTO
-                {
-                    id = user.id,
-                    name = user.name,
-                    hasEmail = user.email != null,
-                });
-            });
-
-            return result;
-        }
-
         [HttpPost("uploadAvatar")]
         [UserLoginRequired]
-        public ResponseDTO UploadAvatar(ImageUploadDTO imageDTO)
+        public string UploadAvatar(ImageUploadDTO imageDTO)
         {
-            ResponseDTO response = new();
-
             var user = HttpContext.User();
 
             var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", imageDTO.image);
@@ -140,11 +115,46 @@ namespace MadoHomuAPIv2.Controllers
             command.CommandText = $"UPDATE users SET avatar = '{filename}.jpg' WHERE id = {user.id}";
             command.ExecuteNonQuery();
 
-            response.SetCode(ResponseCode.Success);
-            response.data = filename + ".jpg";
             Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
 
-            return response;
+            return filename + ".jpg";
+        }
+
+        [HttpGet("me")]
+        [UserLoginRequired]
+        public UserMeDTO UserMe()
+        {
+            var user = HttpContext.User();
+            return new UserMeDTO {
+                id = user.id,
+                name = user.name,
+                avatar = user.avatar,
+                email = user.email,
+            };
+        }
+
+        [HttpGet("find/{name}")]
+        public List<UserFindDTO> FindUser(string name)
+        {
+            List<UserFindDTO> result = [];
+
+            var command = HttpContext.DbConnection().CreateCommand();
+            command.CommandText = "SELECT * FROM users WHERE name = @name";
+            command.Parameters.AddWithValue("name", name);
+            var foundlist = command.ReadAsDTOList<UserDTO>();
+
+            foundlist.ForEach(user =>
+            {
+                result.Add(new UserFindDTO
+                {
+                    id = user.id,
+                    name = user.name,
+                    avatar = user.avatar,
+                    hasEmail = user.email != null,
+                });
+            });
+
+            return result;
         }
 
         [HttpPost("/upload")]

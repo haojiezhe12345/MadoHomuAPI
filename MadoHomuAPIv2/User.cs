@@ -25,9 +25,8 @@ namespace MadoHomuAPIv2
 
             if (context.GetEndpoint()?.Metadata.GetMetadata<UserLoginRequiredAttribute>() != null && !context.UserLoggedIn())
             {
-                ResponseDTO response = new();
-                response.SetCode(ResponseCode.LoginRequired);
-                await context.Response.WriteAsJsonAsync(response);
+                context.Response.StatusCode = 401;
+                await context.Response.WriteAsync("Login required");
                 return;
             }
 
@@ -74,13 +73,6 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
-        public class FindUserDTO
-        {
-            public int? id { get; set; }
-            public string? name { get; set; }
-            public bool? hasEmail { get; set; }
-        }
-
         public class ChangeEmailDTO
         {
             public required string email { get; set; }
@@ -89,6 +81,22 @@ namespace MadoHomuAPIv2
         public class ImageUploadDTO
         {
             public required string image { get; set; }
+        }
+
+        public class UserMeDTO
+        {
+            public int? id { get; set; }
+            public string? name { get; set; }
+            public string? avatar { get; set; }
+            public string? email { get; set; }
+        }
+
+        public class UserFindDTO
+        {
+            public int? id { get; set; }
+            public string? name { get; set; }
+            public string? avatar { get; set; }
+            public bool? hasEmail { get; set; }
         }
 
         public static UserDTO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
