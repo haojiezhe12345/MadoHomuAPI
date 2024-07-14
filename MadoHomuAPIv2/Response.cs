@@ -13,9 +13,10 @@
         EmailNotRegistered = 1000,
         EmailAlreadyRegistered = 1001,
         EmailNotValid = 1002,
-        EmailChangeNotLoggedOn = 1003,
         UserNotFound = 1010,
         UserAlreadyExists = 1011,
+        LoginRequired = 1020,
+        LoginTokenInvalid = 1021,
     }
 
     public static class ResponseDTOExtensions

@@ -78,16 +78,12 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpPost("changeEmail")]
+        [UserLoginRequired]
         public ResponseDTO ChangeEmail(ChangeEmailDTO emailDTO)
         {
             ResponseDTO response = new();
 
             var user = HttpContext.User();
-            if (user == null)
-            {
-                response.SetCode(ResponseCode.EmailChangeNotLoggedOn);
-                return response;
-            }
 
             var check = HttpContext.DbConnection().CheckEmail(emailDTO.email);
             if (check != 1)
@@ -130,8 +126,29 @@ namespace MadoHomuAPIv2.Controllers
             return result;
         }
 
+        [HttpPost("uploadAvatar")]
+        [UserLoginRequired]
+        public ResponseDTO UploadAvatar(ImageUploadDTO imageDTO)
+        {
+            ResponseDTO response = new();
+
+            var user = HttpContext.User();
+
+            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars", ".jpg", imageDTO.image);
+
+            var command = HttpContext.DbConnection().CreateCommand();
+            command.CommandText = $"UPDATE users SET avatar = '{filename}.jpg' WHERE id = {user.id}";
+            command.ExecuteNonQuery();
+
+            response.SetCode(ResponseCode.Success);
+            response.data = filename + ".jpg";
+            Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
+
+            return response;
+        }
+
         [HttpPost("/upload")]
-        public string UploadAvatar()
+        public string UploadAvatarOld()
         {
             //app.Logger.LogInformation(request.Form.Files.Count.ToString());
             if (Request.Form.Files.Count == 0)

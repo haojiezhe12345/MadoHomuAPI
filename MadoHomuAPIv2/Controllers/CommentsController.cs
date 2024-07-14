@@ -82,7 +82,7 @@ namespace MadoHomuAPIv2.Controllers
         [HttpPost("/post")]
         public int Post(PostedComment CommentData)
         {
-            var user = HttpContext.User();
+            var user = HttpContext.UserLoggedIn() ? HttpContext.User() : null;
 
             if ((user == null && CommentData.sender == null) || CommentData.comment == null)
             {

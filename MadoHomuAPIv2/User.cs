@@ -2,34 +2,49 @@
 
 namespace MadoHomuAPIv2
 {
+    [AttributeUsage(AttributeTargets.Method)]
+    public class UserLoginRequiredAttribute : Attribute;
+
     public class UserAuthMiddleware(RequestDelegate next)
     {
         public async Task InvokeAsync(HttpContext context)
         {
             string? token = context.Request.Headers["token"];
-            bool IsTokenInvalid = false;
 
             if (token != null)
             {
                 var user = context.DbConnection().GetUser("token", token);
                 if (user == null)
-                    IsTokenInvalid = true;
+                {
+                    context.Response.StatusCode = 401;
+                    await context.Response.WriteAsync("Invalid token");
+                    return;
+                }
                 else context.SetUser(user);
             }
 
-            if (IsTokenInvalid)
+            if (context.GetEndpoint()?.Metadata.GetMetadata<UserLoginRequiredAttribute>() != null && !context.UserLoggedIn())
             {
-                context.Response.StatusCode = 401;
-                await context.Response.WriteAsync("Invalid token");
+                ResponseDTO response = new();
+                response.SetCode(ResponseCode.LoginRequired);
+                await context.Response.WriteAsJsonAsync(response);
+                return;
             }
-            else await next(context);
+
+            await next(context);
         }
     }
 
     public static class HttpContextUserExtensions
     {
         private static readonly string DbConnectionKey = "User";
-        public static User.UserDTO? User(this HttpContext context) => context.Items[DbConnectionKey] as User.UserDTO;
+        public static User.UserDTO User(this HttpContext context)
+        {
+            if (context.Items[DbConnectionKey] is User.UserDTO user)
+                return user;
+            else throw new Exception("Trying to access null user in a login required controller");
+        }
+        public static bool UserLoggedIn(this HttpContext context) => context.Items[DbConnectionKey] != null;
         public static void SetUser(this HttpContext context, object? value) => context.Items[DbConnectionKey] = value;
     }
 
