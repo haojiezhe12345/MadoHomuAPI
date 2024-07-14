@@ -134,7 +134,7 @@ namespace MadoHomuAPIv2.Controllers
 
             var user = HttpContext.User();
 
-            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars", ".jpg", imageDTO.image);
+            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", imageDTO.image);
 
             var command = HttpContext.DbConnection().CreateCommand();
             command.CommandText = $"UPDATE users SET avatar = '{filename}.jpg' WHERE id = {user.id}";

@@ -14,10 +14,10 @@ namespace MadoHomuAPIv2
             File.WriteAllBytes(file, Convert.FromBase64String(base64));
         }
 
-        public static string WriteFileFromBase64WithRandomName(string path, string ext, string base64)
+        public static string WriteFileFromBase64WithRandomName(string path, string base64)
         {
             var filename = DateTime.UtcNow.Ticks.ToString();
-            WriteFileFromBase64(Path.Combine(path, $"{filename}.{ext.TrimStart('.')}"), base64);
+            WriteFileFromBase64(string.Format(path, filename), base64);
             return filename;
         }
     }
