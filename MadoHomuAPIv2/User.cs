@@ -51,7 +51,16 @@ namespace MadoHomuAPIv2
     {
         public class UserPO
         {
-            public int? id { get; set; }
+            private int? _id;
+            public int id
+            {
+                get
+                {
+                    if (_id != null) return (int)_id;
+                    else throw new Exception("User's 'id' attribute should not be null");
+                }
+                set => _id = value;
+            }
             public string? name { get; set; }
             public string? avatar { get; set; }
             public string? email { get; set; }
@@ -73,14 +82,9 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
-        public class ChangeEmailDTO
+        public class SingleStringDTO
         {
-            public required string email { get; set; }
-        }
-
-        public class ImageUploadDTO
-        {
-            public required string image { get; set; }
+            public required string data { get; set; }
         }
 
         public class UserMeVO
@@ -107,12 +111,18 @@ namespace MadoHomuAPIv2
             return command.ReadAsDTO<UserPO>();
         }
 
+        public static int SetUserParamById(this SqliteConnection connection, int id, string key, object value)
+        {
+            using var command = connection.CreateCommand();
+            command.CommandText = $"UPDATE users SET {key} = @{key} WHERE id = {id}";
+            command.Parameters.AddWithValue($"@{key}", value);
+            return command.ExecuteNonQuery();
+        }
+
         public static string GenerateTokenForUserById(this SqliteConnection connection, int id)
         {
             string token = Guid.NewGuid().ToString();
-            using var command = connection.CreateCommand();
-            command.CommandText = $"UPDATE users SET token = '{token}' WHERE id = {id}";
-            if (command.ExecuteNonQuery() == 1)
+            if (connection.SetUserParamById(id, "token", token) == 1)
                 return token;
             else return "";
         }

@@ -30,11 +30,11 @@ namespace MadoHomuAPIv2.Controllers
                 response.SetCode(ResponseCode.LoginCredentialInsufficient);
             }
 
-            if (user != null && user.id != null)
+            if (user != null)
             {
                 response.SetCode(ResponseCode.Success);
                 response.data = (user.token == null || user.token.Length < 8)
-                    ? HttpContext.DbConnection().GenerateTokenForUserById((int)user.id)
+                    ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
                     : user.token;
                 Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
             }
@@ -71,10 +71,10 @@ namespace MadoHomuAPIv2.Controllers
                 ? HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL")
                 : HttpContext.DbConnection().GetUser("email", reg.email);
 
-            if (user != null && user.id != null)
+            if (user != null)
             {
                 response.SetCode(ResponseCode.Success);
-                response.data = HttpContext.DbConnection().GenerateTokenForUserById((int)user.id);
+                response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
                 Utils.Log($"New user registered: {user.name} (id={user.id})");
             }
 
@@ -83,41 +83,58 @@ namespace MadoHomuAPIv2.Controllers
 
         [HttpPost("changeEmail")]
         [UserLoginRequired]
-        public ResponseVO ChangeEmail(ChangeEmailDTO emailDTO)
+        public ResponseVO ChangeEmail(SingleStringDTO data)
         {
             ResponseVO response = new();
 
             var user = HttpContext.User();
 
-            var check = HttpContext.DbConnection().CheckEmail(emailDTO.email);
+            var check = HttpContext.DbConnection().CheckEmail(data.data);
             if (check != 1)
             {
                 response.SetCode((ResponseCode)check);
                 return response;
             }
 
-            var command = HttpContext.DbConnection().CreateCommand();
-            command.CommandText = $"UPDATE users SET email = @email WHERE id = {user.id}";
-            command.Parameters.AddWithValue("email", emailDTO.email);
+            response.SetCode(ResponseCode.Success);
+            response.data = HttpContext.DbConnection().SetUserParamById(user.id, "email", data.data);
+
+            Utils.Log($"User email changed: {user.name} (id={user.id})");
+
+            return response;
+        }
+
+        [HttpPost("changeName")]
+        [UserLoginRequired]
+        public ResponseVO ChangeName(SingleStringDTO data)
+        {
+            ResponseVO response = new();
+
+            var user = HttpContext.User();
+
+            if (user.email == null)
+            {
+                response.SetCode(ResponseCode.UserNameChangeRequireEmail);
+                return response;
+            }
 
             response.SetCode(ResponseCode.Success);
-            response.data = command.ExecuteNonQuery();
-            Utils.Log($"User email changed: {user.name} (id={user.id})");
+            response.data = HttpContext.DbConnection().SetUserParamById(user.id, "name", data.data);
+
+            Utils.Log($"User {user.name} (id={user.id}) changed name to {data.data}");
 
             return response;
         }
 
         [HttpPost("uploadAvatar")]
         [UserLoginRequired]
-        public string UploadAvatar(ImageUploadDTO imageDTO)
+        public string UploadAvatar(SingleStringDTO data)
         {
             var user = HttpContext.User();
 
-            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", imageDTO.image);
+            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", data.data);
 
-            var command = HttpContext.DbConnection().CreateCommand();
-            command.CommandText = $"UPDATE users SET avatar = '{filename}.jpg' WHERE id = {user.id}";
-            command.ExecuteNonQuery();
+            HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename + ".jpg");
 
             Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
 
@@ -129,7 +146,8 @@ namespace MadoHomuAPIv2.Controllers
         public UserMeVO UserMe()
         {
             var user = HttpContext.User();
-            return new UserMeVO {
+            return new UserMeVO
+            {
                 id = user.id,
                 name = user.name,
                 avatar = user.avatar,

@@ -10,11 +10,15 @@
     public enum ResponseCode
     {
         Success = 1,
+
         EmailNotRegistered = 1000,
         EmailAlreadyRegistered = 1001,
         EmailNotValid = 1002,
+
         UserNotFound = 1010,
         UserAlreadyExists = 1011,
+        UserNameChangeRequireEmail = 1012,
+
         LoginRequired = 1020,
         LoginTokenInvalid = 1021,
         LoginCredentialInsufficient = 1022,
