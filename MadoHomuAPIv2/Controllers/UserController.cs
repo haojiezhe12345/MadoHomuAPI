@@ -42,12 +42,12 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpPost("register")]
-        public ResponseVO Register(RegisterDTO reg)
+        [HttpPost]
+        public ResponseVO Register(UserUpdateDTO reg)
         {
             ResponseVO response = new();
 
-            if (reg.email != null)
+            if (reg.email != null && reg.name != null)
             {
                 var check = HttpContext.DbConnection().CheckEmail(reg.email);
                 if (check != 1)
@@ -56,13 +56,18 @@ namespace MadoHomuAPIv2.Controllers
                     return response;
                 }
             }
-            else
+            else if (reg.name != null)
             {
                 if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
                 {
                     response.SetCode(ResponseCode.UserAlreadyExists);
                     return response;
                 }
+            }
+            else
+            {
+                response.SetCode(ResponseCode.UserRegisterRequireName);
+                return response;
             }
 
             HttpContext.DbConnection().InsertDTO("users", reg);
@@ -81,67 +86,51 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpPost("changeEmail")]
+        [HttpPut]
         [UserLoginRequired]
-        public ResponseVO ChangeEmail(SingleStringDTO data)
+        public ResponseVO UpdateUser(UserUpdateDTO update)
         {
             ResponseVO response = new();
+            int updated = 0;
 
             var user = HttpContext.User();
 
-            var check = HttpContext.DbConnection().CheckEmail(data.data);
-            if (check != 1)
+            if (update.email != null)
             {
-                response.SetCode((ResponseCode)check);
-                return response;
+                var check = HttpContext.DbConnection().CheckEmail(update.email);
+                if (check != 1)
+                {
+                    response.SetCode((ResponseCode)check);
+                    return response;
+                }
+                updated += HttpContext.DbConnection().SetUserParamById(user.id, "email", update.email);
+                Utils.Log($"User email changed: {user.name} (id={user.id})");
+            }
+
+            if (update.name != null)
+            {
+                if (user.email == null)
+                {
+                    response.SetCode(ResponseCode.UserNameChangeRequireEmail);
+                    return response;
+                }
+                updated += HttpContext.DbConnection().SetUserParamById(user.id, "name", update.name);
+                Utils.Log($"User {user.name} (id={user.id}) changed name to {update.name}");
+            }
+
+            if (update.avatar != null)
+            {
+                var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", update.avatar);
+                updated += HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename + ".jpg");
+                Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
             }
 
             response.SetCode(ResponseCode.Success);
-            response.data = HttpContext.DbConnection().SetUserParamById(user.id, "email", data.data);
-
-            Utils.Log($"User email changed: {user.name} (id={user.id})");
-
+            response.data = updated;
             return response;
         }
 
-        [HttpPost("changeName")]
-        [UserLoginRequired]
-        public ResponseVO ChangeName(SingleStringDTO data)
-        {
-            ResponseVO response = new();
-
-            var user = HttpContext.User();
-
-            if (user.email == null)
-            {
-                response.SetCode(ResponseCode.UserNameChangeRequireEmail);
-                return response;
-            }
-
-            response.SetCode(ResponseCode.Success);
-            response.data = HttpContext.DbConnection().SetUserParamById(user.id, "name", data.data);
-
-            Utils.Log($"User {user.name} (id={user.id}) changed name to {data.data}");
-
-            return response;
-        }
-
-        [HttpPost("uploadAvatar")]
-        [UserLoginRequired]
-        public string UploadAvatar(SingleStringDTO data)
-        {
-            var user = HttpContext.User();
-
-            var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", data.data);
-
-            HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename + ".jpg");
-
-            Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
-
-            return filename + ".jpg";
-        }
-
-        [HttpGet("me")]
+        [HttpGet]
         [UserLoginRequired]
         public UserMeVO UserMe()
         {

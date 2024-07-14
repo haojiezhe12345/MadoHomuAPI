@@ -75,16 +75,12 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
-        public class RegisterDTO
+        public class UserUpdateDTO
         {
-            public required string name { get; set; }
+            public string? name { get; set; }
+            public string? avatar { get; set; }
             public string? email { get; set; }
             public string? password { get; set; }
-        }
-
-        public class SingleStringDTO
-        {
-            public required string data { get; set; }
         }
 
         public class UserMeVO

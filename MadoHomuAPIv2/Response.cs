@@ -17,7 +17,8 @@
 
         UserNotFound = 1010,
         UserAlreadyExists = 1011,
-        UserNameChangeRequireEmail = 1012,
+        UserRegisterRequireName = 1012,
+        UserNameChangeRequireEmail = 1013,
 
         LoginRequired = 1020,
         LoginTokenInvalid = 1021,
