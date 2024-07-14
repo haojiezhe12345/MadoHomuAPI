@@ -17,6 +17,7 @@
         UserAlreadyExists = 1011,
         LoginRequired = 1020,
         LoginTokenInvalid = 1021,
+        LoginCredentialInsufficient = 1022,
     }
 
     public static class ResponseDTOExtensions

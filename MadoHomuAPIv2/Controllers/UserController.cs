@@ -25,6 +25,10 @@ namespace MadoHomuAPIv2.Controllers
                 user = HttpContext.DbConnection().GetUser("name", login.name, "AND email is NULL");
                 response.SetCode(ResponseCode.UserNotFound);
             }
+            else
+            {
+                response.SetCode(ResponseCode.LoginCredentialInsufficient);
+            }
 
             if (user != null && user.id != null)
             {
