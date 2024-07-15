@@ -42,7 +42,7 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpPost]
+        [HttpPost("register")]
         public ResponseVO Register(UserUpdateDTO reg)
         {
             ResponseVO response = new();
@@ -86,7 +86,7 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpPut]
+        [HttpPut("update")]
         [UserLoginRequired]
         public ResponseVO UpdateUser(UserUpdateDTO update)
         {
@@ -130,7 +130,7 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
-        [HttpGet]
+        [HttpGet("me")]
         [UserLoginRequired]
         public UserMeVO UserMe()
         {
