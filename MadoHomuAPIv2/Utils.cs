@@ -75,15 +75,23 @@ namespace MadoHomuAPIv2
 
         public static string DecryptString(string encryptedBase64, string? key = null, string? iv = null)
         {
-            using Aes aes = Aes.Create();
-            aes.Key = SHA256Hash(key ?? EncryptionKey, aes.KeySize);
-            aes.IV = SHA256Hash(iv ?? EncryptionKey, aes.BlockSize);
+            try
+            {
+                using Aes aes = Aes.Create();
+                aes.Key = SHA256Hash(key ?? EncryptionKey, aes.KeySize);
+                aes.IV = SHA256Hash(iv ?? EncryptionKey, aes.BlockSize);
 
-            using MemoryStream memoryStream = new(Convert.FromBase64String(encryptedBase64));
-            using CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
-            using StreamReader streamReader = new(cryptoStream, Encoding.UTF8);
+                using MemoryStream memoryStream = new(Convert.FromBase64String(encryptedBase64));
+                using CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
+                using StreamReader streamReader = new(cryptoStream, Encoding.UTF8);
 
-            return streamReader.ReadToEnd();
+                return streamReader.ReadToEnd();
+            }
+            catch (Exception e)
+            {
+                Log($"Failed to decode string '{encryptedBase64}', reason:\n{e}");
+                return encryptedBase64;
+            }
         }
     }
 

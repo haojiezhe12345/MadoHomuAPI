@@ -49,7 +49,37 @@ namespace MadoHomuAPIv2
 
     public static class User
     {
-        public class UserPO
+        public class UserEmailRead
+        {
+            private string? _email;
+            public string? email
+            {
+                get => _email;
+                set
+                {
+                    if (_email != null)
+                        throw new Exception($"Cannot set email in {this.GetType().Name} for more than once because it stores a decrypted value");
+                    if (value != null) _email = Utils.DecryptString(value);
+                }
+            }
+        }
+
+        public class UserEmailWrite
+        {
+            private string? _email;
+            public string? email
+            {
+                get => _email;
+                set
+                {
+                    if (_email != null)
+                        throw new Exception($"Cannot set email in {this.GetType().Name} for more than once because it stores an encrypted value");
+                    if (value != null) _email = Utils.EncryptString(value);
+                }
+            }
+        }
+
+        public class UserPO : UserEmailRead
         {
             private int? _id;
             public int id
@@ -63,23 +93,20 @@ namespace MadoHomuAPIv2
             }
             public string? name { get; set; }
             public string? avatar { get; set; }
-            public string? email { get; set; }
             public string? password { get; set; }
             public string? token { get; set; }
         }
 
-        public class LoginDTO
+        public class LoginDTO : UserEmailWrite
         {
             public string? name { get; set; }
-            public string? email { get; set; }
             public string? password { get; set; }
         }
 
-        public class UserUpdateDTO
+        public class UserUpdateDTO : UserEmailWrite
         {
             public string? name { get; set; }
             public string? avatar { get; set; }
-            public string? email { get; set; }
             public string? password { get; set; }
         }
 
