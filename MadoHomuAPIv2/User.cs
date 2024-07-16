@@ -109,10 +109,7 @@ namespace MadoHomuAPIv2
 
         public static int SetUserParamById(this SqliteConnection connection, int id, string key, object value)
         {
-            using var command = connection.CreateCommand();
-            command.CommandText = $"UPDATE users SET {key} = @{key} WHERE id = {id}";
-            command.Parameters.AddWithValue($"@{key}", value);
-            return command.ExecuteNonQuery();
+            return connection.UpdateFieldById("users", id, key, value);
         }
 
         public static string GenerateTokenForUserById(this SqliteConnection connection, int id)

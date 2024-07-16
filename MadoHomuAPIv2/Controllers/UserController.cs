@@ -149,7 +149,7 @@ namespace MadoHomuAPIv2.Controllers
         {
             List<UserFindVO> result = [];
 
-            var command = HttpContext.DbConnection().CreateCommand();
+            using var command = HttpContext.DbConnection().CreateCommand();
             command.CommandText = "SELECT * FROM users WHERE name = @name";
             command.Parameters.AddWithValue("name", name);
             var foundlist = command.ReadAsDTOList<UserPO>();

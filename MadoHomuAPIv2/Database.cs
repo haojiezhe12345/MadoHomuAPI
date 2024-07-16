@@ -131,6 +131,14 @@ namespace MadoHomuAPIv2
             return command.ExecuteNonQuery();
         }
 
+        public static int UpdateFieldById(this SqliteConnection connection, string table, int id, string key, object value)
+        {
+            using var command = connection.CreateCommand();
+            command.CommandText = $"UPDATE {table} SET {key} = @{key} WHERE id = {id}";
+            command.Parameters.AddWithValue($"@{key}", value);
+            return command.ExecuteNonQuery();
+        }
+
         public static int Execute(this SqliteConnection connection, string sql)
         {
             using var command = connection.CreateCommand();
