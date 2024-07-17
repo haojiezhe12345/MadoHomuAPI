@@ -112,15 +112,12 @@ namespace MadoHomuAPIv2.Controllers
 
             //app.Logger.LogInformation(images);
 
-            DateTimeOffset dto = new(DateTime.UtcNow);
-            long TimeStamp = dto.ToUnixTimeSeconds();
-
             if (CommentData.sender == "3112611479")
             {
                 int testResult;
                 try
                 {
-                    testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, {TimeStamp}, 'sender', -1, 'comment', 'image', 1)");
+                    testResult = HttpContext.DbConnection().Execute($"INSERT INTO comments (id, time, sender, uid, comment, image, hidden) VALUES (-1, -1, 'sender', -1, 'comment', 'image', 1)");
                     HttpContext.DbConnection().Execute("DELETE FROM comments WHERE id = -1");
                 }
                 catch
@@ -141,7 +138,6 @@ namespace MadoHomuAPIv2.Controllers
             {
                 result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
                 {
-                    time = TimeStamp,
                     sender = CommentData.sender,
                     uid = user?.id,
                     comment = CommentData.comment,

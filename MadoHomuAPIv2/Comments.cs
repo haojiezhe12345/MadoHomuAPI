@@ -28,7 +28,6 @@
 
         public class CommentToWrite
         {
-            public long? time { get; set; }
             public string? sender { get; set; }
             public int? uid { get; set; }
             public string? comment { get; set; }
