@@ -134,20 +134,13 @@ namespace MadoHomuAPIv2.Controllers
         [UserLoginRequired]
         public UserMeVO UserMe()
         {
-            var user = HttpContext.User();
-            return new UserMeVO
-            {
-                id = user.id,
-                name = user.name,
-                avatar = user.avatar,
-                email = user.email,
-            };
+            return new UserMeVO(HttpContext.User());
         }
 
-        [HttpGet("find/{name}")]
-        public List<UserFindVO> FindUser(string name)
+        [HttpGet("find")]
+        public List<UserGetVO> FindUser(string name)
         {
-            List<UserFindVO> result = [];
+            List<UserGetVO> result = [];
 
             using var command = HttpContext.DbConnection().CreateCommand();
             command.CommandText = "SELECT * FROM users WHERE name = @name";
@@ -156,13 +149,7 @@ namespace MadoHomuAPIv2.Controllers
 
             foundlist.ForEach(user =>
             {
-                result.Add(new UserFindVO
-                {
-                    id = user.id,
-                    name = user.name,
-                    avatar = user.avatar,
-                    hasEmail = user.email != null,
-                });
+                result.Add(new UserGetVO(user));
             });
 
             return result;

@@ -44,6 +44,7 @@ for i, user in enumerate(users):
     ids.append({
         'id': i + 1,
         'name': user,
+        'time': users[user]['time'],
     })
 
 with open('user_ids.json', 'w', encoding='utf-8') as f:
@@ -54,9 +55,10 @@ cur.execute(f'DELETE FROM sqlite_sequence')
 cur.execute(f'DELETE FROM users')
 cur.execute('UPDATE comments SET uid = null')
 for user in ids:
-    cur.execute('INSERT INTO users (name, avatar) VALUES (?, ?)', (
+    cur.execute('INSERT INTO users (name, avatar, create_time) VALUES (?, ?, ?)', (
         user['name'],
         user['name'] + '.jpg' if os.path.exists(os.path.join(avatarDir, user['name'] + '.jpg')) else None,
+        user['time']
     ))
     cur.execute('UPDATE comments SET uid = ? WHERE sender = ?', (user['id'], user['name']))
 db.commit()

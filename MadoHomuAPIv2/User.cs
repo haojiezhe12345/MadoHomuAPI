@@ -95,6 +95,7 @@ namespace MadoHomuAPIv2
             public string? avatar { get; set; }
             public string? password { get; set; }
             public string? token { get; set; }
+            public long? create_time { get; set; }
         }
 
         public class LoginDTO : UserEmailWrite
@@ -110,20 +111,18 @@ namespace MadoHomuAPIv2
             public string? password { get; set; }
         }
 
-        public class UserMeVO
+        public class UserGetVO(UserPO? user = null)
         {
-            public int? id { get; set; }
-            public string? name { get; set; }
-            public string? avatar { get; set; }
-            public string? email { get; set; }
+            public int? id { get; set; } = user?.id;
+            public string? name { get; set; } = user?.name;
+            public string? avatar { get; set; } = user?.avatar;
+            public bool? hasEmail { get; set; } = user?.email != null;
+            public long? create_time { get; set; } = user?.create_time;
         }
 
-        public class UserFindVO
+        public class UserMeVO(UserPO? user = null) : UserGetVO(user)
         {
-            public int? id { get; set; }
-            public string? name { get; set; }
-            public string? avatar { get; set; }
-            public bool? hasEmail { get; set; }
+            public string? email { get; set; } = user?.email;
         }
 
         public static UserPO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")
