@@ -14,14 +14,8 @@ namespace MadoHomuAPIv2
             {
                 if (_encryptionKey == null)
                 {
-                    if (OperatingSystem.IsWindows())
-                    {
-                        var regKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(@"Software\MadoHomuAPI");
-                        if (regKey?.GetValue("secret") is string key)
-                            _encryptionKey = key;
-                        else throw new Exception($"Failed to read encryption key from registry {regKey?.Name}");
-                    }
-                    else _encryptionKey = File.ReadAllText("secret.txt");
+                    var location = File.ReadAllText(@"data\secret_location.txt");
+                    _encryptionKey = File.ReadAllText(location);
                 }
                 return _encryptionKey;
             }
@@ -29,7 +23,15 @@ namespace MadoHomuAPIv2
 
         public static void Log(string txt)
         {
-            File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] {txt}\n");
+            for (int i = 0; i < 10; i++)
+            {
+                try
+                {
+                    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] {txt}\n");
+                    break;
+                }
+                catch { }
+            }
         }
 
         public static void WriteFileFromBase64(string file, string base64)
