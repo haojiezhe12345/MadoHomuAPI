@@ -11,7 +11,7 @@ namespace MadoHomuAPIv2.Controllers
     public class CommentsController : ControllerBase
     {
         [HttpGet]
-        public List<CommentVO> GetComments(int? from, int? count, long? time, string? user, string? db, long? timeMin, long? timeMax)
+        public List<CommentVO> GetComments(int? from, int? count, long? time, string? user, int? uid, string? db, long? timeMin, long? timeMax)
         {
             var table = "comments";
             if (db != null)
@@ -26,8 +26,12 @@ namespace MadoHomuAPIv2.Controllers
             {
                 if (user != null)
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender=@sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender = @sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
                     DBcommand.Parameters.AddWithValue("@sender", user);
+                }
+                else if (uid != null)
+                {
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE uid = {uid} ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
                 }
                 else if (from != null)
                 {
