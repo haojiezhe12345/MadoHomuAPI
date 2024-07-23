@@ -82,7 +82,7 @@ namespace MadoHomuAPIv2.Controllers
             return (long?)HttpContext.DbConnection().ReadOneValue($"SELECT count(*) FROM comments WHERE time BETWEEN {timeMin} AND {timeMax}") ?? 0;
         }
 
-        [HttpPost("")]
+        [HttpPost("post")]
         [HttpPost("/post")]
         public int Post(PostedComment CommentData)
         {
