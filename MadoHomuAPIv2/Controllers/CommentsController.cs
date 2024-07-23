@@ -142,7 +142,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
                 {
-                    sender = CommentData.sender,
+                    sender = user == null ? CommentData.sender : user.name,
                     uid = user?.id,
                     comment = CommentData.comment,
                     image = images,
