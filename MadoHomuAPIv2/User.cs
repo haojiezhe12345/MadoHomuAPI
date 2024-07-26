@@ -82,6 +82,7 @@ namespace MadoHomuAPIv2
         public class UserPO : UserEmailRead
         {
             private int? _id;
+            private string? _avatar;
             public int id
             {
                 get
@@ -92,7 +93,11 @@ namespace MadoHomuAPIv2
                 set => _id = value;
             }
             public string? name { get; set; }
-            public string? avatar { get; set; }
+            public string avatar
+            {
+                get => _avatar ?? "default.png";
+                set => _avatar = value;
+            }
             public string? password { get; set; }
             public string? token { get; set; }
             public long? create_time { get; set; }

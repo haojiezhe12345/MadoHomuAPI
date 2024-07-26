@@ -15,7 +15,12 @@
 
         public class CommentVO : CommentPO
         {
-            public string? avatar { get; set; }
+            private string? _avatar;
+            public string avatar
+            {
+                get => _avatar ?? "default.png";
+                set => _avatar = value;
+            }
             public string? source { get; set; }
         }
 
