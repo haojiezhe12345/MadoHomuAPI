@@ -46,6 +46,17 @@ namespace MadoHomuAPIv2
             return filename;
         }
 
+        public static string EscapeFilename(string name)
+        {
+            var invalidFileChars = "\\/:*?\"<>|";
+            var validFileChars = "＼／：＊？＂＜＞｜";
+            for (int i = 0; i < invalidFileChars.Length; i++)
+            {
+                name = name.Replace(invalidFileChars[i], validFileChars[i]);
+            }
+            return name;
+        }
+
         public static byte[] SHA256Hash(string input, int bitsLength = SHA256.HashSizeInBits, string? salt = null)
         {
             byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(input + salt ?? EncryptionKey));

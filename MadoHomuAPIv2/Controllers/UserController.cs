@@ -120,9 +120,10 @@ namespace MadoHomuAPIv2.Controllers
 
             if (update.avatar != null)
             {
-                var filename = Utils.WriteFileFromBase64WithRandomName(@"data\images\avatars\{0}.jpg", update.avatar);
-                updated += HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename + ".jpg");
-                Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}.jpg");
+                var filename = Utils.EscapeFilename($"{user.name}.{DateTime.UtcNow.Ticks}.jpg");
+                Utils.WriteFileFromBase64(@$"data\images\avatars\{filename}", update.avatar);
+                updated += HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename);
+                Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}");
             }
 
             response.SetCode(ResponseCode.Success);
