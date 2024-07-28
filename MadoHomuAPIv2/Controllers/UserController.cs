@@ -70,6 +70,13 @@ namespace MadoHomuAPIv2.Controllers
                 return response;
             }
 
+            if (reg.avatar != null)
+            {
+                var filename = Utils.EscapeFilename($"{reg.name}.{DateTime.UtcNow.Ticks}.jpg");
+                Utils.WriteFileFromBase64(@$"data\images\avatars\{filename}", reg.avatar);
+                reg.avatar = filename;
+            }
+
             HttpContext.DbConnection().InsertDTO("users", reg);
 
             var user = reg.email == null
@@ -80,7 +87,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 response.SetCode(ResponseCode.Success);
                 response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
-                Utils.Log($"New user registered: {user.name} (id={user.id})");
+                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar})");
             }
 
             return response;

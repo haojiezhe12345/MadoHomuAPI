@@ -49,7 +49,7 @@ namespace MadoHomuAPIv2
 
     public static class User
     {
-        public class UserEmailRead
+        public class UserEmailDecrypted
         {
             private string? _email;
             public string? email
@@ -64,7 +64,7 @@ namespace MadoHomuAPIv2
             }
         }
 
-        public class UserEmailWrite
+        public class UserEmailEncrypted
         {
             private string? _email;
             public string? email
@@ -79,7 +79,7 @@ namespace MadoHomuAPIv2
             }
         }
 
-        public class UserPO : UserEmailRead
+        public class UserPO : UserEmailDecrypted
         {
             private int? _id;
             private string? _avatar;
@@ -103,13 +103,13 @@ namespace MadoHomuAPIv2
             public long? create_time { get; set; }
         }
 
-        public class LoginDTO : UserEmailWrite
+        public class LoginDTO : UserEmailEncrypted
         {
             public string? name { get; set; }
             public string? password { get; set; }
         }
 
-        public class UserUpdateDTO : UserEmailWrite
+        public class UserUpdateDTO : UserEmailEncrypted
         {
             public string? name { get; set; }
             public string? avatar { get; set; }
