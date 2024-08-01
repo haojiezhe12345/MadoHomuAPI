@@ -48,8 +48,8 @@ namespace MadoHomuAPIv2
 
         public static string EscapeFilename(string name)
         {
-            var invalidFileChars = "\\/:*?\"<>|";
-            var validFileChars = "＼／：＊？＂＜＞｜";
+            var invalidFileChars = "\\/:*?\"<>| ";
+            var validFileChars = "＼／：＊？＂＜＞｜_";
             for (int i = 0; i < invalidFileChars.Length; i++)
             {
                 name = name.Replace(invalidFileChars[i], validFileChars[i]);
