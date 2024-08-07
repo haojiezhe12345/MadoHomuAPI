@@ -94,6 +94,8 @@ namespace MadoHomuAPIv2.Controllers
                 return -1;
             }
 
+            string? realSender = user == null ? CommentData.sender : user.name;
+
             string? images = null;
 
             if (CommentData.images != null && CommentData.images.Count != 0)
@@ -116,7 +118,7 @@ namespace MadoHomuAPIv2.Controllers
 
             //app.Logger.LogInformation(images);
 
-            if (CommentData.sender == "3112611479")
+            if (realSender == "3112611479")
             {
                 int testResult;
                 try
@@ -142,7 +144,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 result = HttpContext.DbConnection().InsertDTO("comments", new CommentToWrite
                 {
-                    sender = user == null ? CommentData.sender : user.name,
+                    sender = realSender,
                     uid = user?.id,
                     comment = CommentData.comment,
                     image = images,
@@ -155,7 +157,7 @@ namespace MadoHomuAPIv2.Controllers
             }
 
             stopwatch.Stop();
-            Utils.Log($"Written comment from {(user == null ? CommentData.sender : user.name)} (id={user?.id}) in {stopwatch.ElapsedMilliseconds}ms");
+            Utils.Log($"Written comment from {realSender} (id={user?.id}) in {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }
