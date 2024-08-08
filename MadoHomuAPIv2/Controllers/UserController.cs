@@ -176,7 +176,8 @@ namespace MadoHomuAPIv2.Controllers
             }
             if (id != null)
             {
-                result.Add(new(HttpContext.DbConnection().GetUser("id", id)));
+                var foundUser = HttpContext.DbConnection().GetUser("id", id);
+                if (foundUser != null) result.Add(new(foundUser));
             }
 
             return result;
