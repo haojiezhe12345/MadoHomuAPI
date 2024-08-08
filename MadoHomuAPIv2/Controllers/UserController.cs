@@ -167,12 +167,7 @@ namespace MadoHomuAPIv2.Controllers
                 using var command = HttpContext.DbConnection().CreateCommand();
                 command.CommandText = "SELECT * FROM users WHERE name = @name";
                 command.Parameters.AddWithValue("name", name);
-                var foundlist = command.ReadAsDTOList<UserPO>();
-
-                foundlist.ForEach(user =>
-                {
-                    result.Add(new(user));
-                });
+                command.ReadAsDTOList<UserPO>().ForEach(user => result.Add(new(user)));
             }
             if (id != null)
             {
