@@ -19,6 +19,8 @@ def adduser(user, timestamp):
 avatarDir = R'Z:\Web\Dashboard0\madohomu\api\data\images\avatars'
 
 for user in os.listdir(avatarDir):
+    if not user.endswith('.jpg'):
+        continue
     # mtime = os.path.getmtime(os.path.join(avatarDir, user))
     ctime = os.path.getctime(os.path.join(avatarDir, user))
     # if (mtime - ctime > 600):

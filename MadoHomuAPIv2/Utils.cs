@@ -57,7 +57,7 @@ namespace MadoHomuAPIv2
             return name;
         }
 
-        public static byte[] SHA256Hash(string input, int bitsLength = SHA256.HashSizeInBits, string? salt = null)
+        public static byte[] SHA256HashWithSalt(string input, int bitsLength = SHA256.HashSizeInBits, string? salt = null)
         {
             byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(input + salt ?? EncryptionKey));
             if (bitsLength > hash.Length * 8)
@@ -75,8 +75,8 @@ namespace MadoHomuAPIv2
         public static string EncryptString(string txt, string? key = null, string? iv = null)
         {
             using var aes = Aes.Create();
-            aes.Key = SHA256Hash(key ?? EncryptionKey, aes.KeySize);
-            aes.IV = SHA256Hash(iv ?? EncryptionKey, aes.BlockSize);
+            aes.Key = SHA256HashWithSalt(key ?? EncryptionKey, aes.KeySize);
+            aes.IV = SHA256HashWithSalt(iv ?? EncryptionKey, aes.BlockSize);
 
             using MemoryStream memoryStream = new();
             using CryptoStream cryptoStream = new(memoryStream, aes.CreateEncryptor(), CryptoStreamMode.Write);
@@ -91,8 +91,8 @@ namespace MadoHomuAPIv2
             try
             {
                 using Aes aes = Aes.Create();
-                aes.Key = SHA256Hash(key ?? EncryptionKey, aes.KeySize);
-                aes.IV = SHA256Hash(iv ?? EncryptionKey, aes.BlockSize);
+                aes.Key = SHA256HashWithSalt(key ?? EncryptionKey, aes.KeySize);
+                aes.IV = SHA256HashWithSalt(iv ?? EncryptionKey, aes.BlockSize);
 
                 using MemoryStream memoryStream = new(Convert.FromBase64String(encryptedBase64));
                 using CryptoStream cryptoStream = new(memoryStream, aes.CreateDecryptor(), CryptoStreamMode.Read);
