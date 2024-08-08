@@ -158,19 +158,26 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpGet("find")]
-        public List<UserGetVO> FindUser(string name)
+        public List<UserGetVO> FindUser(string? name, int? id)
         {
             List<UserGetVO> result = [];
 
-            using var command = HttpContext.DbConnection().CreateCommand();
-            command.CommandText = "SELECT * FROM users WHERE name = @name";
-            command.Parameters.AddWithValue("name", name);
-            var foundlist = command.ReadAsDTOList<UserPO>();
-
-            foundlist.ForEach(user =>
+            if (name != null)
             {
-                result.Add(new UserGetVO(user));
-            });
+                using var command = HttpContext.DbConnection().CreateCommand();
+                command.CommandText = "SELECT * FROM users WHERE name = @name";
+                command.Parameters.AddWithValue("name", name);
+                var foundlist = command.ReadAsDTOList<UserPO>();
+
+                foundlist.ForEach(user =>
+                {
+                    result.Add(new(user));
+                });
+            }
+            if (id != null)
+            {
+                result.Add(new(HttpContext.DbConnection().GetUser("id", id)));
+            }
 
             return result;
         }
