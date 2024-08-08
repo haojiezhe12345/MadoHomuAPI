@@ -98,6 +98,7 @@ namespace MadoHomuAPIv2.Controllers
         public ResponseVO UpdateUser(UserUpdateDTO update)
         {
             bool allowUserNameChangeWithoutEmail = true;
+
             ResponseVO response = new();
             int updated = 0;
 
