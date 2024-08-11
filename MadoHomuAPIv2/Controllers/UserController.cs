@@ -49,10 +49,10 @@ namespace MadoHomuAPIv2.Controllers
 
             if (reg.email != null && reg.name != null)
             {
-                var check = HttpContext.DbConnection().CheckEmail(reg.email);
-                if (check != 1)
+                var check = HttpContext.DbConnection().CheckEmailEncrypted(reg.email);
+                if (check != ResponseCode.Success)
                 {
-                    response.SetCode((ResponseCode)check);
+                    response.SetCode(check);
                     return response;
                 }
             }
@@ -106,10 +106,10 @@ namespace MadoHomuAPIv2.Controllers
 
             if (update.email != null)
             {
-                var check = HttpContext.DbConnection().CheckEmail(update.email);
-                if (check != 1)
+                var check = HttpContext.DbConnection().CheckEmailEncrypted(update.email);
+                if (check != ResponseCode.Success)
                 {
-                    response.SetCode((ResponseCode)check);
+                    response.SetCode(check);
                     return response;
                 }
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "email", update.email);

@@ -151,13 +151,13 @@ namespace MadoHomuAPIv2
             else return "";
         }
 
-        public static int CheckEmail(this SqliteConnection connection, string email)
+        public static ResponseCode CheckEmailEncrypted(this SqliteConnection connection, string email)
         {
-            if (email.Length < 5)
-                return (int)ResponseCode.EmailNotValid;
+            if (Utils.DecryptString(email).Length < 1)
+                return ResponseCode.EmailNotValid;
             if (connection.GetUser("email", email) != null)
-                return (int)ResponseCode.EmailAlreadyRegistered;
-            return 1;
+                return ResponseCode.EmailAlreadyRegistered;
+            return ResponseCode.Success;
         }
     }
 }
