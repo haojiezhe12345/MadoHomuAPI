@@ -13,7 +13,7 @@ namespace MadoHomuAPIv2
 
             if (token != null)
             {
-                var user = context.DbConnection().GetUser("token", token);
+                var user = context.DbConnection().GetUser("token", Utils.EncryptString(token));
                 if (user == null)
                 {
                     context.Response.StatusCode = 401;
@@ -49,37 +49,57 @@ namespace MadoHomuAPIv2
 
     public static class User
     {
-        public class UserEmailDecrypted
+        public class UserDecrypted
         {
             private string? _email;
+            private string? _token;
+            private string? _password;
             public string? email
             {
                 get => _email;
-                set
-                {
-                    if (_email != null)
-                        throw new Exception($"Cannot set email in {this.GetType().Name} for more than once because it stores a decrypted value");
-                    if (value != null) _email = Utils.DecryptString(value);
-                }
+                set => SetDecrypted(ref _email, value);
             }
+            public string? token
+                {
+                get => _token;
+                set => SetDecrypted(ref _token, value);
+                }
+            public string? password
+            {
+                get => _password;
+                set => SetDecrypted(ref _password, value);
+            }
+            private void SetDecrypted(ref string? target, string? value)
+            {
+                if (target != null)
+                    throw new Exception($"Cannot set property in {this.GetType().Name} for more than once because it stores a decrypted value");
+                if (value != null) target = Utils.DecryptString(value);
+        }
         }
 
-        public class UserEmailEncrypted
+        public class UserEncrypted
         {
             private string? _email;
+            private string? _password;
             public string? email
             {
                 get => _email;
-                set
+                set => SetEncrypted(ref _email, value);
+            }
+            public string? password
                 {
-                    if (_email != null)
-                        throw new Exception($"Cannot set email in {this.GetType().Name} for more than once because it stores an encrypted value");
-                    if (value != null) _email = Utils.EncryptString(value);
+                get => _password;
+                set => SetEncrypted(ref _password, value);
                 }
+            private void SetEncrypted(ref string? target, string? value)
+            {
+                if (target != null)
+                    throw new Exception($"Cannot set property in {this.GetType().Name} for more than once because it stores an encrypted value");
+                if (value != null) target = Utils.EncryptString(value);
             }
         }
 
-        public class UserPO : UserEmailDecrypted
+        public class UserPO : UserDecrypted
         {
             private int? _id;
             private string? _avatar;
@@ -98,22 +118,18 @@ namespace MadoHomuAPIv2
                 get => _avatar ?? "default.png";
                 set => _avatar = value;
             }
-            public string? password { get; set; }
-            public string? token { get; set; }
             public long? create_time { get; set; }
         }
 
-        public class LoginDTO : UserEmailEncrypted
+        public class LoginDTO : UserEncrypted
         {
             public string? name { get; set; }
-            public string? password { get; set; }
         }
 
-        public class UserUpdateDTO : UserEmailEncrypted
+        public class UserUpdateDTO : UserEncrypted
         {
             public string? name { get; set; }
             public string? avatar { get; set; }
-            public string? password { get; set; }
         }
 
         public class UserGetVO(UserPO? user = null)
@@ -146,7 +162,7 @@ namespace MadoHomuAPIv2
         public static string GenerateTokenForUserById(this SqliteConnection connection, int id)
         {
             string token = Guid.NewGuid().ToString();
-            if (connection.SetUserParamById(id, "token", token) == 1)
+            if (connection.SetUserParamById(id, "token", Utils.EncryptString(token)) == 1)
                 return token;
             else return "";
         }
