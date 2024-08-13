@@ -59,7 +59,7 @@ namespace MadoHomuAPIv2
 
         public static byte[] SHA256HashWithSalt(string input, int bitsLength = SHA256.HashSizeInBits, string? salt = null)
         {
-            byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(input + salt ?? EncryptionKey));
+            byte[] hash = SHA256.HashData(Encoding.UTF8.GetBytes(input + (salt ?? EncryptionKey)));
             if (bitsLength > hash.Length * 8)
                 throw new Exception($"The maximum hash length is {hash.Length * 8}, but {bitsLength} requested");
             else if (bitsLength == hash.Length * 8)
