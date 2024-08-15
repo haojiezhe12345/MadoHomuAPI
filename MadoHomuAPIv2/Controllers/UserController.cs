@@ -126,7 +126,7 @@ namespace MadoHomuAPIv2.Controllers
                 (
                     Utils.DecryptString(update.email),
                     "确认修改邮箱 | Verify your email",
-                    String.Format(System.IO.File.ReadAllText("html/ConfirmEmail.html"), actionId)
+                    String.Format(System.IO.File.ReadAllText("emails/ConfirmEmail.html"), actionId)
                 );
 
                 if (result != ResponseCode.Success)
