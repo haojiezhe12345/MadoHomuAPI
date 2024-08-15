@@ -1,25 +1,49 @@
 ﻿using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
+using System.Net;
+using System.Net.Mail;
+using System.Text.Json;
 
 namespace MadoHomuAPIv2
 {
-    public class Utils
+    public static class Config
     {
-        private static string? _encryptionKey = null;
+        public class ConfigItems
+        {
+            public required string EncryptionKey { get; set; }
+            public required EmailConfig Email { get; set; }
+            public class EmailConfig
+            {
+                public required string SmtpServerAddr { get; set; }
+                public required int SmtpServerPort { get; set; }
+                public required string Username { get; set; }
+                public required string Password { get; set; }
+            }
+        }
 
-        public static string EncryptionKey
+        private static ConfigItems? _data = null;
+
+        public static ConfigItems Data
         {
             get
             {
-                if (_encryptionKey == null)
-                {
-                    var location = File.ReadAllText(@"data\secret_location.txt");
-                    _encryptionKey = File.ReadAllText(location);
-                }
-                return _encryptionKey;
+                if (_data == null) LoadConfig();
+                if (_data == null) throw new Exception("Failed to read config");
+                return _data;
             }
         }
+
+        public static void LoadConfig()
+        {
+            _data = JsonSerializer.Deserialize<ConfigItems>(File.ReadAllText(File.ReadAllText(@"data\config_location.txt")));
+        }
+    }
+
+    public static class Utils
+    {
+        public static string EncryptionKey => Config.Data.EncryptionKey;
+        public static Config.ConfigItems.EmailConfig EmailConfig => Config.Data.Email;
 
         public static void Log(string txt)
         {
@@ -102,9 +126,55 @@ namespace MadoHomuAPIv2
             }
             catch (Exception e)
             {
-                Log($"Failed to decode string '{encryptedBase64}', reason:\n{e}");
+                Log($"Failed to decrypt string '{encryptedBase64}', reason:\n{e}");
                 return encryptedBase64;
             }
+        }
+
+        public static void SetEncryptedValue(ref string? target, string? rawValue)
+        {
+            if (target != null)
+                throw new Exception($"Cannot set property for more than once because it already stores an encrypted value");
+            if (rawValue != null) target = EncryptString(rawValue);
+        }
+
+        public static void SetDecryptedValue(ref string? target, string? encryptedValue)
+        {
+            if (target != null)
+                throw new Exception($"Cannot set property for more than once because it already stores a decrypted value");
+            if (encryptedValue != null) target = DecryptString(encryptedValue);
+        }
+
+        public static async Task<ResponseCode> SendEmail(string address, string subject, string body, bool isHtml = true)
+        {
+            var smtpClient = new SmtpClient(EmailConfig.SmtpServerAddr, EmailConfig.SmtpServerPort)
+            {
+                Credentials = new NetworkCredential(EmailConfig.Username, EmailConfig.Password),
+                EnableSsl = true,
+            };
+            try
+            {
+                var mail = new MailMessage()
+                {
+                    From = new($"MadoHomu.love <{EmailConfig.Username}>"),
+                    Subject = subject,
+                    Body = body,
+                    IsBodyHtml = isHtml,
+                };
+                mail.To.Add(address);
+                await smtpClient.SendMailAsync(mail);
+            }
+            catch (FormatException)
+            {
+                return ResponseCode.EmailNotValid;
+            }
+            catch (Exception e)
+            {
+                Log($"Failed to send email, reason:\n{e}");
+                return ResponseCode.EmailSendFailed;
+            }
+            Log("Email sent successfully");
+            return ResponseCode.Success;
         }
     }
 

@@ -57,24 +57,18 @@ namespace MadoHomuAPIv2
             public string? email
             {
                 get => _email;
-                set => SetDecrypted(ref _email, value);
+                set => Utils.SetDecryptedValue(ref _email, value);
             }
             public string? token
-                {
+            {
                 get => _token;
-                set => SetDecrypted(ref _token, value);
-                }
+                set => Utils.SetDecryptedValue(ref _token, value);
+            }
             public string? password
             {
                 get => _password;
-                set => SetDecrypted(ref _password, value);
+                set => Utils.SetDecryptedValue(ref _password, value);
             }
-            private void SetDecrypted(ref string? target, string? value)
-            {
-                if (target != null)
-                    throw new Exception($"Cannot set property in {this.GetType().Name} for more than once because it stores a decrypted value");
-                if (value != null) target = Utils.DecryptString(value);
-        }
         }
 
         public class UserEncrypted
@@ -84,18 +78,12 @@ namespace MadoHomuAPIv2
             public string? email
             {
                 get => _email;
-                set => SetEncrypted(ref _email, value);
+                set => Utils.SetEncryptedValue(ref _email, value);
             }
             public string? password
-                {
-                get => _password;
-                set => SetEncrypted(ref _password, value);
-                }
-            private void SetEncrypted(ref string? target, string? value)
             {
-                if (target != null)
-                    throw new Exception($"Cannot set property in {this.GetType().Name} for more than once because it stores an encrypted value");
-                if (value != null) target = Utils.EncryptString(value);
+                get => _password;
+                set => Utils.SetEncryptedValue(ref _password, value);
             }
         }
 
@@ -144,6 +132,12 @@ namespace MadoHomuAPIv2
         public class UserMeVO(UserPO? user = null) : UserGetVO(user)
         {
             public string? email { get; set; } = user?.email;
+        }
+
+        public class UserParamUpdateDTO
+        {
+            public required int id { get; set; }
+            public required string data { get; set; }
         }
 
         public static UserPO? GetUser(this SqliteConnection connection, string key, object value, string ExtraParam = "")

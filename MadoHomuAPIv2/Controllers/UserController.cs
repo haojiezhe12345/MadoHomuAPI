@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 using static MadoHomuAPIv2.User;
+using static MadoHomuAPIv2.Action;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -87,7 +89,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 response.SetCode(ResponseCode.Success);
                 response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
-                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar})");
+                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar}, email={user.email != null})");
             }
 
             return response;
@@ -95,7 +97,7 @@ namespace MadoHomuAPIv2.Controllers
 
         [HttpPut("update")]
         [UserLoginRequired]
-        public ResponseVO UpdateUser(UserUpdateDTO update)
+        public async Task<ResponseVO> UpdateUser(UserUpdateDTO update)
         {
             bool allowUserNameChangeWithoutEmail = true;
 
@@ -112,8 +114,27 @@ namespace MadoHomuAPIv2.Controllers
                     response.SetCode(check);
                     return response;
                 }
-                updated += HttpContext.DbConnection().SetUserParamById(user.id, "email", update.email);
-                Utils.Log($"User email changed: {user.name} (id={user.id})");
+                Utils.Log($"User {user.name} (id={user.id}) requested to change email");
+
+                var actionId = HttpContext.DbConnection().CreateAction(ActionType.EmailConfirm, JsonSerializer.Serialize(new UserParamUpdateDTO
+                {
+                    id = user.id,
+                    data = update.email,
+                }));
+
+                var result = await Utils.SendEmail
+                (
+                    Utils.DecryptString(update.email),
+                    "确认修改邮箱 | Verify your email",
+                    String.Format(System.IO.File.ReadAllText("html/ConfirmEmail.html"), actionId)
+                );
+
+                if (result != ResponseCode.Success)
+                {
+                    HttpContext.DbConnection().ExpireActionEncrypted(Utils.EncryptString(actionId));
+                    response.SetCode(result);
+                    return response;
+                }
             }
 
             if (update.name != null)
