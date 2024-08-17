@@ -99,8 +99,6 @@ namespace MadoHomuAPIv2.Controllers
         [UserLoginRequired]
         public async Task<ResponseVO> UpdateUser(UserUpdateDTO update)
         {
-            bool allowUserNameChangeWithoutEmail = true;
-
             ResponseVO response = new();
             int updated = 0;
 
@@ -141,7 +139,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 if (user.email == null)
                 {
-                    if (allowUserNameChangeWithoutEmail)
+                    if (Config.Data.AllowUserNameChangeWithoutEmail == true)
                     {
                         if (HttpContext.DbConnection().GetUser("name", update.name, "AND email is NULL") != null)
                         {

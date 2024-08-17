@@ -20,6 +20,7 @@ namespace MadoHomuAPIv2
                 public required string Username { get; set; }
                 public required string Password { get; set; }
             }
+            public bool? AllowUserNameChangeWithoutEmail { get; set; }
         }
 
         private static ConfigItems? _data = null;
