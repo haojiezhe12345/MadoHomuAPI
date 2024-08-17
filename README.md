@@ -1,12 +1,21 @@
 # MadoHomuAPI
-backend for [MadoHomu.love](http://madohomu.love?no-redirect)
+backend for [MadoHomu.love](https://madohomu.love/)
 
-### Database location:
-./data/main.db
+### IDE
+- Visual Studio 2022
+- with `ASP.NET and web development` installed
+- [Tutorial](https://learn.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-8.0&tabs=visual-studio)
 
-### Log file location:
-./data/log.txt
+### Files required to run
+|      |      |
+| ---- | ---- |
+| `data/main.db` | Main database |
+| `data/config_location.txt` | Location of `config.json` |
+| `config.json` | Database encryption keys and email config, defined in: [Utils.cs:12](MadoHomuAPIv2/Utils.cs#L12) |
 
-### Images location:
-- ./data/images/avatars
-- ./data/images/posts
+### Files generated upon running
+|      |      |
+| ---- | ---- |
+| `data/log.txt` | Log file |
+| `data/images/avatars` | Uploaded avatars |
+| `data/images/posts` | Posted images |
