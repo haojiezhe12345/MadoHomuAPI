@@ -32,14 +32,19 @@ namespace MadoHomuAPIv2.Controllers
                 response.SetCode(ResponseCode.LoginCredentialInsufficient);
             }
 
-            if (user != null)
+            if (user == null) return response;
+
+            if (user.password != null && user.password != login.password)
             {
-                response.SetCode(ResponseCode.Success);
-                response.data = (user.token == null || user.token.Length < 8)
-                    ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
-                    : user.token;
-                Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
+                response.SetCode(ResponseCode.LoginPasswordIncorrect);
+                return response;
             }
+
+            response.SetCode(ResponseCode.Success);
+            response.data = (user.token == null || user.token.Length < 8)
+                ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
+                : user.token;
+            Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
 
             return response;
         }
@@ -89,7 +94,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 response.SetCode(ResponseCode.Success);
                 response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
-                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar}, email={user.email != null})");
+                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar}, email={user.email != null}, password={user.password != null})");
             }
 
             return response;
@@ -114,11 +119,7 @@ namespace MadoHomuAPIv2.Controllers
                 }
                 Utils.Log($"User {user.name} (id={user.id}) requested to change email");
 
-                var actionId = HttpContext.DbConnection().CreateAction(ActionType.EmailConfirm, JsonSerializer.Serialize(new UserParamUpdateDTO
-                {
-                    id = user.id,
-                    data = update.email,
-                }));
+                var actionId = Guid.NewGuid().ToString();
 
                 var result = await Utils.SendEmail
                 (
@@ -129,10 +130,22 @@ namespace MadoHomuAPIv2.Controllers
 
                 if (result != ResponseCode.Success)
                 {
-                    HttpContext.DbConnection().ExpireActionEncrypted(Utils.EncryptString(actionId));
                     response.SetCode(result);
                     return response;
                 }
+
+                HttpContext.DbConnection().CreateAction(
+                    ActionType.EmailConfirm,
+                    JsonSerializer.Serialize(new UserParamUpdateDTO
+                    {
+                        id = user.id,
+                        data = update.email,
+                    }),
+                    id: actionId
+                );
+                response.SetCode(ResponseCode.Success);
+
+                return response;
             }
 
             if (update.name != null)
@@ -165,8 +178,53 @@ namespace MadoHomuAPIv2.Controllers
                 Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}");
             }
 
+            if (update.password != null)
+            {
+                updated += HttpContext.DbConnection().SetUserParamById(user.id, "password", update.password);
+                Utils.Log($"User {user.name} (id={user.id}) changed password");
+                if (user.email != null)
+                    _ = Utils.SendEmail(
+                        user.email, "您的密码已更改 | Your password has been updated",
+                        string.Format(System.IO.File.ReadAllText("emails/PasswordUpdated.html"))
+                    );
+            }
+
             response.SetCode(ResponseCode.Success);
             response.data = updated;
+            return response;
+        }
+
+        [HttpPost("resetpassword")]
+        public async Task<ResponseVO> ResetPassword(string email)
+        {
+            ResponseVO response = new();
+
+            var uid = HttpContext.DbConnection().GetUser("email", Utils.EncryptString(email))?.id;
+
+            if (uid == null)
+            {
+                response.SetCode(ResponseCode.EmailNotRegistered);
+                return response;
+            }
+
+            var actionId = Guid.NewGuid().ToString();
+            const int expireMinutes = 60;
+
+            var result = await Utils.SendEmail(
+                email, "重置密码 | Reset your password",
+                String.Format(System.IO.File.ReadAllText("emails/ResetPassword.html"), actionId, expireMinutes)
+            );
+
+            if (result != ResponseCode.Success)
+            {
+                response.SetCode(result);
+                return response;
+            }
+
+            HttpContext.DbConnection().CreateAction(ActionType.PasswordReset, uid.ToString(), expireMinutes * 60, actionId);
+            response.SetCode(ResponseCode.Success);
+            response.data = expireMinutes;
+
             return response;
         }
 

@@ -22,9 +22,8 @@
         UserNameChangeRequireEmail = 1013,
         UserNameChangeDuplicates = 1014,
 
-        //LoginRequired = 1020,
-        //LoginTokenInvalid = 1021,
-        LoginCredentialInsufficient = 1022,
+        LoginPasswordIncorrect = 1020,
+        LoginCredentialInsufficient = 1021,
 
         ActionNotExist = 1030,
         ActionExpired = 1031,

@@ -53,7 +53,6 @@ namespace MadoHomuAPIv2
         {
             private string? _email;
             private string? _token;
-            private string? _password;
             public string? email
             {
                 get => _email;
@@ -63,11 +62,6 @@ namespace MadoHomuAPIv2
             {
                 get => _token;
                 set => Utils.SetDecryptedValue(ref _token, value);
-            }
-            public string? password
-            {
-                get => _password;
-                set => Utils.SetDecryptedValue(ref _password, value);
             }
         }
 
@@ -83,7 +77,7 @@ namespace MadoHomuAPIv2
             public string? password
             {
                 get => _password;
-                set => Utils.SetEncryptedValue(ref _password, value);
+                set => Utils.SetHashedValue(ref _password, value);
             }
         }
 
@@ -106,6 +100,7 @@ namespace MadoHomuAPIv2
                 get => _avatar ?? "default.png";
                 set => _avatar = value;
             }
+            public string? password { get; set; }
             public long? create_time { get; set; }
         }
 
@@ -126,6 +121,7 @@ namespace MadoHomuAPIv2
             public string? name { get; set; } = user?.name;
             public string? avatar { get; set; } = user?.avatar;
             public bool? hasEmail { get; set; } = user?.email != null;
+            public bool? hasPassword { get; set; } = user?.password != null;
             public long? create_time { get; set; } = user?.create_time;
         }
 

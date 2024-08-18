@@ -42,18 +42,56 @@ namespace MadoHomuAPIv2.Controllers
             switch (type)
             {
                 case ActionType.EmailConfirm:
-                    var actionData = JsonSerializer.Deserialize<UserParamUpdateDTO>(action.data ?? "null");
-                    if (actionData == null)
                     {
-                        response.SetCode(ResponseCode.ActionDataInvalid);
-                        return response;
+                        var actionData = JsonSerializer.Deserialize<UserParamUpdateDTO>(action.data ?? "null");
+                        if (actionData == null)
+                        {
+                            response.SetCode(ResponseCode.ActionDataInvalid);
+                            return response;
+                        }
+
+                        var oldEmail = HttpContext.DbConnection().GetUser("id", actionData.id)?.email;
+
+                        HttpContext.DbConnection().SetUserParamById(actionData.id, "email", actionData.data);
+                        Utils.Log($"User (id={actionData.id}) confirmed new email");
+
+                        if (oldEmail != null)
+                            _ = Utils.SendEmail(
+                                oldEmail, "您的邮箱已更改 | Your email has been updated",
+                                string.Format(System.IO.File.ReadAllText("emails/EmailUpdated.html"), Utils.DecryptString(actionData.data))
+                            );
+
+                        break;
                     }
-                    HttpContext.DbConnection().SetUserParamById(actionData.id, "email", actionData.data);
-                    Utils.Log($"User (id={actionData.id}) confirmed new email");
-                    HttpContext.DbConnection().ExpireActionEncrypted(actionDTO.id);
-                    response.SetCode(ResponseCode.Success);
-                    break;
+
+                case ActionType.PasswordReset:
+                    {
+                        if (!int.TryParse(action.data, out int uid))
+                        {
+                            response.SetCode(ResponseCode.ActionDataInvalid);
+                            return response;
+                        }
+
+                        HttpContext.DbConnection().SetUserParamById(
+                            uid, "password",
+                            new UserUpdateDTO() { password = actionDTO.data }.password ?? (object)DBNull.Value
+                        );
+                        Utils.Log($"User (id={uid}) reset password by email link");
+
+                        var user = HttpContext.DbConnection().GetUser("id", uid);
+                        if (user != null && user.email != null)
+                            _ = Utils.SendEmail(
+                                user.email, "您的密码已更改 | Your password has been updated",
+                                string.Format(System.IO.File.ReadAllText("emails/PasswordUpdated.html"))
+                            );
+
+                        break;
+                    }
             }
+
+            HttpContext.DbConnection().ExpireActionEncrypted(actionDTO.id);
+            response.SetCode(ResponseCode.Success);
+
             return response;
         }
     }
@@ -101,15 +139,15 @@ namespace MadoHomuAPIv2
             PasswordReset,
         }
 
-        public static string CreateAction(this SqliteConnection connection, ActionType type, string data, int? validTimeSeconds = null)
+        public static string CreateAction(this SqliteConnection connection, ActionType type, string? data, int? expireSeconds = null, string? id = null)
         {
-            var id = Guid.NewGuid().ToString();
+            id ??= Guid.NewGuid().ToString();
             connection.InsertDTO("actions", new ActionWrite
             {
                 id = id,
                 type = type.ToString(),
                 data = data,
-                expire_time = validTimeSeconds != null ? DateTimeOffset.Now.ToUnixTimeSeconds() + validTimeSeconds : null,
+                expire_time = expireSeconds != null ? DateTimeOffset.Now.ToUnixTimeSeconds() + expireSeconds : null,
             });
             Utils.Log($"Action '{type}' created successfully");
             return id;

@@ -146,6 +146,13 @@ namespace MadoHomuAPIv2
             if (encryptedValue != null) target = DecryptString(encryptedValue);
         }
 
+        public static void SetHashedValue(ref string? target, string? rawValue)
+        {
+            if (target != null)
+                throw new Exception($"Cannot set property for more than once because it already stores a hashed value");
+            if (rawValue != null) target = Convert.ToBase64String(SHA256HashWithSalt(rawValue));
+        }
+
         public static async Task<ResponseCode> SendEmail(string address, string subject, string body, bool isHtml = true)
         {
             var smtpClient = new SmtpClient(EmailConfig.SmtpServerAddr, EmailConfig.SmtpServerPort)
