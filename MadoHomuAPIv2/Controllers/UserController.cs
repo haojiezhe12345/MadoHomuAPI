@@ -236,10 +236,15 @@ namespace MadoHomuAPIv2.Controllers
         }
 
         [HttpGet("find")]
-        public List<UserGetVO> FindUser(string? name, int? id)
+        public List<UserGetVO> FindUser(string? name, int? id, string? email)
         {
             List<UserGetVO> result = [];
 
+            if (email != null)
+            {
+                var foundUser = HttpContext.DbConnection().GetUser("email", Utils.EncryptString(email));
+                if (foundUser != null) result.Add(new(foundUser));
+            }
             if (name != null)
             {
                 using var command = HttpContext.DbConnection().CreateCommand();
