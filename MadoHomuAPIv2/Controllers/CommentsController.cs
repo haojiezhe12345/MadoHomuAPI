@@ -157,7 +157,7 @@ namespace MadoHomuAPIv2.Controllers
             }
 
             stopwatch.Stop();
-            Utils.Log($"Written comment from {realSender} (id={user?.id}) in {stopwatch.ElapsedMilliseconds}ms");
+            Utils.Log($"Written comment from '{realSender}' (id={user?.id}) in {stopwatch.ElapsedMilliseconds}ms");
 
             return result;
         }

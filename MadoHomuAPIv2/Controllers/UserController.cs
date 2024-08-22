@@ -44,7 +44,7 @@ namespace MadoHomuAPIv2.Controllers
             response.data = (user.token == null || user.token.Length < 8)
                 ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
                 : user.token;
-            Utils.Log($"User logged on successfully: {user.name} (id={user.id})");
+            Utils.Log($"User logged on successfully: '{user.name}' (id={user.id})");
 
             return response;
         }
@@ -94,7 +94,7 @@ namespace MadoHomuAPIv2.Controllers
             {
                 response.SetCode(ResponseCode.Success);
                 response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
-                Utils.Log($"New user registered: {user.name} (id={user.id}, avatar={reg.avatar}, email={user.email != null}, password={user.password != null})");
+                Utils.Log($"New user registered: '{user.name}' (id={user.id}, avatar={reg.avatar}, email={user.email != null}, password={user.password != null})");
             }
 
             return response;
@@ -117,7 +117,7 @@ namespace MadoHomuAPIv2.Controllers
                     response.SetCode(check);
                     return response;
                 }
-                Utils.Log($"User {user.name} (id={user.id}) requested to change email");
+                Utils.Log($"User '{user.name}' (id={user.id}) requested to change email");
 
                 var actionId = Guid.NewGuid().ToString();
 
@@ -167,7 +167,7 @@ namespace MadoHomuAPIv2.Controllers
                     }
                 }
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "name", update.name);
-                Utils.Log($"User {user.name} (id={user.id}) changed name to {update.name}");
+                Utils.Log($"User '{user.name}' (id={user.id}) changed name to '{update.name}'");
             }
 
             if (update.avatar != null)
@@ -175,13 +175,13 @@ namespace MadoHomuAPIv2.Controllers
                 var filename = Utils.EscapeFilename($"{user.name}.{DateTime.UtcNow.Ticks}.jpg");
                 Utils.WriteFileFromBase64(@$"data\images\avatars\{filename}", update.avatar);
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename);
-                Utils.Log($"User {user.name} (id={user.id}) uploaded an avatar: {filename}");
+                Utils.Log($"User '{user.name}' (id={user.id}) uploaded an avatar: '{filename}'");
             }
 
             if (update.password != null)
             {
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "password", update.password);
-                Utils.Log($"User {user.name} (id={user.id}) changed password");
+                Utils.Log($"User '{user.name}' (id={user.id}) changed password");
                 if (user.email != null)
                     _ = Utils.SendEmail(
                         user.email, "您的密码已更改 | Your password has been updated",
@@ -206,6 +206,8 @@ namespace MadoHomuAPIv2.Controllers
                 response.SetCode(ResponseCode.EmailNotRegistered);
                 return response;
             }
+
+            Utils.Log($"User (id={uid}) requested resetting password");
 
             var actionId = Guid.NewGuid().ToString();
             const int expireMinutes = 60;
