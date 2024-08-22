@@ -28,7 +28,7 @@ namespace MadoHomuAPIv2
     {
         public static SqliteConnection OpenNewConnection()
         {
-            var connection = new SqliteConnection(@"Data Source=data\main.db");
+            var connection = new SqliteConnection("Data Source=data/main.db");
             connection.Open();
             return connection;
         }

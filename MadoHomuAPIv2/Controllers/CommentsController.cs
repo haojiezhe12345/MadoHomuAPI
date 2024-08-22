@@ -106,7 +106,7 @@ namespace MadoHomuAPIv2.Controllers
                     //app.Logger.LogInformation(commentData.images[0]);
                     try
                     {
-                        images += Utils.WriteFileFromBase64WithRandomName(@"data\images\posts\{0}.jpg", image) + ',';
+                        images += Utils.WriteFileFromBase64WithRandomName("data/images/posts/{0}.jpg", image) + ',';
                     }
                     catch (Exception e)
                     {

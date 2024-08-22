@@ -37,7 +37,7 @@ namespace MadoHomuAPIv2
 
         public static void LoadConfig()
         {
-            _data = JsonSerializer.Deserialize<ConfigItems>(File.ReadAllText(File.ReadAllText(@"data\config_location.txt")));
+            _data = JsonSerializer.Deserialize<ConfigItems>(File.ReadAllText(File.ReadAllText("data/config_location.txt")));
         }
     }
 
@@ -52,7 +52,7 @@ namespace MadoHomuAPIv2
             {
                 try
                 {
-                    File.AppendAllText(@".\data\log.txt", $"[{DateTime.Now}] {txt}\n");
+                    File.AppendAllText("data/log.txt", $"[{DateTime.Now}] {txt}\n");
                     break;
                 }
                 catch { }

@@ -80,7 +80,7 @@ namespace MadoHomuAPIv2.Controllers
             if (reg.avatar != null)
             {
                 var filename = Utils.EscapeFilename($"{reg.name}.{DateTime.UtcNow.Ticks}.jpg");
-                Utils.WriteFileFromBase64(@$"data\images\avatars\{filename}", reg.avatar);
+                Utils.WriteFileFromBase64($"data/images/avatars/{filename}", reg.avatar);
                 reg.avatar = filename;
             }
 
@@ -173,7 +173,7 @@ namespace MadoHomuAPIv2.Controllers
             if (update.avatar != null)
             {
                 var filename = Utils.EscapeFilename($"{user.name}.{DateTime.UtcNow.Ticks}.jpg");
-                Utils.WriteFileFromBase64(@$"data\images\avatars\{filename}", update.avatar);
+                Utils.WriteFileFromBase64($"data/images/avatars/{filename}", update.avatar);
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "avatar", filename);
                 Utils.Log($"User '{user.name}' (id={user.id}) uploaded an avatar: '{filename}'");
             }
@@ -287,12 +287,12 @@ namespace MadoHomuAPIv2.Controllers
                 return "invalid username";
             }
 
-            using (var stream = new FileStream(@$"data\images\avatars\{name}", FileMode.Create))
+            using (var stream = new FileStream($"data/images/avatars/{name}", FileMode.Create))
             {
                 Request.Form.Files[0].CopyTo(stream);
             }
 
-            Utils.Log($"Avatar {name} has been uploaded");
+            Utils.Log($"Avatar '{name}' has been uploaded");
 
             return name;
         }
