@@ -73,6 +73,11 @@ namespace MadoHomuAPIv2.Controllers
                 comment.source = table;
             });
 
+            if (from != null && count != null)
+            {
+                if (from - count >= comments.Max(c => c.id)) return [];
+            }
+
             return comments;
         }
 
