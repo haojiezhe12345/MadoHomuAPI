@@ -1,5 +1,8 @@
 # MadoHomuAPI
-backend for [MadoHomu.love](https://madohomu.love/)
+Backend for [MadoHomu.love](https://madohomu.love/)
+
+**Demo:** http://haojiezhe12345.top:8001/api/swagger/index.html  
+(Dedicated for testing purposes, you can post anything you want. It won't affect the main website)
 
 ### IDE
 - Visual Studio 2022
