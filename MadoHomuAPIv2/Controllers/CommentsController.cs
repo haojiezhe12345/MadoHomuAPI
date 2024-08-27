@@ -19,6 +19,7 @@ namespace MadoHomuAPIv2.Controllers
                 if (db == "kami") table = "kami";
                 else return [];
             }
+            count ??= 10;
 
             List<CommentVO> comments = [];
 
@@ -26,20 +27,24 @@ namespace MadoHomuAPIv2.Controllers
             {
                 if (user != null)
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender = @sender ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE sender = @sender ORDER BY id DESC LIMIT {count} OFFSET {from ?? 0};";
                     DBcommand.Parameters.AddWithValue("@sender", user);
                 }
                 else if (uid != null)
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE uid = {uid} ORDER BY id DESC LIMIT {count ?? 10} OFFSET {from ?? 0};";
+                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE uid = {uid} ORDER BY id DESC LIMIT {count} OFFSET {from ?? 0};";
                 }
                 else if (from != null)
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN {from - (count ?? 10) + 1} AND {from} ORDER BY id DESC";
+                    DBcommand.CommandText = count >= 0
+                        ? $"SELECT * FROM {table} WHERE id <= {from} ORDER BY id DESC LIMIT {count}"
+                        : $"SELECT * FROM (SELECT * FROM {table} WHERE id >= {from} ORDER BY id ASC LIMIT {0 - count}) ORDER BY id DESC";
                 }
                 else if (time != null)
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} WHERE id BETWEEN (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) AND (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) + {count ?? 10} - 1 ORDER BY id DESC";
+                    DBcommand.CommandText = count >= 0
+                        ? $"SELECT * FROM {table} WHERE id <= (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) ORDER BY id DESC LIMIT {count}"
+                        : $"SELECT * FROM (SELECT * FROM {table} WHERE id >= (SELECT id FROM {table} WHERE time >= {time} ORDER by id ASC LIMIT 1) ORDER BY id ASC LIMIT {0 - count}) ORDER BY id DESC";
                 }
                 else if (timeMin != null && timeMax != null)
                 {
@@ -47,7 +52,7 @@ namespace MadoHomuAPIv2.Controllers
                 }
                 else
                 {
-                    DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count ?? 10}";
+                    DBcommand.CommandText = $"SELECT * FROM {table} ORDER BY id DESC LIMIT {count}";
                 }
 
                 comments = DBcommand.ReadAsDTOList<CommentVO>();
@@ -67,6 +72,11 @@ namespace MadoHomuAPIv2.Controllers
                 //comment.avatar ??= "default.png";
                 comment.source = table;
             });
+
+            if (from != null && count != null && count >= 0)
+            {
+                if (from - count >= comments.Max(c => c.id)) return [];
+            }
 
             return comments;
         }
