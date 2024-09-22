@@ -120,12 +120,13 @@ namespace MadoHomuAPIv2.Controllers
                 Utils.Log($"User '{user.name}' (id={user.id}) requested to change email");
 
                 var actionId = Guid.NewGuid().ToString();
+                const int expireHours = 24;
 
                 var result = await Utils.SendEmail
                 (
                     Utils.DecryptString(update.email),
                     "确认修改邮箱 | Verify your email",
-                    String.Format(System.IO.File.ReadAllText("emails/ConfirmEmail.html"), actionId)
+                    String.Format(System.IO.File.ReadAllText("emails/ConfirmEmail.html"), actionId, expireHours)
                 );
 
                 if (result != ResponseCode.Success)
@@ -141,9 +142,11 @@ namespace MadoHomuAPIv2.Controllers
                         id = user.id,
                         data = update.email,
                     }),
-                    id: actionId
+                    expireHours * 60 * 60,
+                    actionId
                 );
                 response.SetCode(ResponseCode.Success);
+                response.data = expireHours;
 
                 return response;
             }
