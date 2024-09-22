@@ -233,6 +233,15 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
+        [HttpPost("resettoken")]
+        [UserLoginRequired]
+        public bool ResetToken()
+        {
+            var user = HttpContext.User();
+            Utils.Log($"Resetting token for user '{user.name}' (id={user.id})");
+            return HttpContext.DbConnection().GenerateTokenForUserById(user.id) != "";
+        }
+
         [HttpGet("me")]
         [UserLoginRequired]
         public UserMeVO UserMe()
