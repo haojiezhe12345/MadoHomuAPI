@@ -954,3 +954,1002 @@ string
 [7/27/2024 7:46:10 PM] User logged on successfully: string (id=1237)
 [8/7/2024 8:57:39 PM] Written comment from string (id=) in 26ms
 [8/7/2024 8:58:19 PM] Written comment from string (id=) in 17ms
+[8/11/2024 10:00:45 AM] System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.WriteFileFromBase64(String file, String base64) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 44
+   at MadoHomuAPIv2.Controllers.UserController.Register(UserUpdateDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 76
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 127
+[8/11/2024 10:24:37 AM] System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.WriteFileFromBase64(String file, String base64) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 44
+   at MadoHomuAPIv2.Controllers.UserController.Register(UserUpdateDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 77
+   at lambda_method4(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 127
+[8/11/2024 10:24:44 AM] New user registered: string (id=1248, avatar=)
+[8/11/2024 10:24:53 AM] New user registered: string (id=1249, avatar=)
+[8/11/2024 10:25:10 AM] User logged on successfully: string (id=1249)
+[8/11/2024 10:25:41 AM] User string (id=1249) changed name to string1
+[8/11/2024 10:25:44 AM] User string1 (id=1249) changed name to string
+[8/11/2024 10:33:55 AM] User logged on successfully: string (id=1249)
+[8/11/2024 10:34:14 AM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'UNIQUE constraint failed: users.email'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.UpdateFieldById(SqliteConnection connection, String table, Int32 id, String key, Object value) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 139
+   at MadoHomuAPIv2.User.SetUserParamById(SqliteConnection connection, Int32 id, String key, Object value) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 143
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 116
+   at lambda_method4(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 127
+[8/11/2024 11:01:43 AM] User email changed: string (id=1249)
+[8/11/2024 11:01:43 AM] User string (id=1249) changed name to string
+[8/11/2024 11:01:43 AM] System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.WriteFileFromBase64(String file, String base64) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 39
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 144
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 117
+[8/11/2024 11:02:00 AM] User email changed: string (id=1249)
+[8/11/2024 11:02:00 AM] User string (id=1249) changed name to string
+[8/11/2024 11:02:12 AM] User email changed: string (id=1249)
+[8/11/2024 11:02:12 AM] User string (id=1249) changed name to string
+[8/11/2024 11:10:15 AM] User email changed: string (id=1249)
+[8/11/2024 11:10:15 AM] User string (id=1249) changed name to string
+[8/11/2024 11:10:19 AM] User email changed: string (id=1249)
+[8/11/2024 11:10:19 AM] User string (id=1249) changed name to string
+[8/11/2024 12:10:12 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:11:45 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:12:20 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:13:27 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:14:08 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:14:11 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:16:17 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:17:26 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:17:55 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:18:08 PM] System.FormatException: The specified string is not in the form required for an e-mail address.
+   at System.Net.Mail.MailAddressParser.TryReadCfwsAndThrowIfIncomplete(String data, Int32 index, Int32& outIndex, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseDomain(String data, Int32& index, String& domain, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.TryParseAddress(String data, Boolean expectMultipleAddresses, Int32& index, ParseAddressInfo& parseAddressInfo, Boolean throwExceptionIfFail)
+   at System.Net.Mail.MailAddressParser.ParseMultipleAddresses(String data)
+   at System.Net.Mail.MailAddressCollection.ParseValue(String addresses)
+   at System.Net.Mail.Message..ctor(String from, String to)
+   at System.Net.Mail.MailMessage..ctor(String from, String to)
+   at System.Net.Mail.SmtpClient.SendMailAsync(String from, String recipients, String subject, String body)
+   at MadoHomuAPIv2.Utils.SendEmail(String address, String title, String body) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 126
+   at MadoHomuAPIv2.Controllers.UserController.UpdateUser(UserUpdateDTO update) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 115
+   at lambda_method5(Closure, Object)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.AwaitableObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 137
+[8/11/2024 12:24:08 PM] User email changed: string (id=1249)
+[8/11/2024 12:24:36 PM] User email changed: string (id=1249)
+[8/11/2024 12:26:57 PM] User email changed: string (id=1249)
+[8/11/2024 12:50:54 PM] User email changed: string (id=1249)
+[8/11/2024 4:04:25 PM] User logged on successfully: string (id=1248)
+[8/13/2024 5:28:09 AM] System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.WriteFileFromBase64(String file, String base64) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 63
+   at MadoHomuAPIv2.Controllers.UserController.Register(UserUpdateDTO reg) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\UserController.cs:line 77
+   at lambda_method4(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 164
+[8/13/2024 5:29:12 AM] User logged on successfully: a (id=1250)
+[8/13/2024 5:29:46 AM] User email changed: a (id=1250)
+[8/13/2024 5:40:17 AM] System.InvalidOperationException: Value must be set.
+   at Microsoft.Data.Sqlite.SqliteParameter.Bind(sqlite3_stmt stmt)
+   at Microsoft.Data.Sqlite.SqliteParameterCollection.Bind(sqlite3_stmt stmt)
+   at Microsoft.Data.Sqlite.SqliteCommand.GetStatements()+MoveNext()
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at MadoHomuAPIv2.Database.ReadEachRow(SqliteCommand command, Action`1 callback) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 87
+   at MadoHomuAPIv2.Database.ReadAsDTOList[T](SqliteCommand command) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 61
+   at MadoHomuAPIv2.Database.ReadAsDTO[T](SqliteCommand command) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 52
+   at MadoHomuAPIv2.ActionController.TakeAction(ActionDTO actionDTO) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\ActionWithController.cs:line 21
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 164
+[8/13/2024 6:06:26 AM] System.Text.Json.JsonException: 's' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
+ ---> System.Text.Json.JsonReaderException: 's' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at MadoHomuAPIv2.ActionController.TakeAction(ActionDTO actionDTO) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\ActionWithController.cs:line 44
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 164
+[8/13/2024 6:08:44 AM] User logged on successfully: a (id=1250)
+[8/13/2024 6:10:15 AM] User (id=1254) confirmed new email
+[8/13/2024 6:10:38 AM] Failed to decrypt string '3112611479@qq.com', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/13/2024 6:11:57 AM] Failed to decrypt string '3112611479@qq.com', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/13/2024 6:12:19 AM] Failed to decrypt string '3112611479@qq.com', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/13/2024 6:12:47 AM] Failed to decrypt string '3112611479@qq.com', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/13/2024 6:12:47 AM] User (id=1254) confirmed new email
+[8/13/2024 6:19:10 AM] System.Text.Json.JsonException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
+ ---> System.Text.Json.JsonReaderException: The input does not contain any JSON tokens. Expected the input to start with a valid JSON token, when isFinalBlock is true. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at MadoHomuAPIv2.ActionController.TakeAction(ActionDTO actionDTO) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\ActionWithController.cs:line 39
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 165
+[8/13/2024 6:19:37 AM] System.Text.Json.JsonException: JSON deserialization for type 'MadoHomuAPIv2.User+UserParamUpdateDTO' was missing required properties, including the following: id, data
+   at System.Text.Json.ThrowHelper.ThrowJsonException_JsonRequiredPropertyMissing(JsonTypeInfo parent, BitArray requiredPropertiesSet)
+   at System.Text.Json.Serialization.Converters.ObjectDefaultConverter`1.OnTryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value)
+   at System.Text.Json.Serialization.JsonConverter`1.TryRead(Utf8JsonReader& reader, Type typeToConvert, JsonSerializerOptions options, ReadStack& state, T& value, Boolean& isPopulatedValue)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at MadoHomuAPIv2.ActionController.TakeAction(ActionDTO actionDTO) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\ActionWithController.cs:line 39
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 165
+[8/13/2024 6:20:40 AM] System.Text.Json.JsonException: 's' is an invalid start of a value. Path: $ | LineNumber: 0 | BytePositionInLine: 0.
+ ---> System.Text.Json.JsonReaderException: 's' is an invalid start of a value. LineNumber: 0 | BytePositionInLine: 0.
+   at System.Text.Json.ThrowHelper.ThrowJsonReaderException(Utf8JsonReader& json, ExceptionResource resource, Byte nextByte, ReadOnlySpan`1 bytes)
+   at System.Text.Json.Utf8JsonReader.ConsumeValue(Byte marker)
+   at System.Text.Json.Utf8JsonReader.ReadFirstToken(Byte first)
+   at System.Text.Json.Utf8JsonReader.ReadSingleSegment()
+   at System.Text.Json.Utf8JsonReader.Read()
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   --- End of inner exception stack trace ---
+   at System.Text.Json.ThrowHelper.ReThrowWithPath(ReadStack& state, JsonReaderException ex)
+   at System.Text.Json.Serialization.JsonConverter`1.ReadCore(Utf8JsonReader& reader, JsonSerializerOptions options, ReadStack& state)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 utf8Json, JsonTypeInfo`1 jsonTypeInfo, Nullable`1 actualByteCount)
+   at System.Text.Json.JsonSerializer.ReadFromSpan[TValue](ReadOnlySpan`1 json, JsonTypeInfo`1 jsonTypeInfo)
+   at System.Text.Json.JsonSerializer.Deserialize[TValue](String json, JsonSerializerOptions options)
+   at MadoHomuAPIv2.ActionController.TakeAction(ActionDTO actionDTO) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\ActionWithController.cs:line 39
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 165
+[8/13/2024 6:21:42 AM] User (id=1254) confirmed new email
+[8/13/2024 6:23:37 AM] Email sent successfully
+[8/13/2024 6:24:15 AM] User (id=1254) confirmed new email
+[8/13/2024 7:19:39 AM] New user registered: string (id=1255, avatar=default.png, email=True)
+[8/13/2024 7:20:48 AM] Failed to decrypt string 'cde0afb2-6572-4314-b707-e5a3d7f7581b', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/13/2024 7:20:48 AM] User logged on successfully: a (id=1254)
+[8/13/2024 9:30:41 AM] Failed to decrypt string 'KPUrTl9oceAhoxBSnBQjuQ==', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/13/2024 9:30:41 AM] User logged on successfully: string (id=1255)
+[8/13/2024 10:43:47 AM] Failed to decrypt string 'KPUrTl9oceAhoxBSnBQjuQ==', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/13/2024 10:43:55 AM] New user registered: string (id=1256, avatar=default.png, email=True)
+[8/15/2024 3:13:06 PM] New user registered: string (id=1256, avatar=, email=True)
+[8/15/2024 3:13:33 PM] User string (id=1256) requested to change email
+[8/15/2024 3:13:33 PM] Action 'EmailConfirm' created successfully
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'hVaM+DFkAc7zpqPEGjpkZLBJ/2eCYsR155cyGEf4R9g=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'fc3a1b88-956d-493b-bbdf-9fa3d62acf56', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '53b827dd-606f-4d5c-aa58-fb6579222fb0', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '043df394-5cdc-4864-9fd7-f1cfecfcbaf2', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '8084c18c-98f6-40ac-a2f4-007c320bc36a', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '2228a3f5-3efd-470d-96ff-e0db16d20882', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '3796ed00-5d64-456d-8a14-6da863e8bc71', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'rDJsH0e/sOPKCg91mG78DkLWsEmRMd9rD6VryRM/MUc=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '2c4b7469-3e28-44a1-9b4d-bf6f391d37ff', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'cBNQkkVyS0H7KwCazhY6LTMq8APmKSIbREsay3ng9YY=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'b914bc7f-ad4d-47eb-9e70-adf64aac2e91', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'cmVyY+sa1kWn2qIApG9vEzi3ykunmHBwx9nIRpZdvHE=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'e50811a6-3976-4eb7-8b0e-f33ae31f0b31', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'XuiM9CSbZih9r/HFhYJoMjigU7Sie0Eqa+Pi+xiRZoo=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '62fa32f6-3baa-422e-815f-9cdfb061e1e7', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'ed5eb031-e7c6-4e98-abb0-6cf85df6a8ab', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '61+imLfuHk0DAk/a/bAOgx37vXaOA8J4H/8VfgS3Mak=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'f2d8dc68-f254-49f0-b876-80cf23f3b45e', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '36b030d0-81ae-407e-8ec4-6acb8975f324', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '22c81f73-c839-49bc-baf5-a1f2320e8ceb', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'AI/odvzFLH4GlgtsmtJ0VYM2mKTLo0vfoKa0xExIJ34=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '05651125-eab1-41cf-8b61-88e18dcfaf82', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '946b3126-4d8c-414e-b66d-06d42a50fed6', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '7073a4c7-0d08-4183-a866-b5616481844c', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '6fe25dd0-8e4a-4426-940c-c2ab391746c1', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'ffFGy6ge5byt1GD/TFj3aM/n33P2nDq2lkdyW7uz4y4=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '913e5b20-d853-4df0-bb30-bba681358d95', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '0eb41a5c-a405-4e1e-9c65-708a8cffaea8', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'b37cf28b-ec94-49d2-9fe9-524b3f04e133', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '4b021a54-2a12-4768-ba5b-555b1ed0f6a4', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'fy4USznm0yhDQGVt4RFeoiiVo3VaLPs+QfXPjzjuNGU=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '929f8e14-e3a6-4fa0-9bf4-651dbb111e1c', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '47df405c-d5a7-4e42-8127-576a4f7b813c', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'afda3943-69a4-4cfb-8451-4e2905e3d138', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'lLEF4BtrmSI8CB0ugsmImLJZFwt9KwRuQcIyFryI4co=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'fe136752-be33-44f8-b5ef-4e30766cf7ea', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'VgMeN8i3TR48trvMHc6boZDxYuO1ch9txdO0NvdNWrI=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '4f3103b8-b2a3-43c6-98ce-95fb64225186', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'b02b0e31-4c30-497f-aeab-56eea0247d83', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '2098da2b-0e4b-4eaa-a279-d6530045eb46', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '723e1cdf-3361-4c0e-bc6d-e42b2fe6e904', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'c973f6cd-afeb-4842-8cb6-3ec952ac1aac', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '7b514a19-a945-442e-b5d3-499625439470', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string 'JFGUtlkbIl0paD+nQKomDvjNVtB06XabADRl0FrU7y4=', reason:
+System.Security.Cryptography.CryptographicException: Padding is invalid and cannot be removed.
+   at System.Security.Cryptography.SymmetricPadding.GetPaddingLength(ReadOnlySpan`1 block, PaddingMode paddingMode, Int32 blockSize)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(ReadOnlySpan`1 inputBuffer, Span`1 outputBuffer)
+   at System.Security.Cryptography.UniversalCryptoDecryptor.UncheckedTransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.UniversalCryptoTransform.TransformFinalBlock(Byte[] inputBuffer, Int32 inputOffset, Int32 inputCount)
+   at System.Security.Cryptography.CryptoStream.ReadAsyncCore(Memory`1 buffer, CancellationToken cancellationToken, Boolean useAsync)
+   at System.Security.Cryptography.CryptoStream.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at System.IO.StreamReader.ReadBuffer()
+   at System.IO.StreamReader.ReadToEnd()
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 125
+[8/15/2024 6:39:08 PM] Failed to decrypt string '18868e07-2adf-4150-b73c-5d55e4be1829', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/15/2024 6:39:08 PM] Failed to decrypt string '86f28e2f-679e-436e-892a-d4f90a251ad4', reason:
+System.FormatException: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+   at System.Convert.FromBase64CharPtr(Char* inputPtr, Int32 inputLength)
+   at System.Convert.FromBase64String(String s)
+   at MadoHomuAPIv2.Utils.DecryptString(String encryptedBase64, String key, String iv) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 121
+[8/17/2024 6:57:48 PM] New user registered: string (id=1260, avatar=, email=True)
+[8/17/2024 9:20:22 PM] New user registered: string (id=1261, avatar=, email=False)
+[8/17/2024 9:21:11 PM] User logged on successfully: string (id=1261)
+[8/17/2024 9:22:23 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:23:27 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:09 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:11 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:14 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:56 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:57 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:24:57 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:25:00 PM] User logged on successfully: string (id=1261)
+[8/17/2024 9:25:07 PM] User logged on successfully: string (id=1261)
+[8/17/2024 9:25:12 PM] User logged on successfully: string (id=1260)
+[8/17/2024 9:26:17 PM] User string (id=1260) changed password
+[8/18/2024 2:22:50 PM] Email sent successfully
+[8/18/2024 2:22:50 PM] Action 'PasswordReset' created successfully
+[8/18/2024 2:25:18 PM] Email sent successfully
+[8/18/2024 2:25:18 PM] Action 'PasswordReset' created successfully
+[8/18/2024 2:40:13 PM] User (id=1) reset password by email link
+[8/18/2024 2:40:13 PM] Action expired successfully
+[8/18/2024 2:42:22 PM] User logged on successfully: 浩劫者12345 (id=1)
+[8/18/2024 2:42:44 PM] User 浩劫者12345 (id=1) changed password
+[8/18/2024 2:42:52 PM] User 浩劫者12345 (id=1) changed password
+[8/18/2024 2:43:02 PM] User logged on successfully: 浩劫者12345 (id=1)
+[8/18/2024 3:00:56 PM] Email sent successfully
+[8/18/2024 3:00:56 PM] Action 'PasswordReset' created successfully
+[8/18/2024 3:01:10 PM] User (id=1) reset password by email link
+[8/18/2024 3:01:10 PM] Action expired successfully
+[8/18/2024 3:01:35 PM] User logged on successfully: string (id=1260)
+[8/18/2024 3:01:41 PM] User logged on successfully: 浩劫者12345 (id=1)
+[8/18/2024 3:01:52 PM] User logged on successfully: 浩劫者12345 (id=1)
+[8/18/2024 3:01:59 PM] User logged on successfully: 浩劫者12345 (id=1)
+[8/18/2024 3:02:01 PM] User logged on successfully: string (id=1261)
+[8/23/2024 9:56:17 PM] User logged on successfully: 'string' (id=1260)
+[8/23/2024 9:56:33 PM] Resetting token for user 'string' (id=1260)
+[8/23/2024 9:56:55 PM] User logged on successfully: 'string' (id=1260)
+[8/23/2024 9:57:07 PM] Resetting token for user 'string' (id=1260)
+[8/23/2024 10:02:52 PM] User logged on successfully: 'string' (id=1260)
+[11/13/2024 4:43:51 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[11/13/2024 4:43:51 AM] Failed to write comment. Reason:
+[11/13/2024 4:43:51 AM] Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 19: 'FOREIGN KEY constraint failed'.
+   at Microsoft.Data.Sqlite.SqliteException.ThrowExceptionForRC(Int32 rc, sqlite3 db)
+   at Microsoft.Data.Sqlite.SqliteDataReader.NextResult()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader(CommandBehavior behavior)
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteReader()
+   at Microsoft.Data.Sqlite.SqliteCommand.ExecuteNonQuery()
+   at MadoHomuAPIv2.Database.InsertDTO[T](SqliteConnection connection, String table, T dto) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 131
+   at MadoHomuAPIv2.Controllers.CommentsController.Post(PostedComment CommentData) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 155
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 195
+[11/13/2024 4:44:49 AM] Failed to decode base64 image: The input is not a valid Base-64 string as it contains a non-base 64 character, more than two padding characters, or an illegal character among the padding characters.
+The base64 data is:
+string
+[11/13/2024 4:44:49 AM] Written comment from 'string' (id=) in 4ms
+[11/13/2024 4:57:24 AM] System.InvalidCastException: Unable to cast object of type 'System.Int64' to type 'System.Nullable`1[System.Int32]'.
+   at MadoHomuAPIv2.Controllers.CommentsController.<>c__DisplayClass0_0.<GetComments>b__0(CommentVO comment) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 74
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at MadoHomuAPIv2.Controllers.CommentsController.GetComments(Nullable`1 from, Nullable`1 count, Nullable`1 time, String user, Nullable`1 uid, String db, Nullable`1 timeMin, Nullable`1 timeMax) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Controllers\CommentsController.cs:line 61
+   at lambda_method2(Closure, Object, Object[])
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at MadoHomuAPIv2.UserAuthMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\User.cs:line 33
+   at MadoHomuAPIv2.DatabaseMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Database.cs:line 11
+   at MadoHomuAPIv2.ErrorLoggingMiddleware.InvokeAsync(HttpContext context) in C:\Users\31126\Desktop\MadoHomuAPIv2\MadoHomuAPIv2\Utils.cs:line 195

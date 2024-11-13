@@ -17,6 +17,7 @@ namespace MadoHomuAPIv2
                 if (user == null)
                 {
                     context.Response.StatusCode = 401;
+                    context.Response.ContentType = "text/plain";
                     await context.Response.WriteAsync("Invalid token");
                     return;
                 }
@@ -26,6 +27,7 @@ namespace MadoHomuAPIv2
             if (context.GetEndpoint()?.Metadata.GetMetadata<UserLoginRequiredAttribute>() != null && !context.UserLoggedIn())
             {
                 context.Response.StatusCode = 401;
+                context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync("Login required");
                 return;
             }

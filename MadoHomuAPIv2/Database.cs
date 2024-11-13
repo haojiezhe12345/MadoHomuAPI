@@ -98,17 +98,17 @@ namespace MadoHomuAPIv2
             }
         }
 
-        public static object? ReadOneValue(this SqliteConnection connection, string sql)
+        public static async Task<object?> ReadOneValueAsync(this SqliteConnection connection, string sql)
         {
             using var command = connection.CreateCommand();
             command.CommandText = sql;
-            return command.ReadOneValue();
+            return await command.ReadOneValueAsync();
         }
 
-        public static object? ReadOneValue(this SqliteCommand command)
+        public static async Task<object?> ReadOneValueAsync(this SqliteCommand command)
         {
-            using var reader = command.ExecuteReader();
-            while (reader.Read())
+            using var reader = await command.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
                 return reader.GetValue(0);
             return null;
         }
@@ -139,11 +139,11 @@ namespace MadoHomuAPIv2
             return command.ExecuteNonQuery();
         }
 
-        public static int Execute(this SqliteConnection connection, string sql)
+        public static async Task<int> ExecuteAsync(this SqliteConnection connection, string sql)
         {
             using var command = connection.CreateCommand();
             command.CommandText = sql;
-            return command.ExecuteNonQuery();
+            return await command.ExecuteNonQueryAsync();
         }
 
         private class Row : List<RowValue>;
