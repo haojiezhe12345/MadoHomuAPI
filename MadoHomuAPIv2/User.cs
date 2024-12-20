@@ -26,7 +26,7 @@ namespace MadoHomuAPIv2
 
             if (context.GetEndpoint()?.Metadata.GetMetadata<UserLoginRequiredAttribute>() != null && !context.UserLoggedIn())
             {
-                context.Response.StatusCode = 401;
+                context.Response.StatusCode = 403;
                 context.Response.ContentType = "text/plain";
                 await context.Response.WriteAsync("Login required");
                 return;
@@ -38,15 +38,15 @@ namespace MadoHomuAPIv2
 
     public static class HttpContextUserExtensions
     {
-        private static readonly string DbConnectionKey = "User";
+        private static readonly string UserKey = "User";
         public static User.UserPO User(this HttpContext context)
         {
-            if (context.Items[DbConnectionKey] is User.UserPO user)
+            if (context.Items[UserKey] is User.UserPO user)
                 return user;
             else throw new Exception("Trying to access null user in a login required controller");
         }
-        public static bool UserLoggedIn(this HttpContext context) => context.Items[DbConnectionKey] != null;
-        public static void SetUser(this HttpContext context, object? value) => context.Items[DbConnectionKey] = value;
+        public static bool UserLoggedIn(this HttpContext context) => context.Items[UserKey] != null;
+        public static void SetUser(this HttpContext context, object? value) => context.Items[UserKey] = value;
     }
 
     public static class User
