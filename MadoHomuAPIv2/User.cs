@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using MadoHomuAPIv2.Response;
+using Microsoft.Data.Sqlite;
 
 namespace MadoHomuAPIv2
 {
@@ -9,7 +10,7 @@ namespace MadoHomuAPIv2
     {
         public async Task InvokeAsync(HttpContext context)
         {
-            string? token = context.Request.Headers["token"];
+            string? token = context.Request.Headers.Authorization.FirstOrDefault() ?? context.Request.Headers["token"];
 
             if (token != null)
             {
@@ -17,8 +18,8 @@ namespace MadoHomuAPIv2
                 if (user == null)
                 {
                     context.Response.StatusCode = 401;
-                    context.Response.ContentType = "text/plain";
-                    await context.Response.WriteAsync("Invalid token");
+                    context.Response.ContentType = "text/plain; charset=utf-8";
+                    await context.Response.WriteAsync(ResponseMessages.Get(ResponseCode.InvalidToken, context.Request.Headers.AcceptLanguage));
                     return;
                 }
                 else context.SetUser(user);
@@ -26,9 +27,9 @@ namespace MadoHomuAPIv2
 
             if (context.GetEndpoint()?.Metadata.GetMetadata<UserLoginRequiredAttribute>() != null && !context.UserLoggedIn())
             {
-                context.Response.StatusCode = 403;
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Login required");
+                context.Response.StatusCode = 401;
+                context.Response.ContentType = "text/plain; charset=utf-8";
+                await context.Response.WriteAsync(ResponseMessages.Get(ResponseCode.LoginRequired, context.Request.Headers.AcceptLanguage));
                 return;
             }
 

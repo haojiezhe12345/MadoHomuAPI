@@ -1,12 +1,5 @@
-﻿namespace MadoHomuAPIv2
+﻿namespace MadoHomuAPIv2.Response
 {
-    public class ResponseVO
-    {
-        public int? code { get; set; }
-        public string? message { get; set; }
-        public object? data { get; set; }
-    }
-
     public enum ResponseCode
     {
         Success = 1,
@@ -24,19 +17,12 @@
 
         LoginPasswordIncorrect = 1020,
         LoginCredentialInsufficient = 1021,
+        LoginRequired = 1022,
+        InvalidToken = 1023,
 
         ActionNotExist = 1030,
         ActionExpired = 1031,
         ActionTypeNotRecognized = 1032,
         ActionDataInvalid = 1033,
-    }
-
-    public static class ResponseDTOExtensions
-    {
-        public static void SetCode(this ResponseVO response, ResponseCode code)
-        {
-            response.code = (int)code;
-            response.message = code.ToString();
-        }
     }
 }

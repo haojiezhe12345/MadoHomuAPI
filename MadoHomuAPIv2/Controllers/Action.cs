@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MadoHomuAPIv2.Response;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.Sqlite;
 using System.Text.Json;
 using static MadoHomuAPIv2.Action;
@@ -13,9 +14,8 @@ namespace MadoHomuAPIv2.Controllers
     public class ActionController : ControllerBase
     {
         [HttpPost]
-        public ResponseVO TakeAction(ActionDTO actionDTO)
+        public ApiResponse TakeAction(ActionDTO actionDTO)
         {
-            ResponseVO response = new();
             using var command = HttpContext.DbConnection().CreateCommand();
             command.CommandText = "SELECT * FROM actions WHERE id = @id";
             command.Parameters.AddWithValue("id", actionDTO.id ?? "");
@@ -23,20 +23,17 @@ namespace MadoHomuAPIv2.Controllers
 
             if (action == null || actionDTO.id == null)
             {
-                response.SetCode(ResponseCode.ActionNotExist);
-                return response;
+                return this.ApiResponse(ResponseCode.ActionNotExist);
             }
 
             if (action.expired == 1 || (action.expire_time != null && DateTimeOffset.Now > DateTimeOffset.FromUnixTimeSeconds((long)action.expire_time)))
             {
-                response.SetCode(ResponseCode.ActionExpired);
-                return response;
+                return this.ApiResponse(ResponseCode.ActionExpired);
             }
 
             if (!Enum.TryParse(action.type, out ActionType type))
             {
-                response.SetCode(ResponseCode.ActionTypeNotRecognized);
-                return response;
+                return this.ApiResponse(ResponseCode.ActionTypeNotRecognized);
             }
 
             switch (type)
@@ -46,8 +43,7 @@ namespace MadoHomuAPIv2.Controllers
                         var actionData = JsonSerializer.Deserialize<UserParamUpdateDTO>(action.data ?? "null");
                         if (actionData == null)
                         {
-                            response.SetCode(ResponseCode.ActionDataInvalid);
-                            return response;
+                            return this.ApiResponse(ResponseCode.ActionDataInvalid);
                         }
 
                         var oldEmail = HttpContext.DbConnection().GetUser("id", actionData.id)?.email;
@@ -68,8 +64,7 @@ namespace MadoHomuAPIv2.Controllers
                     {
                         if (!int.TryParse(action.data, out int uid))
                         {
-                            response.SetCode(ResponseCode.ActionDataInvalid);
-                            return response;
+                            return this.ApiResponse(ResponseCode.ActionDataInvalid);
                         }
 
                         HttpContext.DbConnection().SetUserParamById(
@@ -90,9 +85,7 @@ namespace MadoHomuAPIv2.Controllers
             }
 
             HttpContext.DbConnection().ExpireActionEncrypted(actionDTO.id);
-            response.SetCode(ResponseCode.Success);
-
-            return response;
+            return this.ApiResponse(ResponseCode.Success);
         }
     }
 

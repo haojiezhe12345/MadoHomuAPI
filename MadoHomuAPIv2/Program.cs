@@ -1,4 +1,5 @@
 using MadoHomuAPIv2;
+using MadoHomuAPIv2.Response;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,18 +11,20 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(options =>
 {
-    options.AddSecurityDefinition("token", new OpenApiSecurityScheme
+    options.AddSecurityDefinition("Authorization", new OpenApiSecurityScheme
     {
-        Name = "token",
+        Name = "Authorization",
         In = ParameterLocation.Header,
         Type = SecuritySchemeType.ApiKey,
     });
 
     options.AddSecurityRequirement(new OpenApiSecurityRequirement
     {{
-        new() { Reference = new() { Type = ReferenceType.SecurityScheme, Id = "token" } },
+        new() { Reference = new() { Type = ReferenceType.SecurityScheme, Id = "Authorization" } },
         Array.Empty<string>()
     }});
+
+    options.OperationFilter<AddAcceptLanguageParameter>();
 });
 
 var app = builder.Build();

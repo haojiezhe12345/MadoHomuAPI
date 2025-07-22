@@ -2,6 +2,7 @@
 using System.Text.Json;
 using static MadoHomuAPIv2.User;
 using static MadoHomuAPIv2.Action;
+using MadoHomuAPIv2.Response;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,69 +13,65 @@ namespace MadoHomuAPIv2.Controllers
     public class UserController : ControllerBase
     {
         [HttpPost("login")]
-        public ResponseVO Login(LoginDTO login)
+        public ApiResponse<string> Login(LoginDTO login)
         {
             UserPO? user = null;
-            ResponseVO response = new();
+            ApiResponse<string> response;
 
             if (login.email != null)
             {
                 user = HttpContext.DbConnection().GetUser("email", login.email);
-                response.SetCode(ResponseCode.EmailNotRegistered);
+                response = this.ApiResponse(ResponseCode.EmailNotRegistered);
             }
             else if (login.name != null)
             {
                 user = HttpContext.DbConnection().GetUser("name", login.name, "AND email is NULL");
-                response.SetCode(ResponseCode.UserNotFound);
+                response = this.ApiResponse(ResponseCode.UserNotFound);
             }
             else
             {
-                response.SetCode(ResponseCode.LoginCredentialInsufficient);
+                response = this.ApiResponse(ResponseCode.LoginCredentialInsufficient);
             }
 
             if (user == null) return response;
 
             if (user.password != null && user.password != login.password)
             {
-                response.SetCode(ResponseCode.LoginPasswordIncorrect);
-                return response;
+                return this.ApiResponse(ResponseCode.LoginPasswordIncorrect);
             }
 
-            response.SetCode(ResponseCode.Success);
-            response.data = (user.token == null || user.token.Length < 8)
-                ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
-                : user.token;
+            response = this.ApiResponse(
+                ResponseCode.Success,
+                (user.token == null || user.token.Length < 8)
+                    ? HttpContext.DbConnection().GenerateTokenForUserById(user.id)
+                    : user.token
+            );
             Utils.Log($"User logged on successfully: '{user.name}' (id={user.id})");
 
             return response;
         }
 
         [HttpPost("register")]
-        public ResponseVO Register(UserUpdateDTO reg)
+        public ApiResponse<string> Register(UserUpdateDTO reg)
         {
-            ResponseVO response = new();
-
             if (reg.email != null && reg.name != null)
             {
                 var check = HttpContext.DbConnection().CheckEmailEncrypted(reg.email);
                 if (check != ResponseCode.Success)
                 {
-                    response.SetCode(check);
-                    return response;
+                    return this.ApiResponse(check);
                 }
             }
             else if (reg.name != null)
             {
                 if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
                 {
-                    response.SetCode(ResponseCode.UserAlreadyExists);
-                    return response;
+                    return this.ApiResponse(ResponseCode.UserAlreadyExists);
                 }
             }
             else
             {
-                response.SetCode(ResponseCode.UserRegisterRequireName);
-                return response;
+                return this.ApiResponse(ResponseCode.UserRegisterRequireName);
             }
 
             if (reg.avatar != null)
@@ -90,21 +87,19 @@ namespace MadoHomuAPIv2.Controllers
                 ? HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL")
                 : HttpContext.DbConnection().GetUser("email", reg.email);
 
-            if (user != null)
-            {
-                response.SetCode(ResponseCode.Success);
-                response.data = HttpContext.DbConnection().GenerateTokenForUserById(user.id);
-                Utils.Log($"New user registered: '{user.name}' (id={user.id}, avatar={reg.avatar}, email={user.email != null}, password={user.password != null})");
-            }
+            ApiResponse<string> response = this.ApiResponse(
+                ResponseCode.Success,
+                HttpContext.DbConnection().GenerateTokenForUserById(user.id)
+            );
+            Utils.Log($"New user registered: '{user.name}' (id={user.id}, avatar={reg.avatar}, email={user.email != null}, password={user.password != null})");
 
             return response;
         }
 
         [HttpPut("update")]
         [UserLoginRequired]
-        public async Task<ResponseVO> UpdateUser(UserUpdateDTO update)
+        public async Task<ApiResponse<int>> UpdateUser(UserUpdateDTO update)
         {
-            ResponseVO response = new();
             int updated = 0;
 
             var user = HttpContext.User();
@@ -114,8 +109,7 @@ namespace MadoHomuAPIv2.Controllers
                 var check = HttpContext.DbConnection().CheckEmailEncrypted(update.email);
                 if (check != ResponseCode.Success)
                 {
-                    response.SetCode(check);
-                    return response;
+                    return this.ApiResponse(check);
                 }
                 Utils.Log($"User '{user.name}' (id={user.id}) requested to change email");
 
@@ -131,8 +125,7 @@ namespace MadoHomuAPIv2.Controllers
 
                 if (result != ResponseCode.Success)
                 {
-                    response.SetCode(result);
-                    return response;
+                    return this.ApiResponse(result);
                 }
 
                 HttpContext.DbConnection().CreateAction(
@@ -145,10 +138,8 @@ namespace MadoHomuAPIv2.Controllers
                     expireHours * 60 * 60,
                     actionId
                 );
-                response.SetCode(ResponseCode.Success);
-                response.data = expireHours;
 
-                return response;
+                return this.ApiResponse(ResponseCode.Success, expireHours);
             }
 
             if (update.name != null)
@@ -159,14 +150,12 @@ namespace MadoHomuAPIv2.Controllers
                     {
                         if (HttpContext.DbConnection().GetUser("name", update.name, "AND email is NULL") != null)
                         {
-                            response.SetCode(ResponseCode.UserNameChangeDuplicates);
-                            return response;
+                            return this.ApiResponse(ResponseCode.UserNameChangeDuplicates);
                         }
                     }
                     else
                     {
-                        response.SetCode(ResponseCode.UserNameChangeRequireEmail);
-                        return response;
+                        return this.ApiResponse(ResponseCode.UserNameChangeRequireEmail);
                     }
                 }
                 updated += HttpContext.DbConnection().SetUserParamById(user.id, "name", update.name);
@@ -192,22 +181,17 @@ namespace MadoHomuAPIv2.Controllers
                     );
             }
 
-            response.SetCode(ResponseCode.Success);
-            response.data = updated;
-            return response;
+            return this.ApiResponse(ResponseCode.Success, updated);
         }
 
         [HttpPost("resetpassword")]
-        public async Task<ResponseVO> ResetPassword(string email)
+        public async Task<ApiResponse<int>> ResetPassword(string email)
         {
-            ResponseVO response = new();
-
             var uid = HttpContext.DbConnection().GetUser("email", Utils.EncryptString(email))?.id;
 
             if (uid == null)
             {
-                response.SetCode(ResponseCode.EmailNotRegistered);
-                return response;
+                return this.ApiResponse(ResponseCode.EmailNotRegistered);
             }
 
             Utils.Log($"User (id={uid}) requested resetting password");
@@ -222,15 +206,12 @@ namespace MadoHomuAPIv2.Controllers
 
             if (result != ResponseCode.Success)
             {
-                response.SetCode(result);
-                return response;
+                return this.ApiResponse(result);
             }
 
             HttpContext.DbConnection().CreateAction(ActionType.PasswordReset, uid.ToString(), expireMinutes * 60, actionId);
-            response.SetCode(ResponseCode.Success);
-            response.data = expireMinutes;
 
-            return response;
+            return this.ApiResponse(ResponseCode.Success, expireMinutes);
         }
 
         [HttpPost("resettoken")]

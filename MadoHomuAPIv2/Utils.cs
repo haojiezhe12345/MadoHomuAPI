@@ -4,6 +4,7 @@ using System.Text;
 using System.Net;
 using System.Net.Mail;
 using System.Text.Json;
+using MadoHomuAPIv2.Response;
 
 namespace MadoHomuAPIv2
 {
