@@ -51,37 +51,42 @@ namespace MadoHomuAPIv2.Controllers
             return response;
         }
 
+        private readonly object _userRegisterLockObj = new();
+
         [HttpPost("register")]
         public ApiResponse<string> Register(UserUpdateDTO reg)
         {
-            if (reg.email != null && reg.name != null)
+            lock (_userRegisterLockObj)
             {
-                var check = HttpContext.DbConnection().CheckEmailEncrypted(reg.email);
-                if (check != ResponseCode.Success)
+                if (reg.email != null && reg.name != null)
                 {
-                    return this.ApiResponse(check);
+                    var check = HttpContext.DbConnection().CheckEmailEncrypted(reg.email);
+                    if (check != ResponseCode.Success)
+                    {
+                        return this.ApiResponse(check);
+                    }
                 }
-            }
-            else if (reg.name != null)
-            {
-                if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
+                else if (reg.name != null)
                 {
-                    return this.ApiResponse(ResponseCode.UserAlreadyExists);
+                    if (HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL") != null)
+                    {
+                        return this.ApiResponse(ResponseCode.UserAlreadyExists);
+                    }
                 }
-            }
-            else
-            {
-                return this.ApiResponse(ResponseCode.UserRegisterRequireName);
-            }
+                else
+                {
+                    return this.ApiResponse(ResponseCode.UserRegisterRequireName);
+                }
 
-            if (reg.avatar != null)
-            {
-                var filename = Utils.EscapeFilename($"{reg.name}.{DateTime.UtcNow.Ticks}.jpg");
-                Utils.WriteFileFromBase64($"data/images/avatars/{filename}", reg.avatar);
-                reg.avatar = filename;
-            }
+                if (reg.avatar != null)
+                {
+                    var filename = Utils.EscapeFilename($"{reg.name}.{DateTime.UtcNow.Ticks}.jpg");
+                    Utils.WriteFileFromBase64($"data/images/avatars/{filename}", reg.avatar);
+                    reg.avatar = filename;
+                }
 
-            HttpContext.DbConnection().InsertDTO("users", reg);
+                HttpContext.DbConnection().InsertDTO("users", reg);
+            }
 
             var user = reg.email == null
                 ? HttpContext.DbConnection().GetUser("name", reg.name, "AND email is NULL")
